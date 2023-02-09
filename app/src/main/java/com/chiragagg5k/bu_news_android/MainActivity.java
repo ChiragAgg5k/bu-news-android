@@ -1,67 +1,50 @@
 package com.chiragagg5k.bu_news_android;
 
-import android.view.View;
-import android.widget.*;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
-    EditText full_name, email, password;
-    Button register_button;
-    ProgressBar progress_bar;
-    TextView link_login;
-
-    FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register_layout);
+        setContentView(R.layout.activity_layout);
 
-        full_name = findViewById(R.id.fullName);
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-        register_button = findViewById(R.id.register_button);
-        progress_bar = findViewById(R.id.progressBar);
-        link_login = findViewById(R.id.link_login);
+        ViewPager viewPager = findViewById(R.id.viewPager);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
+        AuthenticationPagerAdapter pagerAdapter = new AuthenticationPagerAdapter(getSupportFragmentManager());
+        pagerAdapter.addFragment(new LoginFragment());
+        pagerAdapter.addFragment(new RegisterFragment());
+        viewPager.setAdapter(pagerAdapter);
+    }
+}
 
-        link_login.setOnClickListener(view -> setContentView(R.layout.login_layout));
+class AuthenticationPagerAdapter extends FragmentPagerAdapter {
+    private final ArrayList<Fragment> fragmentList = new ArrayList<>();
 
-        register_button.setOnClickListener(view -> {
-            String name = full_name.getText().toString();
-            String email_id = email.getText().toString();
-            String pass = password.getText().toString();
+    public AuthenticationPagerAdapter(FragmentManager fm) {
+        super(fm);
+    }
 
-            // check if any of the fields are empty
-            if(name.isEmpty() || email_id.isEmpty() || pass.isEmpty()) {
-                Toast.makeText(MainActivity.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-            }else{
-                progress_bar.setVisibility(View.VISIBLE);
+    @NotNull
+    @Override
+    public Fragment getItem(int i) {
+        return fragmentList.get(i);
+    }
 
-                // register the user
-                firebaseAuth.createUserWithEmailAndPassword(email_id,pass).addOnCompleteListener(
-                        task -> {
-                            if(task.isSuccessful()){
-                                Toast.makeText(MainActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+    @Override
+    public int getCount() {
+        return fragmentList.size();
+    }
 
-                                // TODO: Add the user to the database
-
-                            }else{
-                                Toast.makeText(MainActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
-                            }
-                            progress_bar.setVisibility(View.GONE);
-                        }
-                );
-            }
-        });
+    void addFragment(Fragment fragment) {
+        fragmentList.add(fragment);
     }
 }

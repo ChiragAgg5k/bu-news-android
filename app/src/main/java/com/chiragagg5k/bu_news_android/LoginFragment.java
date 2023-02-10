@@ -1,5 +1,6 @@
 package com.chiragagg5k.bu_news_android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +51,7 @@ public class LoginFragment extends Fragment {
 
             if (email_text.isEmpty() || password_text.isEmpty()) {
                 Toast.makeText(getContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
-            }else{
+            } else{
 
                 progressBar.setVisibility(View.VISIBLE);
 
@@ -58,7 +59,7 @@ public class LoginFragment extends Fragment {
                 mAuth.signInWithEmailAndPassword(email_text, password_text).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         user = mAuth.getCurrentUser();
-                        Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getActivity(), DashboardActivity.class));
                     }else{
                         Toast.makeText(getContext(), "Login Failed", Toast.LENGTH_SHORT).show();
                     }

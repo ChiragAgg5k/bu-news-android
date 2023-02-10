@@ -8,7 +8,7 @@
         android:id="@+id/logo"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="40dp"
         android:src="@mipmap/ic_launcher"
         android:layout_gravity="center"
         android:scaleType="fitXY"/>
@@ -17,6 +17,7 @@
         android:id="@+id/tagline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:text="The pulse of university life"
         android:textSize="17sp"

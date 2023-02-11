@@ -21,7 +21,6 @@ public class LoginFragment extends Fragment {
 
     EditText email, password;
     Button login_button;
-    ProgressBar progressBar;
     FirebaseAuth mAuth;
     FirebaseUser user;
 
@@ -40,33 +39,40 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        login_button = view.findViewById(R.id.login_button);
-        login_button.setOnClickListener(v -> {
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
-            email = view.findViewById(R.id.email);
-            password = view.findViewById(R.id.password);
-            progressBar = view.findViewById(R.id.progressBar);
-            String email_text = email.getText().toString();
-            String password_text = password.getText().toString();
+        if (user != null) {
+            startActivity(new Intent(getActivity(), DashboardActivity.class));
+        }else {
 
-            if (email_text.isEmpty() || password_text.isEmpty()) {
-                Toast.makeText(getContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
-            } else{
+            login_button = view.findViewById(R.id.login_button);
+            login_button.setOnClickListener(v -> {
 
-                progressBar.setVisibility(View.VISIBLE);
+                email = view.findViewById(R.id.email);
+                password = view.findViewById(R.id.password);
+                String email_text = email.getText().toString();
+                String password_text = password.getText().toString();
 
-                mAuth = FirebaseAuth.getInstance();
-                mAuth.signInWithEmailAndPassword(email_text, password_text).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        user = mAuth.getCurrentUser();
-                        startActivity(new Intent(getActivity(), DashboardActivity.class));
-                    }else{
-                        Toast.makeText(getContext(), "Login Failed", Toast.LENGTH_SHORT).show();
-                    }
+                if (email_text.isEmpty() || password_text.isEmpty()) {
+                    Toast.makeText(getContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                } else {
 
-                    progressBar.setVisibility(View.GONE);
-                });
-            }
-        });
+                    login_button.setText("Logging in...");
+
+                    mAuth = FirebaseAuth.getInstance();
+                    mAuth.signInWithEmailAndPassword(email_text, password_text).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            user = mAuth.getCurrentUser();
+                            startActivity(new Intent(getActivity(), DashboardActivity.class));
+                            login_button.setText("Login");
+                        } else {
+                            Toast.makeText(getContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+                            login_button.setText("Login");
+                        }
+                    });
+                }
+
+            });
+        }
     }
 }

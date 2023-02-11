@@ -62,34 +62,21 @@
         android:layout_marginHorizontal="40dp"
         android:ems="10" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginVertical="20dp">
-
         <Button
             android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Login"
+            android:layout_marginTop="20dp"
             android:backgroundTint="#8D3339"
             android:paddingHorizontal="40dp"
             android:paddingVertical="10dp"/>
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
-
-    </LinearLayout>
-
     <TextView android:id="@+id/link_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="New to the app?\n Swipe right to register"
         android:gravity="center"
         android:textSize="17sp"

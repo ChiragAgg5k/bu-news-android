@@ -1,5 +1,6 @@
 package com.chiragagg5k.bu_news_android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,18 +14,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class RegisterFragment extends Fragment {
 
     EditText full_name, email, password;
     Button register_button;
-    ProgressBar progress_bar;
     FirebaseAuth mAuth;
     FirebaseUser user;
-    FirebaseFirestore database;
-
     final private String STUDENT_ID = "^e[1-2][1-9]cseu\\d\\d\\d\\d@bennett.edu.in";
 
 
@@ -48,10 +48,7 @@ public class RegisterFragment extends Fragment {
         password = view.findViewById(R.id.password);
         register_button = view.findViewById(R.id.register_button);
 
-        progress_bar = view.findViewById(R.id.progress_bar);
-
         mAuth = FirebaseAuth.getInstance();
-        database = FirebaseFirestore.getInstance();
 
         register_button.setOnClickListener(v -> {
 
@@ -62,25 +59,35 @@ public class RegisterFragment extends Fragment {
             if(full_name.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(getContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
             }else if(!email.matches(STUDENT_ID)){
-                Toast.makeText(getContext(), "Please enter a valid student email", Toast.LENGTH_SHORT).show();
-            }else if(password.length() < 6){
-                Toast.makeText(getContext(), "Password must be at least 6 characters long", Toast.LENGTH_SHORT).show();
-            }
-            else{
+                this.email.setError("Please enter a valid student email");
+            } else{
 
-                progress_bar.setVisibility(View.VISIBLE);
+                register_button.setText("Registering...");
+
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         user = mAuth.getCurrentUser();
-                        database.collection("users").document(user.getUid()).set(new User(full_name, email, password));
 
-                        Toast.makeText(getContext(), "User created successfully", Toast.LENGTH_SHORT).show();
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(full_name)
+                                .build();
+                        user.updateProfile(profileUpdates).addOnCompleteListener(
+                                task1 -> {
+                                    if(task1.isSuccessful()) {
+                                        startActivity(new Intent(getContext(), DashboardActivity.class));
+                                        Toast.makeText(getContext(), "User created successfully", Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(getContext(), "Error: " + Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                        );
+
+                        register_button.setText("Register");
                     }else{
-                        Toast.makeText(getContext(), "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                        register_button.setText("Register");
                     }
                 });
-
-                progress_bar.setVisibility(View.GONE);
             }
         });
     }

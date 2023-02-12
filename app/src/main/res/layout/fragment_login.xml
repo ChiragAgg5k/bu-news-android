@@ -43,9 +43,12 @@
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:inputType="textEmailAddress"
         android:layout_marginHorizontal="40dp"
+        android:autofillHints="email"
+        android:hint="Enter your email"
+        android:textColorHint="@color/white"
         android:ems="10" />
     <TextView
         android:id="@+id/thirdTxt"
@@ -53,13 +56,16 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:text="Password" />
+
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:inputType="textPassword"
         android:autofillHints="password"
         android:layout_marginHorizontal="40dp"
+        android:hint="Enter your password"
+        android:textColorHint="@color/white"
         android:ems="10" />
 
         <Button

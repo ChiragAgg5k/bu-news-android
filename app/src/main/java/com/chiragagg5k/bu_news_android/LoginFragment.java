@@ -2,18 +2,20 @@ package com.chiragagg5k.bu_news_android;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 import org.jetbrains.annotations.NotNull;
 
 
@@ -43,7 +45,7 @@ public class LoginFragment extends Fragment {
 
         if (user != null) {
             startActivity(new Intent(getActivity(), DashboardActivity.class));
-        }else {
+        } else {
 
             login_button = view.findViewById(R.id.login_button);
             login_button.setOnClickListener(v -> {
@@ -57,17 +59,17 @@ public class LoginFragment extends Fragment {
                     Toast.makeText(getContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    login_button.setText("Logging in...");
+                    login_button.setText(getResources().getString(R.string.logging_in));
 
                     mAuth = FirebaseAuth.getInstance();
                     mAuth.signInWithEmailAndPassword(email_text, password_text).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             user = mAuth.getCurrentUser();
                             startActivity(new Intent(getActivity(), DashboardActivity.class));
-                            login_button.setText("Login");
+                            login_button.setText(getResources().getString(R.string.login));
                         } else {
                             Toast.makeText(getContext(), "Login Failed", Toast.LENGTH_SHORT).show();
-                            login_button.setText("Login");
+                            login_button.setText(getResources().getString(R.string.login));
                         }
                     });
                 }

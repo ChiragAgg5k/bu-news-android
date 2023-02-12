@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,6 +52,8 @@ public class RegisterFragment extends Fragment {
         register_button.setOnClickListener(v -> {
 
             String full_name = this.full_name.getText().toString();
+            full_name = convertToTitleCase(full_name);
+
             String email = this.email.getText().toString().toLowerCase();
             String password = this.password.getText().toString();
 
@@ -62,14 +63,15 @@ public class RegisterFragment extends Fragment {
                 this.email.setError("Please enter a valid student email");
             } else{
 
-                register_button.setText("Registering...");
+                register_button.setText(getResources().getString(R.string.registering));
 
+                String finalFull_name = full_name;
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         user = mAuth.getCurrentUser();
 
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(full_name)
+                                .setDisplayName(finalFull_name)
                                 .build();
                         user.updateProfile(profileUpdates).addOnCompleteListener(
                                 task1 -> {
@@ -82,13 +84,36 @@ public class RegisterFragment extends Fragment {
                                 }
                         );
 
-                        register_button.setText("Register");
+                        register_button.setText(getResources().getString(R.string.register));
                     }else{
                         Toast.makeText(getContext(), "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
-                        register_button.setText("Register");
+                        register_button.setText(getResources().getString(R.string.register));
                     }
                 });
             }
         });
+    }
+
+    public static String convertToTitleCase(String text) {
+        if (text == null || text.isEmpty()) {
+            return text;
+        }
+
+        StringBuilder converted = new StringBuilder();
+
+        boolean convertNext = true;
+        for (char ch : text.toCharArray()) {
+            if (Character.isSpaceChar(ch)) {
+                convertNext = true;
+            } else if (convertNext) {
+                ch = Character.toTitleCase(ch);
+                convertNext = false;
+            } else {
+                ch = Character.toLowerCase(ch);
+            }
+            converted.append(ch);
+        }
+
+        return converted.toString();
     }
 }

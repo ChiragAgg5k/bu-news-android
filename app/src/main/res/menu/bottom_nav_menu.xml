@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/home_icon_foreground"
+        android:title="Home" />
+    <item
+        android:id="@+id/event"
+        android:icon="@drawable/event_icon_foreground"
+        android:title="Events" />
+    <item
+        android:id="@+id/post"
+        android:icon="@drawable/post_icon_foreground"
+        android:title="Post" />
+    <item
+        android:id="@+id/lost_found"
+        android:icon="@drawable/lost_found_icon_foreground"
+        android:title="Lost Found" />
+    <item
+        android:id="@+id/helpdesk"
+        android:icon="@drawable/helpdesk_icon_foreground"
+        android:title="Helpdesk" />
+</menu>

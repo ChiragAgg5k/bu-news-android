@@ -1,5 +1,20 @@
 <resources>
     <string name="app_name">BU-News</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="register">Register</string>
+    <string name="registering">Registering…</string>
+
+    <string name="login">Login</string>
+    <string name="logging_in">Logging in…</string>
+
+    <!--  Account Setting Texts  -->
+    <string name="back_button">Back Button</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="logout_text">Logout</string>
+    <string name="placeholder_email_text">Placeholder Email</string>
+    <string name="student_email_text">Student Email</string>
+    <string name="placeholder_name_text">Placeholder Name</string>
+    <string name="change_password_text">Change Password</string>
+    <string name="edit_profile_text">Edit Profile</string>
+
 </resources>

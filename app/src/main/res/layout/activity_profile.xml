@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/account_settings"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:textStyle="bold"/>
@@ -190,8 +190,11 @@
         >
 
         <TextView
+            android:id="@+id/edit_profile_button"
             android:layout_width="140dp"
             android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
             android:background="@drawable/btn_bg"
             android:text="@string/edit_profile_text"
             android:textColor="#8D3339"
@@ -200,10 +203,13 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/change_password_button"
+            android:clickable="true"
             android:layout_width="210dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/btn_bg"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
             android:text="@string/change_password_text"
             android:padding="10dp"
             android:textColor="#8D3339"

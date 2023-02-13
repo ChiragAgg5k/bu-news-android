@@ -6,7 +6,7 @@
         android:icon="@drawable/home_icon_foreground"
         android:title="Home" />
     <item
-        android:id="@+id/event"
+        android:id="@+id/events"
         android:icon="@drawable/event_icon_foreground"
         android:title="Events" />
     <item

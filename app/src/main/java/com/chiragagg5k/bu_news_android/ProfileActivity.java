@@ -3,6 +3,7 @@ package com.chiragagg5k.bu_news_android;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,7 +18,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     FirebaseUser user;
     ImageView back_button;
-    TextView logout_button, profile_name, full_name_text, email_text, edit_profile_button, change_password_button;
+    TextView logout_button, profile_name, full_name_text, email_text;
+    Button edit_profile_button, change_password_button;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

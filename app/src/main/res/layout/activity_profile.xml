@@ -189,33 +189,25 @@
         android:orientation="vertical"
         >
 
-        <TextView
+        <Button
             android:id="@+id/edit_profile_button"
-            android:layout_width="140dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackgroundBorderless"
-            android:background="@drawable/btn_bg"
             android:text="@string/edit_profile_text"
-            android:textColor="#8D3339"
+            android:textColor="#fff"
             android:gravity="center"
-            android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:paddingHorizontal="20dp"/>
 
-        <TextView
+        <Button
             android:id="@+id/change_password_button"
-            android:clickable="true"
-            android:layout_width="210dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/btn_bg"
-            android:foreground="?android:attr/selectableItemBackgroundBorderless"
             android:text="@string/change_password_text"
             android:padding="10dp"
-            android:textColor="#8D3339"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textColor="#fff"
+            android:gravity="center" />
 
     </LinearLayout>
 

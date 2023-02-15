@@ -11,8 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BUNewsAndroid"
         tools:targetApi="31">
+
         <activity
-            android:name=".MainActivity"
+            android:name=".AuthenticationActivity"
             android:exported="true"
             android:windowSoftInputMode="stateVisible|adjustPan"
             >
@@ -23,11 +24,13 @@
         </activity>
 
         <activity
-            android:name=".DashboardActivity">
+            android:name=".DashboardActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan">
         </activity>
 
         <activity
-            android:name=".ProfileActivity">
+            android:name=".ProfileActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan">
         </activity>
 
     </application>

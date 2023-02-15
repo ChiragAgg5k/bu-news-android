@@ -1,55 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_marginTop="40dp"
-        android:src="@mipmap/ic_launcher"
         android:layout_gravity="center"
-        android:scaleType="fitXY"/>
+        android:layout_marginTop="40dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/tagline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:text="The pulse of university life"
-        android:textSize="17sp"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/register_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login here"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:text="Login here"
         android:textSize="25sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/secTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Student Email"
+        android:layout_marginHorizontal="40dp"
         android:layout_marginTop="20sp"
-        android:layout_marginHorizontal="40dp" />
+        android:text="Student Email" />
+
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:inputType="textEmailAddress"
         android:layout_marginHorizontal="40dp"
         android:autofillHints="email"
+        android:ems="10"
         android:hint="Enter your email"
-        android:textColorHint="@color/white"
-        android:ems="10" />
+        android:inputType="textEmailAddress"
+        android:singleLine="true"
+        android:textColorHint="@color/white" />
+
     <TextView
         android:id="@+id/thirdTxt"
         android:layout_width="wrap_content"
@@ -61,31 +65,33 @@
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:inputType="textPassword"
-        android:autofillHints="password"
         android:layout_marginHorizontal="40dp"
+        android:autofillHints="password"
+        android:ems="10"
         android:hint="Enter your password"
-        android:textColorHint="@color/white"
-        android:ems="10" />
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:textColorHint="@color/white" />
 
-        <Button
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Login"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#8D3339"
-            android:paddingHorizontal="40dp"
-            android:paddingVertical="10dp"/>
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#8D3339"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="10dp"
+        android:text="Login" />
 
-    <TextView android:id="@+id/link_login"
+    <TextView
+        android:id="@+id/link_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="New to the app?\n Swipe right to register"
         android:gravity="center"
-        android:textSize="17sp"
-        android:textColor="#3F51B5" />
+        android:text="New to the app?\n Swipe right to register"
+        android:textColor="#3F51B5"
+        android:textSize="17sp" />
 
 </LinearLayout>

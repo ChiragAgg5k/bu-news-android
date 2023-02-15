@@ -12,11 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class DashboardActivity extends AppCompatActivity {
 
     ImageView profileImage;
     BottomNavigationView bottomNavigationView;
+    FloatingActionButton postButton;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -25,12 +27,20 @@ public class DashboardActivity extends AppCompatActivity {
 
         profileImage = findViewById(R.id.profile_icon);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        postButton = findViewById(R.id.post_button);
+
+        // disabling middle icon
+        bottomNavigationView.getMenu().getItem(2).setEnabled(false);
 
         bottomNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
         loadFragment(new HomeFragment());
 
         profileImage.setOnClickListener(v -> {
             startActivity(new Intent(this, ProfileActivity.class));
+        });
+
+        postButton.setOnClickListener(v -> {
+            loadFragment(new PostFragment());
         });
     }
 
@@ -40,9 +50,6 @@ public class DashboardActivity extends AppCompatActivity {
         switch (menuItem.getItemId()) {
             case R.id.home:
                 selectedFragment = new HomeFragment();
-                break;
-            case R.id.post:
-                selectedFragment = new PostFragment();
                 break;
             case R.id.events:
                 selectedFragment = new EventsFragment();

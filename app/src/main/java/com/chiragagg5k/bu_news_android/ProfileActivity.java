@@ -2,7 +2,6 @@ package com.chiragagg5k.bu_news_android;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,7 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
             finish();
 
             Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, AuthenticationActivity.class));
         });
     }
 }

@@ -10,9 +10,8 @@
         android:icon="@drawable/event_icon_foreground"
         android:title="Events" />
     <item
-        android:id="@+id/post"
-        android:icon="@drawable/post_icon_foreground"
-        android:title="Post" />
+        android:id="@+id/placeholder"
+        android:title="" />
     <item
         android:id="@+id/lost_found"
         android:icon="@drawable/lost_found_icon_foreground"

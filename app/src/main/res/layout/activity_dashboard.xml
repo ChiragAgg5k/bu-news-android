@@ -1,46 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".DashboardActivity">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:id="@+id/toolBar"
-        android:background="@color/dark_red"
-        >
+        android:background="@color/dark_red">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            >
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/profile_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/profile_icon"
-                android:contentDescription="Profile Icon"
-                android:clickable="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                />
+                android:clickable="true"
+                android:contentDescription="Profile Icon"
+                android:src="@drawable/profile_icon" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="BU-News"
-                android:textColor="@color/white"
-                android:textAlignment="textEnd"
-                android:textSize="20sp"
-                android:padding="4dp"
-                android:layout_marginEnd="15dp"
-                android:textStyle="bold"
                 android:layout_marginTop="5dp"
-                />
+                android:layout_marginEnd="15dp"
+                android:padding="4dp"
+                android:text="BU-News"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -50,26 +46,47 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolBar"/>
+        android:layout_below="@id/toolBar" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginBottom="16dp"
-        android:elevation="8dp"
-        android:background="@drawable/bottom_navigation_background"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/bottom_navigation"
-        app:itemIconTint="@color/white"
-        app:menu="@menu/bottom_nav_menu"
-        app:itemIconSize="40dp"
-        app:itemTextColor="@color/light_gray"
-    />
+        android:layout_height="match_parent">
 
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/app_bar"
+            style="@style/Widget.MaterialComponents.BottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/dark_red"
+            android:outlineSpotShadowColor="@android:color/transparent">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:outlineSpotShadowColor="@android:color/transparent"
+                app:itemIconSize="30dp"
+                app:itemIconTint="@color/white"
+                app:itemTextColor="@color/white"
+                app:menu="@menu/bottom_nav_menu" />
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/post_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@drawable/post_icon_foreground"
+            app:layout_anchor="@id/app_bar"
+            app:maxImageSize="40dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </RelativeLayout>

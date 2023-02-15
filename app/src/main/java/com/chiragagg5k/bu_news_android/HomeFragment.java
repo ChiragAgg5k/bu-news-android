@@ -37,6 +37,7 @@ public class HomeFragment extends Fragment {
 
         rv = view.findViewById(R.id.categories_rv);
         category_names = new ArrayList<>();
+        category_names.add("All");
         category_names.add("Sports");
         category_names.add("Entertainment");
         category_names.add("Politics");

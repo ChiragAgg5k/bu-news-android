@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -55,45 +57,63 @@ public class RegisterFragment extends Fragment {
         register_button.setOnClickListener(v -> {
 
             String full_name = this.full_name.getText().toString();
-            full_name = UtilityClass.convertToTitleCase(full_name);
+            String finalFull_name = UtilityClass.convertToTitleCase(full_name);
 
             String email = this.email.getText().toString().toLowerCase();
             String password = this.password.getText().toString();
 
-            if (full_name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(getContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
-            } else if (!email.matches(STUDENT_ID)) {
-                this.email.setError("Please enter a valid student email");
-            } else {
+            register_button.setText(getResources().getString(R.string.registering));
 
-                register_button.setText(getResources().getString(R.string.registering));
+            if(full_name.isEmpty() || email.isEmpty() || password.isEmpty()){
+                YoYo.with(Techniques.Bounce)
+                        .duration(700)
+                        .repeat(0)
+                        .playOn(view.findViewById(R.id.register_button));
 
-                String finalFull_name = full_name;
-                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        user = mAuth.getCurrentUser();
-
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(finalFull_name)
-                                .build();
-                        user.updateProfile(profileUpdates).addOnCompleteListener(
-                                task1 -> {
-                                    if (task1.isSuccessful()) {
-                                        startActivity(new Intent(getContext(), DashboardActivity.class));
-                                        Toast.makeText(getContext(), "User created successfully", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(getContext(), "Error: " + Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                        );
-
-                        register_button.setText(getResources().getString(R.string.register));
-                    } else {
-                        Toast.makeText(getContext(), "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
-                        register_button.setText(getResources().getString(R.string.register));
-                    }
-                });
+                Toast.makeText(getContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                register_button.setText(getResources().getString(R.string.register));
+                return;
             }
+
+            if(!email.matches(STUDENT_ID)){
+                YoYo.with(Techniques.Bounce)
+                        .duration(700)
+                        .repeat(0)
+                        .playOn(view.findViewById(R.id.register_button));
+
+                Toast.makeText(getContext(), "Please enter a valid student email", Toast.LENGTH_SHORT).show();
+                register_button.setText(getResources().getString(R.string.register));
+                return;
+            }
+
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    user = mAuth.getCurrentUser();
+
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(finalFull_name)
+                            .build();
+                    user.updateProfile(profileUpdates).addOnCompleteListener(
+                            task1 -> {
+                                if (task1.isSuccessful()) {
+                                    startActivity(new Intent(getContext(), DashboardActivity.class));
+                                    Toast.makeText(getContext(), "User created successfully", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getContext(), "Error: " + Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                    );
+                }else{
+                    YoYo.with(Techniques.Bounce)
+                            .duration(700)
+                            .repeat(0)
+                            .playOn(view.findViewById(R.id.register_button));
+
+                    Toast.makeText(getContext(),Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            register_button.setText(getResources().getString(R.string.register));
         });
     }
 }

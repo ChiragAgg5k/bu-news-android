@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -56,6 +58,11 @@ public class LoginFragment extends Fragment {
                 String password_text = password.getText().toString();
 
                 if (email_text.isEmpty() || password_text.isEmpty()) {
+                    YoYo.with(Techniques.Bounce)
+                            .duration(700)
+                            .repeat(0)
+                            .playOn(view.findViewById(R.id.login_button));
+
                     Toast.makeText(getContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 } else {
 
@@ -64,16 +71,25 @@ public class LoginFragment extends Fragment {
                     mAuth = FirebaseAuth.getInstance();
                     mAuth.signInWithEmailAndPassword(email_text, password_text).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
+
                             user = mAuth.getCurrentUser();
                             startActivity(new Intent(getActivity(), DashboardActivity.class));
                             login_button.setText(getResources().getString(R.string.login));
+
                         } else {
-                            Toast.makeText(getContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+                            YoYo.with(Techniques.Bounce)
+                                    .duration(700)
+                                    .repeat(0)
+                                    .playOn(view.findViewById(R.id.login_button));
+
+                            if(task.getException() != null) {
+                                Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+
                             login_button.setText(getResources().getString(R.string.login));
                         }
                     });
                 }
-
             });
         }
     }

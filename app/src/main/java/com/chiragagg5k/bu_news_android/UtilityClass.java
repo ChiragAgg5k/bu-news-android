@@ -1,7 +1,9 @@
 package com.chiragagg5k.bu_news_android;
 
-import android.app.Activity;
-import android.view.inputmethod.InputMethodManager;
+import android.content.ContentResolver;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.OpenableColumns;
 
 public class UtilityClass {
 
@@ -28,16 +30,22 @@ public class UtilityClass {
         return converted.toString();
     }
 
-    public static void hideSoftKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager =
-                (InputMethodManager) activity.getSystemService(
-                        Activity.INPUT_METHOD_SERVICE);
-        if (inputMethodManager.isAcceptingText()) {
-            inputMethodManager.hideSoftInputFromWindow(
-                    activity.getCurrentFocus().getWindowToken(),
-                    0
-            );
-        }
+    /**
+     * Method to get the name of the file from the uri
+     *
+     * @param resolver ContentResolver
+     * @param uri      Uri of the file
+     * @return Name of the file
+     */
+    public static String queryName(ContentResolver resolver, Uri uri) {
+        Cursor returnCursor =
+                resolver.query(uri, null, null, null, null);
+        assert returnCursor != null;
+        int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+        returnCursor.moveToFirst();
+        String name = returnCursor.getString(nameIndex);
+        returnCursor.close();
+        return name;
     }
 
 }

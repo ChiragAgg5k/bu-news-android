@@ -40,9 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
         edit_profile_button = findViewById(R.id.edit_profile_button);
         change_password_button = findViewById(R.id.change_password_button);
 
-        back_button.setOnClickListener(v -> {
-            finish();
-        });
+        back_button.setOnClickListener(v -> finish());
 
         logout_button.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();

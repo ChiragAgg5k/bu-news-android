@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,5 +50,15 @@ public class HomeFragment extends Fragment {
 
         rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(adaptor);
+    }
+
+    @Nullable
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        if (enter) {
+            return AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        } else {
+            return AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
+        }
     }
 }

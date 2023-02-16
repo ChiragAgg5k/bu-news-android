@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -36,31 +39,35 @@ public class DashboardActivity extends AppCompatActivity {
         loadFragment(new HomeFragment());
 
         profileImage.setOnClickListener(v -> {
+            YoYo.with(Techniques.Tada)
+                    .duration(700)
+                    .repeat(0)
+                    .playOn(profileImage);
             startActivity(new Intent(this, ProfileActivity.class));
         });
 
         postButton.setOnClickListener(v -> {
-            loadFragment(new PostFragment());
+            bottomNavigationView.setSelectedItemId(R.id.placeholder);
+            YoYo.with(Techniques.Tada)
+                    .duration(1000)
+                    .repeat(0)
+                    .playOn(postButton);
+                loadFragment(new PostFragment());
         });
     }
 
     private boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Fragment selectedFragment = null;
 
-        switch (menuItem.getItemId()) {
-            case R.id.home:
-                selectedFragment = new HomeFragment();
-                break;
-            case R.id.events:
-                selectedFragment = new EventsFragment();
-                break;
-            case R.id.helpdesk:
-                selectedFragment = new HelpDeskFragment();
-                break;
-            case R.id.lost_found:
-                selectedFragment = new LostFoundFragment();
-                break;
-        }
+        if(menuItem.getItemId() == R.id.home)
+            selectedFragment = new HomeFragment();
+        else if(menuItem.getItemId() == R.id.events)
+            selectedFragment = new EventsFragment();
+        else if(menuItem.getItemId() == R.id.helpdesk)
+            selectedFragment = new HelpDeskFragment();
+        else if(menuItem.getItemId() == R.id.lost_found)
+            selectedFragment = new LostFoundFragment();
+
         if (selectedFragment != null) {
             loadFragment(selectedFragment);
         }
@@ -77,12 +84,8 @@ public class DashboardActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to exit?");
         builder.setCancelable(true);
-        builder.setPositiveButton("Yes", (dialog, which) -> {
-            finishAffinity();
-        });
-        builder.setNegativeButton("No", (dialog, which) -> {
-            dialog.cancel();
-        });
+        builder.setPositiveButton("Yes", (dialog, which) -> finishAffinity());
+        builder.setNegativeButton("No", (dialog, which) -> dialog.cancel());
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }

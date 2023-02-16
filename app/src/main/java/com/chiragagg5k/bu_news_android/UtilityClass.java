@@ -5,8 +5,16 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 
+/**
+ * Utility class to hold the methods which are used in multiple classes
+ */
 public class UtilityClass {
 
+    /**
+     * Method to convert the string to title case
+     * @param text String to be converted
+     * @return Converted string
+     */
     public static String convertToTitleCase(String text) {
         if (text == null || text.isEmpty()) {
             return text;
@@ -32,9 +40,8 @@ public class UtilityClass {
 
     /**
      * Method to get the name of the file from the uri
-     *
      * @param resolver ContentResolver
-     * @param uri      Uri of the file
+     * @param uri Uri of the file
      * @return Name of the file
      */
     public static String queryName(ContentResolver resolver, Uri uri) {

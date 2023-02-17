@@ -17,4 +17,6 @@
     <string name="change_password_text">Change Password</string>
     <string name="edit_profile_text">Edit Profile</string>
     <string name="post_description">Want to share your own news? Post it here! Make sure to post relevant news only or else it won\'t be approved. Examples of such news are: club events, informative bootcamps, student achievements, etc.</string>
+    <string name="top_news_heading">Top News</string>
+    <string name="tagline">The pulse of university life</string>
 </resources>

@@ -22,14 +22,4 @@ public class EventsFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_events, container, false);
     }
-
-    @Nullable
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        if (enter) {
-            return AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-        } else {
-            return AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
-        }
-    }
 }

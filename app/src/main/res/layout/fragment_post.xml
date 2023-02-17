@@ -18,7 +18,7 @@
             android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="Post Your own News!"
-            android:textColor="@color/dark_red"
+            android:textColor="@color/lighter_red"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -28,7 +28,8 @@
             android:layout_below="@+id/post_title"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
-            android:background="@color/light_gray" />
+            android:background="@color/light_gray"
+            android:backgroundTint="@color/light_gray"/>
 
         <TextView
             android:id="@+id/what_to_post_tv"
@@ -38,7 +39,8 @@
             android:layout_marginHorizontal="12dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/post_description" />
+            android:text="@string/post_description"
+            android:textColor="@color/white"/>
 
         <View
             android:id="@+id/what_to_post_divider"
@@ -48,7 +50,8 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:background="@color/light_gray" />
+            android:background="@color/light_gray"
+            android:backgroundTint="@color/light_gray"/>
 
         <EditText
             android:id="@+id/post_title_et"
@@ -59,7 +62,10 @@
             android:layout_marginBottom="10dp"
             android:hint="Heading"
             android:inputType="text"
-            android:singleLine="true" />
+            android:textColorHint="@color/gray"
+            android:textColor="@color/white"
+            android:singleLine="true"
+            android:backgroundTint="@color/light_gray"/>
 
         <EditText
             android:id="@+id/post_description_et"
@@ -72,8 +78,11 @@
             android:gravity="bottom"
             android:hint="Description"
             android:inputType="textMultiLine"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/white"
             android:minLines="6"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:backgroundTint="@color/light_gray"/>
 
         <Button
             android:id="@+id/post_image_btn"
@@ -105,6 +114,8 @@
             android:layout_marginBottom="10dp"
             android:paddingHorizontal="50dp"
             android:paddingVertical="10dp"
+            android:backgroundTint="@color/dark_red"
+            android:textColor="@color/white"
             android:text="Post" />
 
 

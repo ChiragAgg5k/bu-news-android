@@ -23,8 +23,8 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         // sets status bar color to white, and text color to black
         Window window = getWindow();
-        window.setStatusBarColor(getColor(R.color.white));
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        window.setStatusBarColor(getColor(R.color.black_shade_1));
+//        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         // sets appearance to light mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);

@@ -71,13 +71,4 @@ public class PostFragment extends Fragment {
         getImageActivityResultLauncher.launch(intent);
     }
 
-    @Nullable
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        if (enter) {
-            return AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-        } else {
-            return AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
-        }
-    }
 }

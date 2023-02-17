@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".ProfileActivity"
+    android:theme="@style/Theme.BUNewsAndroid">
 
     <RelativeLayout
         android:id="@+id/profile_header"
@@ -18,14 +19,13 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:contentDescription="@string/back_button"
-            android:src="@drawable/arrow_back_logo" />
+            android:src="@drawable/arrow_back_white" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/account_settings"
             android:textAlignment="center"
-            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -36,7 +36,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="5dp"
             android:text="@string/logout_text"
-            android:textColor="@color/dark_red"
+            android:textColor="@color/lighter_red"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -47,7 +47,9 @@
         android:layout_height="1dp"
         android:layout_below="@id/profile_header"
         android:layout_marginHorizontal="8dp"
-        android:background="@color/dark_red" />
+        android:background="@color/dark_red"
+        android:backgroundTint="@color/dark_red"
+        />
 
     <LinearLayout
         android:id="@+id/profile_body"
@@ -72,7 +74,6 @@
             android:layout_height="wrap_content"
             android:text="@string/placeholder_name_text"
             android:textAlignment="center"
-            android:textColor="@color/light_red"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -81,7 +82,8 @@
             android:layout_height="2dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
-            android:background="@color/dark_red" />
+            android:background="@color/dark_red"
+            android:backgroundTint="@color/dark_red"/>
 
     </LinearLayout>
 
@@ -106,7 +108,6 @@
             android:layout_toEndOf="@id/mini_profile_icon"
             android:gravity="center"
             android:text="Full Name"
-            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -128,7 +129,8 @@
         android:layout_below="@id/user_info"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
-        android:background="@color/light_gray" />
+        android:background="@color/light_gray"
+        android:backgroundTint="@color/light_gray"/>
 
     <RelativeLayout
         android:id="@+id/user_email_info"
@@ -151,7 +153,6 @@
             android:layout_toEndOf="@id/mini_email_icon"
             android:gravity="center"
             android:text="@string/student_email_text"
-            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -174,7 +175,8 @@
         android:layout_below="@id/user_email_info"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
-        android:background="@color/light_gray" />
+        android:background="@color/light_gray"
+        android:backgroundTint="@color/light_gray"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -192,7 +194,8 @@
             android:gravity="center"
             android:paddingHorizontal="20dp"
             android:text="@string/edit_profile_text"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:backgroundTint="@color/dark_red"/>
 
         <Button
             android:id="@+id/change_password_button"
@@ -202,7 +205,8 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/change_password_text"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:backgroundTint="@color/dark_red"/>
 
     </LinearLayout>
 

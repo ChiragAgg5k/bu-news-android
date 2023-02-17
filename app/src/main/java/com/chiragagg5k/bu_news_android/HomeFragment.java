@@ -52,13 +52,4 @@ public class HomeFragment extends Fragment {
         rv.setAdapter(adaptor);
     }
 
-    @Nullable
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        if (enter) {
-            return AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-        } else {
-            return AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
-        }
-    }
 }

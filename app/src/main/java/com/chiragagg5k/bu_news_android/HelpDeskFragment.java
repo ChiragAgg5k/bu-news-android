@@ -24,13 +24,4 @@ public class HelpDeskFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_help_desk, container, false);
     }
 
-    @Nullable
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        if (enter) {
-            return AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-        } else {
-            return AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
-        }
-    }
 }

@@ -4,14 +4,17 @@
     tools:ignore="HardcodedText">
 
     <item
-        android:id="@+id/nav_account"
-        android:title="My Account" />
+        android:icon="@drawable/profile_icon"
+        android:id="@+id/nav_profile"
+        android:title="Profile" />
 
     <item
-        android:id="@+id/nav_settings"
-        android:title="Settings" />
+        android:icon="@drawable/info_icon_foreground"
+        android:id="@+id/about"
+        android:title="About Us" />
 
     <item
+        android:icon="@drawable/close_icon_foreground"
         android:id="@+id/nav_logout"
         android:title="Logout" />
 

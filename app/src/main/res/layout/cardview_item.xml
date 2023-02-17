@@ -17,8 +17,7 @@
             android:id="@+id/card_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@color/light_blue" />
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/category_name"
@@ -30,7 +29,6 @@
             android:padding="3dp"
             android:text="Category"
             android:textAlignment="center"
-            android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
 

@@ -51,8 +51,7 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:singleLine="true"
-        android:textColorHint="@color/white"
-        android:backgroundTint="@color/light_gray"/>
+        android:backgroundTint="@color/textColor"/>
 
     <TextView
         android:id="@+id/thirdTxt"
@@ -70,8 +69,7 @@
         android:ems="10"
         android:inputType="textPassword"
         android:singleLine="true"
-        android:textColorHint="@color/white"
-        android:backgroundTint="@color/light_gray"/>
+        android:backgroundTint="@color/textColor"/>
 
     <Button
         android:id="@+id/login_button"

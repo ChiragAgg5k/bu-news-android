@@ -1,99 +1,133 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashboardActivity"
-    android:theme="@style/Theme.BUNewsAndroid">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/curvedtoolbar"
-        android:layout_marginTop="5dp"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginBottom="5dp"
-        android:elevation="10dp"
-        android:backgroundTint="@color/dark_red"
-        >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <ImageView
-                android:id="@+id/profile_icon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:contentDescription="Profile Icon"
-                android:src="@drawable/profile_icon" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="15dp"
-                android:padding="4dp"
-                android:text="BU-News"
-                android:textAlignment="textEnd"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-    </androidx.appcompat.widget.Toolbar>
+    tools:context=".DashboardActivity">
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolBar" />
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/app_bar"
-            style="@style/Widget.MaterialComponents.BottomAppBar"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/curvedtoolbar"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:elevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/colorPrimaryDark">
+
+                <ImageView
+                    android:id="@+id/profile_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="fitXY"
+                    android:layout_alignParentStart="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Profile Icon"
+                    android:src="@drawable/menu_icon_foreground" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:padding="4dp"
+                    android:text="BU-News"
+                    android:textAlignment="textEnd"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColor="@color/white"/>
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolBar" >
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/coordinator"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.bottomappbar.BottomAppBar
+                    android:id="@+id/app_bar"
+                    style="@style/Widget.MaterialComponents.BottomAppBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom">
+
+                    <com.google.android.material.bottomnavigation.BottomNavigationView
+                        android:id="@+id/bottom_navigation"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="16dp"
+                        android:outlineSpotShadowColor="@android:color/transparent"
+                        app:itemIconSize="35dp"
+                        app:menu="@menu/bottom_nav_menu"
+                        app:itemBackground="@color/backgroundColor" />
+
+                </com.google.android.material.bottomappbar.BottomAppBar>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/post_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="center"
+                    android:src="@drawable/post_icon_foreground"
+                    app:layout_anchor="@id/app_bar"
+                    app:maxImageSize="40dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    app:tint="@color/white"/>
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/side_nav_view"
+        app:headerLayout="@layout/side_nav_header"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/side_nav_menu"
+        app:itemBackground="@android:color/transparent"
+        >
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:backgroundTint="@color/dark_red"
-            android:outlineSpotShadowColor="@android:color/transparent">
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_navigation"
+            android:clickable="true"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/footer_item_1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:outlineSpotShadowColor="@android:color/transparent"
-                app:itemIconSize="35dp"
-                android:layout_marginEnd="16dp"
-                app:itemIconTint="@color/white"
-                app:itemTextColor="@color/white"
-                app:menu="@menu/bottom_nav_menu" />
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:layout_marginBottom="30dp"
+                android:text="Made by Team Obsidian" />
+        </LinearLayout>
 
-        </com.google.android.material.bottomappbar.BottomAppBar>
+        
+    </com.google.android.material.navigation.NavigationView>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/post_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="center"
-            android:src="@drawable/post_icon_foreground"
-            app:layout_anchor="@id/app_bar"
-            app:maxImageSize="40dp"
-            android:backgroundTint="@color/light_red"/>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-</RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -17,7 +17,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     FirebaseUser user;
     ImageView back_button;
-    TextView logout_button, profile_name, full_name_text, email_text;
+    TextView  profile_name, full_name_text, email_text;
     Button edit_profile_button, change_password_button;
 
     @Override
@@ -36,18 +36,9 @@ public class ProfileActivity extends AppCompatActivity {
         email_text.setText(user.getEmail());
 
         back_button = findViewById(R.id.back_button);
-        logout_button = findViewById(R.id.logout_button);
         edit_profile_button = findViewById(R.id.edit_profile_button);
         change_password_button = findViewById(R.id.change_password_button);
 
         back_button.setOnClickListener(v -> finish());
-
-        logout_button.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-            finish();
-
-            Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, AuthenticationActivity.class));
-        });
     }
 }

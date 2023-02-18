@@ -38,10 +38,13 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0' // Material Design
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation platform('com.google.firebase:firebase-bom:31.2.2') // Firebase BOM
     implementation 'com.google.firebase:firebase-auth:21.1.0' // Firebase Auth
-    implementation 'com.google.firebase:firebase-firestore:24.4.3' // Firebase Fire store
+    implementation 'com.google.firebase:firebase-database' // Firebase Realtime Database
+    implementation 'com.google.firebase:firebase-storage' // Firebase Storage
     implementation 'de.hdodenhof:circleimageview:3.1.0'// Circle Image View
     implementation 'com.daimajia.androidanimations:library:2.4@aar' // yo yo animation
+    implementation 'com.squareup.picasso:picasso:2.71828' // Picasso
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

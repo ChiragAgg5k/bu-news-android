@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -59,9 +58,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         loadFragment(new HomeFragment());
 
-        profileImage.setOnClickListener(v -> {
-            drawerLayout.openDrawer(GravityCompat.START);
-        });
+        profileImage.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
 
         postButton.setOnClickListener(v -> {
             bottomNavigationView.setSelectedItemId(R.id.placeholder);

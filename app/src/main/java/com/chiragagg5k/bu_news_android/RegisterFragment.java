@@ -64,7 +64,7 @@ public class RegisterFragment extends Fragment {
 
             register_button.setText(getResources().getString(R.string.registering));
 
-            if(full_name.isEmpty() || email.isEmpty() || password.isEmpty()){
+            if (full_name.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 YoYo.with(Techniques.Bounce)
                         .duration(700)
                         .repeat(0)
@@ -75,7 +75,7 @@ public class RegisterFragment extends Fragment {
                 return;
             }
 
-            if(!email.matches(STUDENT_ID)){
+            if (!email.matches(STUDENT_ID)) {
                 YoYo.with(Techniques.Bounce)
                         .duration(700)
                         .repeat(0)
@@ -103,13 +103,13 @@ public class RegisterFragment extends Fragment {
                                 }
                             }
                     );
-                }else{
+                } else {
                     YoYo.with(Techniques.Bounce)
                             .duration(700)
                             .repeat(0)
                             .playOn(view.findViewById(R.id.register_button));
 
-                    Toast.makeText(getContext(),Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
 

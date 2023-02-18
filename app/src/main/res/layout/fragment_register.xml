@@ -49,9 +49,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:autofillHints="name"
+        android:backgroundTint="@color/textColor"
         android:ems="10"
-        android:singleLine="true"
-        android:backgroundTint="@color/textColor"/>
+        android:singleLine="true" />
 
     <TextView
         android:id="@+id/secTxt"
@@ -65,9 +65,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
+        android:backgroundTint="@color/textColor"
         android:ems="10"
-        android:singleLine="true"
-        android:backgroundTint="@color/textColor"/>
+        android:singleLine="true" />
 
     <TextView
         android:id="@+id/thirdTxt"
@@ -82,10 +82,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:autofillHints="password"
+        android:backgroundTint="@color/textColor"
         android:ems="10"
         android:inputType="textPassword"
-        android:singleLine="true"
-        android:backgroundTint="@color/textColor"/>
+        android:singleLine="true" />
 
     <Button
         android:id="@+id/register_button"

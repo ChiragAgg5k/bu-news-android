@@ -1,11 +1,9 @@
 package com.chiragagg5k.bu_news_android;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +15,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     FirebaseUser user;
     ImageView back_button;
-    TextView  profile_name, full_name_text, email_text;
+    TextView profile_name, full_name_text, email_text;
     Button edit_profile_button, change_password_button;
 
     @Override

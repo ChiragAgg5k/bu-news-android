@@ -7,10 +7,9 @@
     android:layout_marginBottom="100dp"
     tools:ignore="HardcodedText">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context=".HomeFragment">
 
@@ -21,8 +20,10 @@
             android:scrollbars="none" />
 
         <TextView
+            android:id="@+id/top_news_heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/categories_rv"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:text="@string/top_news_heading"
@@ -30,11 +31,33 @@
             android:textStyle="bold" />
 
         <View
+            android:id="@+id/top_news_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_below="@id/top_news_heading"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="5dp"
-            android:backgroundTint="@color/backgroundColorDark"/>
+            android:backgroundTint="@color/backgroundColorDark" />
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/top_news_divider"
+            android:text="Loading..."
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginTop="50dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/news_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/top_news_divider"
+            android:layout_marginTop="10dp"
+            android:nestedScrollingEnabled="false"
+            android:scrollbars="none" />
+
+    </RelativeLayout>
 </ScrollView>

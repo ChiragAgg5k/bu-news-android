@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity"
-    android:theme="@style/Theme.BUNewsAndroidDark">
+    android:theme="@style/Theme.BUNewsAndroidDark"
+    tools:context=".ProfileActivity">
 
     <RelativeLayout
         android:id="@+id/profile_header"
@@ -20,17 +20,17 @@
             android:layout_height="30dp"
             android:contentDescription="@string/back_button"
             android:src="@drawable/arrow_back_white"
-            app:tint="@color/textColor"/>
+            app:tint="@color/textColor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/account_settings"
             android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:text="@string/account_settings"
             android:textAlignment="textEnd"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginRight="10dp"/>
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
@@ -39,8 +39,7 @@
         android:layout_height="2dp"
         android:layout_below="@id/profile_header"
         android:layout_marginHorizontal="8dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        />
+        android:backgroundTint="@color/colorPrimaryDark" />
 
     <LinearLayout
         android:id="@+id/profile_body"
@@ -72,7 +71,7 @@
             android:layout_height="1dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/backgroundColorDark"/>
+            android:backgroundTint="@color/backgroundColorDark" />
 
     </LinearLayout>
 
@@ -89,7 +88,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/profile_icon"
-            app:tint="@color/colorPrimary"/>
+            app:tint="@color/colorPrimary" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -119,7 +118,7 @@
         android:layout_below="@id/user_info"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
-        android:backgroundTint="@color/backgroundColorDark"/>
+        android:backgroundTint="@color/backgroundColorDark" />
 
     <RelativeLayout
         android:id="@+id/user_email_info"
@@ -164,7 +163,7 @@
         android:layout_below="@id/user_email_info"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp"
-        android:backgroundTint="@color/backgroundColorDark"/>
+        android:backgroundTint="@color/backgroundColorDark" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -178,23 +177,23 @@
             android:id="@+id/edit_profile_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:clickable="true"
             android:gravity="center"
             android:paddingHorizontal="20dp"
             android:text="@string/edit_profile_text"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/change_password_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/change_password_text"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

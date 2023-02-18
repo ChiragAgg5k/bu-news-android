@@ -1,8 +1,7 @@
-<androidx.drawerlayout.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DashboardActivity">
@@ -25,32 +24,32 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:layout_marginRight="10dp"
-                android:backgroundTint="@color/colorPrimaryDark">
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/profile_icon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:scaleType="fitXY"
                     android:layout_alignParentStart="true"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="Profile Icon"
+                    android:scaleType="fitXY"
                     android:src="@drawable/menu_icon_foreground" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     android:padding="4dp"
                     android:text="BU-News"
                     android:textAlignment="textEnd"
+                    android:textColor="@color/white"
                     android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:backgroundTint="@color/colorPrimaryDark"
-                    android:textColor="@color/white"/>
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -60,7 +59,7 @@
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolBar" >
+            android:layout_below="@id/toolBar">
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/coordinator"
@@ -80,9 +79,9 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="16dp"
                         android:outlineSpotShadowColor="@android:color/transparent"
+                        app:itemBackground="@color/backgroundColor"
                         app:itemIconSize="35dp"
-                        app:menu="@menu/bottom_nav_menu"
-                        app:itemBackground="@color/backgroundColor" />
+                        app:menu="@menu/bottom_nav_menu" />
 
                 </com.google.android.material.bottomappbar.BottomAppBar>
 
@@ -90,12 +89,12 @@
                     android:id="@+id/post_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
                     android:scaleType="center"
                     android:src="@drawable/post_icon_foreground"
                     app:layout_anchor="@id/app_bar"
                     app:maxImageSize="40dp"
-                    android:backgroundTint="@color/colorPrimary"
-                    app:tint="@color/white"/>
+                    app:tint="@color/white" />
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
         </RelativeLayout>
@@ -104,13 +103,12 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/side_nav_view"
-        app:headerLayout="@layout/side_nav_header"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/side_nav_menu"
+        app:headerLayout="@layout/side_nav_header"
         app:itemBackground="@android:color/transparent"
-        >
+        app:menu="@menu/side_nav_menu">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,16 +116,17 @@
             android:layout_gravity="bottom"
             android:clickable="true"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/footer_item_1"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:gravity="center"
                 android:layout_marginBottom="30dp"
+                android:gravity="center"
                 android:text="Made by Team Obsidian" />
         </LinearLayout>
 
-        
+
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

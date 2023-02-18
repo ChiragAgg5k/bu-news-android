@@ -82,7 +82,7 @@ public class LoginFragment extends Fragment {
                                     .repeat(0)
                                     .playOn(view.findViewById(R.id.login_button));
 
-                            if(task.getException() != null) {
+                            if (task.getException() != null) {
                                 Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
 

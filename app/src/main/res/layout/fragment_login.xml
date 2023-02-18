@@ -48,10 +48,10 @@
         android:layout_height="48dp"
         android:layout_marginHorizontal="40dp"
         android:autofillHints="email"
+        android:backgroundTint="@color/textColor"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:singleLine="true"
-        android:backgroundTint="@color/textColor"/>
+        android:singleLine="true" />
 
     <TextView
         android:id="@+id/thirdTxt"
@@ -66,10 +66,10 @@
         android:layout_height="48dp"
         android:layout_marginHorizontal="40dp"
         android:autofillHints="password"
+        android:backgroundTint="@color/textColor"
         android:ems="10"
         android:inputType="textPassword"
-        android:singleLine="true"
-        android:backgroundTint="@color/textColor"/>
+        android:singleLine="true" />
 
     <Button
         android:id="@+id/login_button"

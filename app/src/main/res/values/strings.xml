@@ -23,4 +23,14 @@
     <!-- to toggle the open close button of the navigation drawer -->
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+
+    <!--  Category DropDown items  -->
+    <string-array name="category_names">
+        <item>General</item>
+        <item>Sports</item>
+        <item>Entertainment</item>
+        <item>Technology</item>
+        <item>Clubs Related</item>
+    </string-array>
+
 </resources>

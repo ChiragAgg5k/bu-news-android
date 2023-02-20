@@ -9,8 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +42,8 @@ public class PostFragment extends Fragment {
     DatabaseReference databaseRef;
     StorageTask uploadTask;
     Uri image_uri;
+    Spinner category_spinner;
+    ArrayAdapter<CharSequence> category_adapter;
 
 
     public PostFragment() {
@@ -59,9 +66,14 @@ public class PostFragment extends Fragment {
         choose_image = view.findViewById(R.id.post_image_btn);
         post_button = view.findViewById(R.id.post_btn);
         image_status = view.findViewById(R.id.selected_image_tv);
+        category_spinner = view.findViewById(R.id.categories_spinner);
 
         storageRef = FirebaseStorage.getInstance().getReference("uploads");
         databaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+
+        category_adapter = ArrayAdapter.createFromResource(getContext(), R.array.category_names, android.R.layout.simple_spinner_item);
+        category_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        category_spinner.setAdapter(category_adapter);
 
         choose_image.setOnClickListener(v -> selectImage());
 
@@ -102,7 +114,7 @@ public class PostFragment extends Fragment {
                         image_uri = data.getData();
 
                         String name = UtilityClass.queryName(requireActivity().getContentResolver(), image_uri);
-                        image_status.setText(name);
+                        image_status.setText("Selected image: "+name);
                     }
                 }
             });
@@ -154,7 +166,7 @@ public class PostFragment extends Fragment {
 
                         // get the download url of the image
                         fileReference.getDownloadUrl().addOnSuccessListener(uri -> {
-                            UploadObject upload = new UploadObject(heading.getText().toString(), description.getText().toString(), uri.toString());
+                            UploadObject upload = new UploadObject(heading.getText().toString(), description.getText().toString(), category_spinner.getSelectedItem().toString() , uri.toString());
                             String uploadId = databaseRef.push().getKey();
                             databaseRef.child(uploadId).setValue(upload);
                         });

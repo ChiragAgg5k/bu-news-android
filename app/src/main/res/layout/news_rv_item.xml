@@ -43,6 +43,18 @@
             android:text="News Description"
             android:textSize="14sp" />
 
+        <TextView
+            android:id="@+id/news_uploader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/news_description"
+            android:layout_margin="3dp"
+            android:padding="3dp"
+            android:text="News Uploader"
+            android:textAlignment="textEnd"
+            android:layout_marginEnd="10dp"
+            android:textSize="14sp" />
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

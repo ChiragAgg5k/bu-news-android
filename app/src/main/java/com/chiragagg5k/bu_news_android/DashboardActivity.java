@@ -3,6 +3,7 @@ package com.chiragagg5k.bu_news_android;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.HapticFeedbackConstants;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class DashboardActivity extends AppCompatActivity {
     NavigationView sideNavigationView;
     TextView sideNavUsername;
     FirebaseUser user;
+    final String GITHUB_URL = "https://github.com/ChiragAgg5k/bu-news-android";
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class DashboardActivity extends AppCompatActivity {
         profileImage.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
 
         postButton.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
             bottomNavigationView.setSelectedItemId(R.id.placeholder);
             YoYo.with(Techniques.Tada)
                     .duration(1000)
@@ -83,7 +86,9 @@ public class DashboardActivity extends AppCompatActivity {
             startActivity(new Intent(this, AuthenticationActivity.class));
 
         } else if (menuItem.getItemId() == R.id.about) {
-            Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(android.net.Uri.parse(GITHUB_URL));
+            startActivity(intent);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

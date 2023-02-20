@@ -1,10 +1,12 @@
 package com.chiragagg5k.bu_news_android;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +33,7 @@ public class HomeFragment extends Fragment {
     NewsRvAdaptor news_adaptor;
     List<UploadObject> uploadObjects;
     DatabaseReference databaseReference;
+    TextView loadingTV;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -49,6 +52,12 @@ public class HomeFragment extends Fragment {
 
         categories_rv = view.findViewById(R.id.categories_rv);
         news_rv = view.findViewById(R.id.news_rv);
+        loadingTV = view.findViewById(R.id.loading_tv);
+
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            loadingTV.setText("No news found");
+        }, 4000);
 
         uploadObjects = new ArrayList<>();
 
@@ -58,8 +67,8 @@ public class HomeFragment extends Fragment {
         category_names.add("All");
         category_names.add("Sports");
         category_names.add("Entertainment");
-        category_names.add("Politics");
         category_names.add("Technology");
+        category_names.add("Clubs Related");
 
         linearLayoutManager_VERTICAL = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         linearLayoutManager_HORIZONTAL = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -72,9 +81,16 @@ public class HomeFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                uploadObjects.clear();
+
                 for(DataSnapshot postSnapShot : snapshot.getChildren()){
                     UploadObject upload = postSnapShot.getValue(UploadObject.class);
-                    uploadObjects.add(upload);
+
+                    assert upload != null;
+
+                    if (upload.isAuthorized()) {
+                        uploadObjects.add(upload);
+                    }
                 }
 
                 news_adaptor = new NewsRvAdaptor(uploadObjects);
@@ -87,7 +103,6 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
 }

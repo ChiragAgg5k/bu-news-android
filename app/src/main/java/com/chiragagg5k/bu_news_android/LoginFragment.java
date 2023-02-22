@@ -54,6 +54,7 @@ public class LoginFragment extends Fragment {
 
                 email = view.findViewById(R.id.email);
                 password = view.findViewById(R.id.password);
+
                 String email_text = email.getText().toString();
                 String password_text = password.getText().toString();
 

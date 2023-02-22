@@ -82,21 +82,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/post_description_et"
-            android:orientation="horizontal"
-            android:layout_margin="16dp">
+            android:layout_margin="16dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Select Category:"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <Spinner
                 android:id="@+id/categories_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/post_description_et"
-                android:backgroundTint="@color/backgroundColorDark"/>
+                android:backgroundTint="@color/backgroundColorDark" />
 
         </LinearLayout>
 

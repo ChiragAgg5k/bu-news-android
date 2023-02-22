@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -26,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class DashboardActivity extends AppCompatActivity {
 
+    final String GITHUB_URL = "https://github.com/ChiragAgg5k/bu-news-android";
     ImageView profileImage;
     BottomNavigationView bottomNavigationView;
     FloatingActionButton postButton;
@@ -33,7 +35,6 @@ public class DashboardActivity extends AppCompatActivity {
     NavigationView sideNavigationView;
     TextView sideNavUsername;
     FirebaseUser user;
-    final String GITHUB_URL = "https://github.com/ChiragAgg5k/bu-news-android";
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -60,7 +61,10 @@ public class DashboardActivity extends AppCompatActivity {
 
         loadFragment(new HomeFragment());
 
-        profileImage.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
+        profileImage.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+            drawerLayout.openDrawer(GravityCompat.START);
+        });
 
         postButton.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
@@ -98,14 +102,29 @@ public class DashboardActivity extends AppCompatActivity {
     private boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Fragment selectedFragment = null;
 
-        if (menuItem.getItemId() == R.id.home)
+        if (menuItem.getItemId() == R.id.home) {
+            if (getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof HomeFragment)
+                return true;
+
             selectedFragment = new HomeFragment();
-        else if (menuItem.getItemId() == R.id.events)
+
+        } else if (menuItem.getItemId() == R.id.events) {
+            if (getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof EventsFragment)
+                return true;
+
             selectedFragment = new EventsFragment();
-        else if (menuItem.getItemId() == R.id.helpdesk)
+
+        } else if (menuItem.getItemId() == R.id.helpdesk) {
+            if (getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof HelpDeskFragment)
+                return true;
+
             selectedFragment = new HelpDeskFragment();
-        else if (menuItem.getItemId() == R.id.lost_found)
+        } else if (menuItem.getItemId() == R.id.lost_found) {
+            if (getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof LostFoundFragment)
+                return true;
+
             selectedFragment = new LostFoundFragment();
+        }
 
         if (selectedFragment != null) {
             loadFragment(selectedFragment);
@@ -114,8 +133,11 @@ public class DashboardActivity extends AppCompatActivity {
         return true;
     }
 
-    void loadFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.relativeLayout, fragment).commit();
+    public void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        transaction.replace(R.id.relativeLayout, fragment);
+        transaction.commit();
     }
 
     @Override

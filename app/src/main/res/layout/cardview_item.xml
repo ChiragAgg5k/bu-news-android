@@ -5,14 +5,14 @@
     android:layout_height="70dp"
     android:layout_gravity="center"
     android:layout_margin="2dp"
+    android:background="?android:selectableItemBackground"
     android:clickable="true"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/card_image"

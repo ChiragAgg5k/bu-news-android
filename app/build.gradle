@@ -43,8 +43,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-database' // Firebase Realtime Database
     implementation 'com.google.firebase:firebase-storage' // Firebase Storage
     implementation 'de.hdodenhof:circleimageview:3.1.0'// Circle Image View
-    implementation 'com.daimajia.androidanimations:library:2.4@aar' // Yo Yo animation
+    implementation 'com.daimajia.androidanimations:library:2.4@aar' // Yo Yo animations
     implementation 'com.squareup.picasso:picasso:2.71828' // Picasso
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0" // Swipe Refresh Layout
     testImplementation 'junit:junit:4.13.2' // JUnit
     androidTestImplementation 'androidx.test.ext:junit:1.1.5' // JUnit
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // Espresso

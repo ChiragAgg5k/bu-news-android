@@ -166,12 +166,6 @@ public class PostFragment extends Fragment {
                             if(uploadId != null) databaseRef.child(uploadId).setValue(upload);
                         });
 
-                        // clear the fields
-                        heading.setText("");
-                        description.setText("");
-                        image_status.setText("No image selected");
-                        image_uri = null;
-
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(requireActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();

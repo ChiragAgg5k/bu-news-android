@@ -1,5 +1,6 @@
 package com.chiragagg5k.bu_news_android;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,18 +58,21 @@ public class CategoriesRvAdaptor extends RecyclerView.Adapter<CategoriesRvAdapto
 
                     this.fragment = new GeneralNewsFragment();
                     break;
+
                 case 1:
                     if (this.fragment instanceof ClubsRelatedFragment)
                         return;
 
                     this.fragment = new ClubsRelatedFragment();
                     break;
+
                 case 2:
                     if (this.fragment instanceof EventsNewsFragment)
                         return;
 
                     this.fragment = new EventsNewsFragment();
                     break;
+
                 case 3:
                     if (this.fragment instanceof SportsNewsFragment)
                         return;

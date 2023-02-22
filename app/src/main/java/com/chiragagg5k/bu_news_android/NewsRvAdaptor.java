@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewsRvAdaptor extends RecyclerView.Adapter<NewsRvAdaptor.ViewHolder> {
@@ -38,7 +39,7 @@ public class NewsRvAdaptor extends RecyclerView.Adapter<NewsRvAdaptor.ViewHolder
         UploadObject uploadCurrent = uploadObjects.get(position);
         holder.title.setText(uploadCurrent.getNewsHeading());
         holder.description.setText(uploadCurrent.getNewsDescription());
-        holder.uploader.setText("- " + uploadCurrent.getUsername());
+        holder.uploader.setText(uploadCurrent.getUsername());
 
         Picasso.get().load(uploadCurrent.getmImageUrl()).fit().centerCrop().into(holder.image);
     }

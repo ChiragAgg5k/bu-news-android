@@ -29,7 +29,7 @@ public class EventsNewsFragment extends Fragment {
     NewsRvAdaptor news_adaptor;
     ArrayList<UploadObject> uploadObjects;
     RecyclerView events_rv;
-    TextView loading_tv;
+    TextView events_loading_tv;
 
     public EventsNewsFragment() {
         // Required empty public constructor
@@ -48,15 +48,10 @@ public class EventsNewsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         events_rv = view.findViewById(R.id.events_news_rv);
-        loading_tv = view.findViewById(R.id.loading_tv);
+        events_loading_tv = view.findViewById(R.id.events_loading_tv);
 
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                loading_tv.setText("No Events News Found");
-            }
-        }, 4000);
+        handler.postDelayed(() -> events_loading_tv.setText("No Events News Found"), 4000);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
         uploadObjects = new ArrayList<>();

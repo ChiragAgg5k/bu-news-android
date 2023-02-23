@@ -1,13 +1,18 @@
 package com.chiragagg5k.bu_news_android;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,10 +26,14 @@ import java.util.List;
 public class CategoriesRvAdaptor extends RecyclerView.Adapter<CategoriesRvAdaptor.ViewHolder> {
 
     ArrayList<String> categories;
-    Fragment fragment;
+    CategoryClickListener categoryClickListener;
+    Context context;
+    int selectedPosition = 0;
 
-    public CategoriesRvAdaptor(ArrayList<String> categories) {
+    public CategoriesRvAdaptor(ArrayList<String> categories, Context context, CategoryClickListener categoryClickListener) {
         this.categories = categories;
+        this.context = context;
+        this.categoryClickListener = categoryClickListener;
     }
 
     @NonNull
@@ -42,48 +51,18 @@ public class CategoriesRvAdaptor extends RecyclerView.Adapter<CategoriesRvAdapto
     @Override
     public void onBindViewHolder(@NonNull CategoriesRvAdaptor.ViewHolder holder, int position) {
 
-        holder.category.setText(categories.get(position));
-        AppCompatActivity activity = (AppCompatActivity) holder.itemView.getContext();
-        this.fragment = new GeneralNewsFragment();
+        if (selectedPosition == position) {
+            holder.category.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
+        } else {
+            holder.category.setTextColor(Color.WHITE);
+        }
 
-        activity.getSupportFragmentManager().beginTransaction().replace(R.id.newsLayout, fragment).addToBackStack(null).commit();
+        holder.category.setText(categories.get(position));
 
         holder.itemView.setOnClickListener(v -> {
-            YoYo.with(Techniques.FadeIn).duration(400).playOn(holder.itemView);
-
-            switch (position) {
-                case 0:
-                    if (this.fragment instanceof GeneralNewsFragment)
-                        return;
-
-                    this.fragment = new GeneralNewsFragment();
-                    break;
-
-                case 1:
-                    if (this.fragment instanceof ClubsRelatedFragment)
-                        return;
-
-                    this.fragment = new ClubsRelatedFragment();
-                    break;
-
-                case 2:
-                    if (this.fragment instanceof EventsNewsFragment)
-                        return;
-
-                    this.fragment = new EventsNewsFragment();
-                    break;
-
-                case 3:
-                    if (this.fragment instanceof SportsNewsFragment)
-                        return;
-
-                    this.fragment = new SportsNewsFragment();
-                    break;
-            }
-
-            FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-            transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-            transaction.replace(R.id.newsLayout, this.fragment).addToBackStack(null).commit();
+            categoryClickListener.onCategoryClick(position);
+            selectedPosition = holder.getAdapterPosition();
+            notifyDataSetChanged();
         });
     }
 
@@ -95,5 +74,9 @@ public class CategoriesRvAdaptor extends RecyclerView.Adapter<CategoriesRvAdapto
             super(itemView);
             category = itemView.findViewById(R.id.category_name);
         }
+    }
+
+    public interface CategoryClickListener{
+        void onCategoryClick(int position);
     }
 }

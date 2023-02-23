@@ -1,40 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_marginBottom="100dp"
-    tools:ignore="HardcodedText">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".HomeFragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginHorizontal="10dp"
+        android:id="@+id/categories_rv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:context=".HomeFragment">
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:scrollbars="none"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categories_rv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:scrollbars="none" />
+    <View
+        android:id="@+id/top_news_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/categories_rv"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/backgroundColorDark" />
 
-        <View
-            android:id="@+id/top_news_divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/categories_rv"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="5dp"
-            android:backgroundTint="@color/backgroundColorDark" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/news_rv_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_news_divider" />
 
-        <RelativeLayout
-            android:id="@+id/newsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/top_news_divider" />
+    <ProgressBar
+        android:id="@+id/progress_bar_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
-    </RelativeLayout>
-</ScrollView>
+
+</RelativeLayout>

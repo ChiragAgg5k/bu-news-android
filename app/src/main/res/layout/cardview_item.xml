@@ -5,20 +5,15 @@
     android:layout_height="70dp"
     android:layout_gravity="center"
     android:layout_margin="2dp"
-    android:background="?android:selectableItemBackground"
-    android:clickable="true"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="8dp">
+    android:backgroundTint="@color/backgroundColorDark"
+    android:elevation="8dp"
+    app:cardCornerRadius="8dp">
 
     <RelativeLayout
+        android:id="@+id/category_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/card_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/backgroundColorDark">
 
         <TextView
             android:id="@+id/category_name"
@@ -31,7 +26,8 @@
             android:text="Category"
             android:textAlignment="center"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:backgroundTint="@color/backgroundColorDark"/>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

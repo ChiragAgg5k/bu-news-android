@@ -1,4 +1,5 @@
-<set xmlns:android="http://schemas.android.com/apk/res/android">
-    <alpha android:fromAlpha="0.0" android:toAlpha="1.0"
-        android:duration="@android:integer/config_shortAnimTime" />
-</set>
+<alpha xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="@android:integer/config_shortAnimTime"
+    android:interpolator="@android:anim/linear_interpolator"
+    android:fromAlpha="0.0"
+    android:toAlpha="1.0" />

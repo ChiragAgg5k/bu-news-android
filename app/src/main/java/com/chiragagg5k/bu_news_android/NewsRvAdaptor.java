@@ -1,5 +1,6 @@
 package com.chiragagg5k.bu_news_android;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ public class NewsRvAdaptor extends RecyclerView.Adapter<NewsRvAdaptor.ViewHolder
 
     private final List<UploadObject> uploadObjects;
 
-    public NewsRvAdaptor(List<UploadObject> uploadObjects) {
+    public NewsRvAdaptor(List<UploadObject> uploadObjects, Context context) {
         this.uploadObjects = uploadObjects;
     }
 
@@ -44,7 +45,7 @@ public class NewsRvAdaptor extends RecyclerView.Adapter<NewsRvAdaptor.ViewHolder
         Picasso.get().load(uploadCurrent.getmImageUrl()).fit().centerCrop().into(holder.image);
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView title, description, uploader;
         ImageView image;

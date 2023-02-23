@@ -55,49 +55,50 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinator"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toolBar">
+            android:layout_height="match_parent">
 
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:id="@+id/coordinator"
+            <RelativeLayout
+                android:layout_marginVertical="75dp"
+                android:id="@+id/relativeLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_below="@id/toolBar">
+            </RelativeLayout>
 
-                <com.google.android.material.bottomappbar.BottomAppBar
-                    android:id="@+id/app_bar"
-                    style="@style/Widget.MaterialComponents.BottomAppBar"
+            <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/app_bar"
+                style="@style/Widget.MaterialComponents.BottomAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom">
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottom_navigation"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom">
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:outlineSpotShadowColor="@android:color/transparent"
+                    app:itemBackground="@color/backgroundColor"
+                    app:itemIconSize="35dp"
+                    app:menu="@menu/bottom_nav_menu" />
 
-                    <com.google.android.material.bottomnavigation.BottomNavigationView
-                        android:id="@+id/bottom_navigation"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="16dp"
-                        android:outlineSpotShadowColor="@android:color/transparent"
-                        app:itemBackground="@color/backgroundColor"
-                        app:itemIconSize="35dp"
-                        app:menu="@menu/bottom_nav_menu" />
+            </com.google.android.material.bottomappbar.BottomAppBar>
 
-                </com.google.android.material.bottomappbar.BottomAppBar>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/post_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:scaleType="center"
+                android:src="@drawable/post_icon_foreground"
+                app:layout_anchor="@id/app_bar"
+                app:maxImageSize="40dp"
+                app:tint="@color/white" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/post_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:scaleType="center"
-                    android:src="@drawable/post_icon_foreground"
-                    app:layout_anchor="@id/app_bar"
-                    app:maxImageSize="40dp"
-                    app:tint="@color/white" />
-
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
-        </RelativeLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </RelativeLayout>
 

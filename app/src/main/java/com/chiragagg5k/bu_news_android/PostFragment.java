@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -165,6 +166,14 @@ public class PostFragment extends Fragment {
 
                             if(uploadId != null) databaseRef.child(uploadId).setValue(upload);
                         });
+
+                        // clear the fields after 1 seconds
+                        new Handler().postDelayed(() -> {
+                            heading.setText("");
+                            description.setText("");
+                            image_status.setText("No image selected");
+                            image_uri = null;
+                        }, 1000);
 
                     })
                     .addOnFailureListener(e -> {

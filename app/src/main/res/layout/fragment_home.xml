@@ -10,10 +10,10 @@
     tools:context=".HomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginHorizontal="10dp"
         android:id="@+id/categories_rv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
         android:clickable="true"
         android:focusable="true"
         android:orientation="horizontal"
@@ -40,7 +40,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:indeterminateTint="@color/textColorHint"
+        />
 
 
 </RelativeLayout>

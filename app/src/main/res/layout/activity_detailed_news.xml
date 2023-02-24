@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginBottom="30dp">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Placeholder title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
+        android:id="@+id/detailed_news_title"/>
+
+    <ImageView
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detailed_news_title"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
+        android:scaleType="fitStart"
+        android:adjustViewBounds="true"
+        android:id="@+id/detailed_news_image"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Placeholder description"
+        android:textSize="16sp"
+        android:layout_below="@+id/detailed_news_image"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
+        android:id="@+id/detailed_news_description"/>
+
+</RelativeLayout>
+</ScrollView>

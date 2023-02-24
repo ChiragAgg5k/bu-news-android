@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.BUNewsAndroidDark"
-    tools:context=".ProfileActivity">
+    tools:context=".EditProfileActivity">
 
     <RelativeLayout
         android:id="@+id/profile_header"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="10dp"
-            android:text="@string/account_settings"
+            android:text="Edit Profile"
             android:textAlignment="textEnd"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -49,24 +49,42 @@
         android:layout_marginVertical="20dp"
         android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:src="@mipmap/default_profile_image"
-            app:civ_border_width="2dp" />
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@mipmap/default_profile_image"
+                app:civ_border_width="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/profile_image"
+                app:layout_constraintHorizontal_bias="0.709"
+                app:layout_constraintStart_toStartOf="@+id/profile_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.829" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <TextView
             android:id="@+id/profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/placeholder_name_text"
             android:textAlignment="center"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            />
+            android:textStyle="bold" />
 
         <View
             android:layout_width="match_parent"
@@ -82,7 +100,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/profile_body"
-        android:layout_marginTop="10dp"
         android:paddingHorizontal="15dp">
 
         <ImageView
@@ -98,19 +115,20 @@
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/mini_profile_icon"
             android:gravity="center"
-            android:text="Full Name"
+            android:text="Edit Full Name"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/full_name_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:gravity="center"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/backgroundColorDark"
             android:text="@string/placeholder_name_text"
-            android:textSize="14sp"
-            android:layout_marginEnd="10dp"/>
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
@@ -143,7 +161,7 @@
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/mini_email_icon"
             android:gravity="center"
-            android:text="@string/student_email_text"
+            android:text="You can't change your email"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -184,18 +202,7 @@
             android:clickable="true"
             android:gravity="center"
             android:paddingHorizontal="20dp"
-            android:text="@string/edit_profile_text"
-            android:textColor="@color/white" />
-
-        <Button
-            android:id="@+id/change_password_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/change_password_text"
+            android:text="Save Changes"
             android:textColor="@color/white" />
 
     </LinearLayout>

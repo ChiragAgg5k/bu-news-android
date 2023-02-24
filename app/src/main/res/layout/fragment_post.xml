@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_marginBottom="90dp"
-    tools:ignore="HardcodedText">
+    tools:ignore="HardcodedText"
+    android:layout_marginBottom="20dp"
+    >
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -93,12 +94,21 @@
 
             <Spinner
                 android:id="@+id/categories_spinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/post_description_et"
-                android:backgroundTint="@color/backgroundColorDark" />
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:layout_marginHorizontal="20dp"/>
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/categories_spinner_ll"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/backgroundColorDark" />
 
 
         <Button

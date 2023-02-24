@@ -21,13 +21,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:backgroundTint="@color/backgroundColorDark"
             android:gravity="center"
             android:padding="3dp"
             android:text="Category"
             android:textAlignment="center"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:backgroundTint="@color/backgroundColorDark"/>
+            android:textStyle="bold" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

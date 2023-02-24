@@ -28,9 +28,14 @@
     <string-array name="category_names">
         <item>General</item>
         <item>Sports</item>
-        <item>Entertainment</item>
+        <item>Events</item>
         <item>Technology</item>
         <item>Clubs Related</item>
     </string-array>
+
+    <string name="post">Post</string>
+    <string name="post_loading">Posting…</string>
+    <string name="no_image_selected">No image selected</string>
+    <string name="selected_image">Selected image: %1$s</string>
 
 </resources>

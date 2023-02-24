@@ -1,27 +1,18 @@
 package com.chiragagg5k.bu_news_android;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class CategoriesRvAdaptor extends RecyclerView.Adapter<CategoriesRvAdaptor.ViewHolder> {
 
@@ -48,6 +39,7 @@ public class CategoriesRvAdaptor extends RecyclerView.Adapter<CategoriesRvAdapto
         return categories.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBindViewHolder(@NonNull CategoriesRvAdaptor.ViewHolder holder, int position) {
 
@@ -61,9 +53,14 @@ public class CategoriesRvAdaptor extends RecyclerView.Adapter<CategoriesRvAdapto
 
         holder.itemView.setOnClickListener(v -> {
             categoryClickListener.onCategoryClick(position);
+
             selectedPosition = holder.getAdapterPosition();
             notifyDataSetChanged();
         });
+    }
+
+    public interface CategoryClickListener {
+        void onCategoryClick(int position);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -74,9 +71,5 @@ public class CategoriesRvAdaptor extends RecyclerView.Adapter<CategoriesRvAdapto
             super(itemView);
             category = itemView.findViewById(R.id.category_name);
         }
-    }
-
-    public interface CategoryClickListener{
-        void onCategoryClick(int position);
     }
 }

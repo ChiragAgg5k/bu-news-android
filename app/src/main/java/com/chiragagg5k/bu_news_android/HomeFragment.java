@@ -1,7 +1,7 @@
 package com.chiragagg5k.bu_news_android;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +23,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Objects;
 
-public class HomeFragment extends Fragment implements CategoriesRvAdaptor.CategoryClickListener{
+public class HomeFragment extends Fragment implements CategoriesRvAdaptor.CategoryClickListener {
 
-    RecyclerView categories_rv,news_rv;
+    RecyclerView categories_rv, news_rv;
     ArrayList<String> category_names;
     CategoriesRvAdaptor categories_adaptor;
     NewsRvAdaptor news_adaptor;
@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment implements CategoriesRvAdaptor.Catego
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -58,32 +59,35 @@ public class HomeFragment extends Fragment implements CategoriesRvAdaptor.Catego
         uploadObjects = new ArrayList<>();
         category_names = new ArrayList<>();
 
-        category_names.add("General");
-        category_names.add("Clubs Related");
-        category_names.add("Events");
-        category_names.add("Sports");
-
+        // Add all the categories to the category_names arraylist
+        category_names.addAll(Arrays.asList(getResources().getStringArray(R.array.category_names)));
 
         categories_adaptor = new CategoriesRvAdaptor(category_names, getContext(), this);
 
-        news_rv.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
         categories_rv.setAdapter(categories_adaptor);
 
-        getNews("General" );
+        getNews("General"); // Inflating uploadObjects with general news by default
         news_adaptor = new NewsRvAdaptor(uploadObjects, getContext());
+
+        news_rv.setLayoutManager(new LinearLayoutManager(getContext()));
         news_rv.setAdapter(news_adaptor);
         news_adaptor.notifyDataSetChanged();
 
     }
 
+    /**
+     * This method clears the uploadObjects arraylist and then adds all the news of the category passed
+     *
+     * @param category The category of news to be fetched
+     */
     private void getNews(String category) {
+
         progressBar.setVisibility(View.VISIBLE);
         uploadObjects.clear();
 
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
         databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -112,6 +116,11 @@ public class HomeFragment extends Fragment implements CategoriesRvAdaptor.Catego
         });
     }
 
+    /**
+     * Called when a category is clicked
+     *
+     * @param position The position of the category clicked
+     */
     @Override
     public void onCategoryClick(int position) {
         String category = category_names.get(position);

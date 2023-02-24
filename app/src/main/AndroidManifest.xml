@@ -36,6 +36,16 @@
             android:windowSoftInputMode="stateVisible|adjustPan">
         </activity>
 
+        <activity
+            android:name=".EditProfileActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan">
+        </activity>
+
+        <activity
+            android:name=".NewsDetailActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan">
+        </activity>
+
     </application>
 
 </manifest>

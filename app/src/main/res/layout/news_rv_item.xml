@@ -41,7 +41,9 @@
             android:maxLines="3"
             android:padding="3dp"
             android:text="News Description"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:ellipsize="end"
+            />
 
         <TextView
             android:id="@+id/news_uploader"

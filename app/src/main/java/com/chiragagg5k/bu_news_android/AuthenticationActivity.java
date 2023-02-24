@@ -31,8 +31,6 @@ public class AuthenticationActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finishAffinity();
-        System.exit(0);
-        super.onBackPressed();
     }
 }
 

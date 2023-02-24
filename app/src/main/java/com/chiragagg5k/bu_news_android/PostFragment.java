@@ -31,6 +31,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
+@SuppressWarnings("rawtypes")
 public class PostFragment extends Fragment {
 
     TextView image_status;
@@ -56,7 +57,7 @@ public class PostFragment extends Fragment {
                         image_uri = data.getData();
 
                         String name = UtilityClass.queryName(requireActivity().getContentResolver(), image_uri);
-                        image_status.setText("Selected image: " + name);
+                        image_status.setText(getResources().getString(R.string.selected_image, name));
                     }
                 }
             });
@@ -156,7 +157,7 @@ public class PostFragment extends Fragment {
                     .addOnSuccessListener(taskSnapshot -> {
 
                         post_button.setEnabled(true);
-                        post_button.setText("Post");
+                        post_button.setText(getResources().getString(R.string.post));
                         Toast.makeText(requireActivity(), "Upload successful", Toast.LENGTH_SHORT).show();
 
                         // get the download url of the image
@@ -164,14 +165,14 @@ public class PostFragment extends Fragment {
                             UploadObject upload = new UploadObject(heading.getText().toString(), description.getText().toString(), category_spinner.getSelectedItem().toString(), uri.toString());
                             String uploadId = databaseRef.push().getKey();
 
-                            if(uploadId != null) databaseRef.child(uploadId).setValue(upload);
+                            if (uploadId != null) databaseRef.child(uploadId).setValue(upload);
                         });
 
                         // clear the fields after 1 seconds
                         new Handler().postDelayed(() -> {
                             heading.setText("");
                             description.setText("");
-                            image_status.setText("No image selected");
+                            image_status.setText(getResources().getString(R.string.no_image_selected));
                             image_uri = null;
                         }, 1000);
 
@@ -183,11 +184,11 @@ public class PostFragment extends Fragment {
                                 .repeat(1)
                                 .playOn(post_button);
                         post_button.setEnabled(true);
-                        post_button.setText("Post");
+                        post_button.setText(getResources().getString(R.string.post));
                     })
                     .addOnProgressListener(snapshot -> {
                         post_button.setEnabled(false);
-                        post_button.setText("Posting...");
+                        post_button.setText(getResources().getString(R.string.post_loading));
                     });
         }
     }

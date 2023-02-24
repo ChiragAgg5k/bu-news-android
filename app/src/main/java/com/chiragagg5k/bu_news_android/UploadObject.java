@@ -27,10 +27,10 @@ public class UploadObject {
         }
     }
 
-    public UploadObject(){
+    public UploadObject() {
         // !IMPORTANT: This constructor is required for Firebase to work
 
-        this("","","","");
+        this("", "", "", "");
     }
 
     public String getNewsHeading() {

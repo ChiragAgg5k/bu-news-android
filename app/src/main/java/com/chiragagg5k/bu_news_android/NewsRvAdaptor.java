@@ -1,6 +1,7 @@
 package com.chiragagg5k.bu_news_android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NewsRvAdaptor extends RecyclerView.Adapter<NewsRvAdaptor.ViewHolder> {
 
     private final List<UploadObject> uploadObjects;
+    Context context;
 
     public NewsRvAdaptor(List<UploadObject> uploadObjects, Context context) {
         this.uploadObjects = uploadObjects;
+        this.context = context;
     }
 
     @NonNull
@@ -40,9 +42,20 @@ public class NewsRvAdaptor extends RecyclerView.Adapter<NewsRvAdaptor.ViewHolder
         UploadObject uploadCurrent = uploadObjects.get(position);
         holder.title.setText(uploadCurrent.getNewsHeading());
         holder.description.setText(uploadCurrent.getNewsDescription());
-        holder.uploader.setText(uploadCurrent.getUsername());
+        holder.uploader.setText("- "+uploadCurrent.getUsername());
 
         Picasso.get().load(uploadCurrent.getmImageUrl()).fit().centerCrop().into(holder.image);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(this.context, NewsDetailActivity.class);
+            intent.putExtra("news_heading", uploadCurrent.getNewsHeading());
+            intent.putExtra("news_description", uploadCurrent.getNewsDescription());
+            intent.putExtra("news_image_url", uploadCurrent.getmImageUrl());
+            intent.putExtra("news_uploader", uploadCurrent.getUsername());
+            intent.putExtra("news_category", uploadCurrent.getCategory());
+
+            this.context.startActivity(intent);
+        });
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

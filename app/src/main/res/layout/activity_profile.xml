@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:src="@mipmap/default_profile_image"
-            app:civ_border_width="2dp" />
+            app:civ_border_width="0dp" />
 
 
         <TextView

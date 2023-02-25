@@ -6,13 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -35,6 +38,7 @@ public class HomeFragment extends Fragment implements CategoriesRvAdaptor.Catego
     ProgressBar progressBar;
     ArrayList<UploadObject> uploadObjects;
     DatabaseReference databaseReference;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -55,9 +59,12 @@ public class HomeFragment extends Fragment implements CategoriesRvAdaptor.Catego
         categories_rv = view.findViewById(R.id.categories_rv);
         news_rv = view.findViewById(R.id.news_rv_home);
         progressBar = view.findViewById(R.id.progress_bar_home);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_home);
 
         uploadObjects = new ArrayList<>();
         category_names = new ArrayList<>();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
 
         // Add all the categories to the category_names arraylist
         category_names.addAll(Arrays.asList(getResources().getStringArray(R.array.category_names)));
@@ -66,13 +73,20 @@ public class HomeFragment extends Fragment implements CategoriesRvAdaptor.Catego
 
         categories_rv.setAdapter(categories_adaptor);
 
-        getNews("General"); // Inflating uploadObjects with general news by default
+        getNews("All"); // Inflating uploadObjects with general news by default
         news_adaptor = new NewsRvAdaptor(uploadObjects, getContext());
 
         news_rv.setLayoutManager(new LinearLayoutManager(getContext()));
         news_rv.setAdapter(news_adaptor);
         news_adaptor.notifyDataSetChanged();
 
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            getNews("All");
+            categories_rv.smoothScrollToPosition(0);
+            categories_adaptor.selectedPosition = 0;
+            categories_adaptor.notifyDataSetChanged();
+            swipeRefreshLayout.setRefreshing(false);
+        });
     }
 
     /**
@@ -85,7 +99,6 @@ public class HomeFragment extends Fragment implements CategoriesRvAdaptor.Catego
         progressBar.setVisibility(View.VISIBLE);
         uploadObjects.clear();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -97,7 +110,7 @@ public class HomeFragment extends Fragment implements CategoriesRvAdaptor.Catego
                     assert upload != null;
 
                     if (upload.isAuthorized()) {
-                        if (upload.getCategory().equals(category) || category.equals("General")) {
+                        if (upload.getCategory().equals(category) || category.equals("All")) {
                             uploadObjects.add(upload);
                         }
                     }

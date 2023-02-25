@@ -29,7 +29,7 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:id="@+id/profile_icon"
+                    android:id="@+id/menu_icon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_alignParentStart="true"
@@ -39,6 +39,7 @@
                     android:src="@drawable/menu_icon_foreground" />
 
                 <TextView
+                    android:id="@+id/bu_news_healine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -93,7 +94,9 @@
                 android:src="@drawable/post_icon_foreground"
                 app:layout_anchor="@id/app_bar"
                 app:maxImageSize="40dp"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                app:borderWidth="0dp"
+                />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -45,6 +45,8 @@ dependencies {
     implementation 'com.daimajia.androidanimations:library:2.4@aar' // Yo Yo animations
     implementation 'com.squareup.picasso:picasso:2.71828' // Picasso
     implementation 'com.github.dhaval2404:imagepicker:2.1' // Image Picker
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0" // Swipe Refresh Layout
+    implementation 'com.google.firebase:firebase-messaging:23.1.1' // Firebase Messaging
     testImplementation 'junit:junit:4.13.2' // JUnit
     androidTestImplementation 'androidx.test.ext:junit:1.1.5' // JUnit
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // Espresso

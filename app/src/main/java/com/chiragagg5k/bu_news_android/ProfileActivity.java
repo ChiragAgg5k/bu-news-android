@@ -36,19 +36,23 @@ public class ProfileActivity extends AppCompatActivity {
         email_text = findViewById(R.id.email_text);
         profile_image = findViewById(R.id.profile_image);
 
+        back_button = findViewById(R.id.back_button);
+        edit_profile_button = findViewById(R.id.edit_profile_button);
+        change_password_button = findViewById(R.id.change_password_button);
+
         profile_name.setText(user.getDisplayName());
         full_name_text.setText(user.getDisplayName());
         email_text.setText(user.getEmail());
 
-        back_button = findViewById(R.id.back_button);
-        edit_profile_button = findViewById(R.id.edit_profile_button);
-        change_password_button = findViewById(R.id.change_password_button);
+        if(user.getPhotoUrl() != null)
+            profile_image.setImageURI(user.getPhotoUrl());
 
         back_button.setOnClickListener(v -> finish());
         edit_profile_button.setOnClickListener(v -> {
             Intent intent = new Intent(this, EditProfileActivity.class);
             startActivity(intent);
         });
+
     }
 
     @Override

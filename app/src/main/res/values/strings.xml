@@ -26,10 +26,17 @@
 
     <!--  Category DropDown items  -->
     <string-array name="category_names">
+        <item>All</item>
         <item>General</item>
         <item>Sports</item>
-        <item>Events</item>
-        <item>Technology</item>
+        <item>Event</item>
+        <item>Clubs Related</item>
+    </string-array>
+
+    <string-array name="choice_category_names">
+        <item>General</item>
+        <item>Sports</item>
+        <item>Event</item>
         <item>Clubs Related</item>
     </string-array>
 

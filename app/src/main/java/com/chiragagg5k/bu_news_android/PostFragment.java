@@ -87,7 +87,7 @@ public class PostFragment extends Fragment {
         storageRef = FirebaseStorage.getInstance().getReference("uploads");
         databaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
-        category_adapter = ArrayAdapter.createFromResource(getContext(), R.array.category_names, android.R.layout.simple_spinner_item);
+        category_adapter = ArrayAdapter.createFromResource(getContext(), R.array.choice_category_names, android.R.layout.simple_spinner_item);
         category_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         category_spinner.setAdapter(category_adapter);
 

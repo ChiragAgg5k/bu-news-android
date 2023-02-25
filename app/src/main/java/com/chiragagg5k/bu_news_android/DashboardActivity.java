@@ -1,7 +1,10 @@
 package com.chiragagg5k.bu_news_android;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.HapticFeedbackConstants;
 import android.view.MenuItem;
@@ -9,9 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -24,16 +30,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 public class DashboardActivity extends AppCompatActivity {
 
     final String GITHUB_URL = "https://github.com/ChiragAgg5k/bu-news-android";
-    ImageView profileImage;
+    final String WEBSITE_URL = "https://bu-news.netlify.app/";
+    ImageView menuIcon, sideNavProfileImage;
     BottomNavigationView bottomNavigationView;
     FloatingActionButton postButton;
     DrawerLayout drawerLayout;
     NavigationView sideNavigationView;
-    TextView sideNavUsername;
+    TextView sideNavUsername, buHeadline;
     FirebaseUser user;
 
     @Override
@@ -41,15 +50,19 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        profileImage = findViewById(R.id.profile_icon);
+        menuIcon = findViewById(R.id.menu_icon);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         sideNavigationView = findViewById(R.id.side_nav_view);
         postButton = findViewById(R.id.post_button);
         drawerLayout = findViewById(R.id.drawer_layout);
+        buHeadline = findViewById(R.id.bu_news_healine);
         sideNavUsername = sideNavigationView.getHeaderView(0).findViewById(R.id.side_nav_username);
+        sideNavProfileImage = sideNavigationView.getHeaderView(0).findViewById(R.id.side_nav_profile_image);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
+            if (user.getPhotoUrl() != null)
+                sideNavProfileImage.setImageURI(user.getPhotoUrl());
             sideNavUsername.setText(user.getDisplayName());
         }
 
@@ -61,7 +74,14 @@ public class DashboardActivity extends AppCompatActivity {
 
         loadFragment(new HomeFragment());
 
-        profileImage.setOnClickListener(v -> {
+        buHeadline.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(android.net.Uri.parse(WEBSITE_URL));
+            startActivity(intent);
+        });
+
+        menuIcon.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
             drawerLayout.openDrawer(GravityCompat.START);
         });

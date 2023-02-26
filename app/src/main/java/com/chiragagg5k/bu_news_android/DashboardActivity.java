@@ -1,23 +1,18 @@
 package com.chiragagg5k.bu_news_android;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.HapticFeedbackConstants;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -30,8 +25,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -68,6 +61,16 @@ public class DashboardActivity extends AppCompatActivity {
 
         // disabling middle icon
         bottomNavigationView.getMenu().getItem(2).setEnabled(false);
+
+        // long press listener for bottom navigation
+        for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
+            MenuItem menuItem = bottomNavigationView.getMenu().getItem(i);
+            View view = bottomNavigationView.findViewById(menuItem.getItemId());
+            view.setOnLongClickListener(v -> {
+                Toast.makeText(this, menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                return true;
+            });
+        }
 
         bottomNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
         sideNavigationView.setNavigationItemSelectedListener(this::sideNavigationItemSelected);
@@ -122,11 +125,11 @@ public class DashboardActivity extends AppCompatActivity {
     private boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Fragment selectedFragment = null;
 
-        if (menuItem.getItemId() == R.id.home) {
-            if (getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof HomeFragment)
+        if (menuItem.getItemId() == R.id.headlines) {
+            if (getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof HeadlinesFragment)
                 return true;
 
-            selectedFragment = new HomeFragment();
+            selectedFragment = new HeadlinesFragment();
 
         } else if (menuItem.getItemId() == R.id.events) {
             if (getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof EventsFragment)
@@ -134,11 +137,11 @@ public class DashboardActivity extends AppCompatActivity {
 
             selectedFragment = new EventsFragment();
 
-        } else if (menuItem.getItemId() == R.id.helpdesk) {
-            if (getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof HelpDeskFragment)
+        } else if (menuItem.getItemId() == R.id.home) {
+            if (getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof HomeFragment)
                 return true;
 
-            selectedFragment = new HelpDeskFragment();
+            selectedFragment = new HomeFragment();
         } else if (menuItem.getItemId() == R.id.lost_found) {
             if (getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof LostFoundFragment)
                 return true;

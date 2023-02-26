@@ -6,18 +6,19 @@
         android:icon="@drawable/home_icon_foreground"
         android:title="Home" />
     <item
-        android:id="@+id/events"
-        android:icon="@drawable/event_icon_foreground"
-        android:title="Events" />
+        android:id="@+id/headlines"
+        android:icon="@drawable/newspaper_icon_foreground"
+        android:title="Headlines" />
     <item
         android:id="@+id/placeholder"
         android:title="" />
     <item
+        android:id="@+id/events"
+        android:icon="@drawable/event_icon_foreground"
+        android:title="Events" />
+    <item
         android:id="@+id/lost_found"
         android:icon="@drawable/lost_found_icon_foreground"
         android:title="Lost Found" />
-    <item
-        android:id="@+id/helpdesk"
-        android:icon="@drawable/helpdesk_icon_foreground"
-        android:title="Helpdesk" />
+
 </menu>

@@ -1,8 +1,13 @@
 package com.chiragagg5k.bu_news_android;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +26,9 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -176,6 +184,8 @@ public class PostFragment extends Fragment {
                             image_uri = null;
                         }, 1000);
 
+                        postNotification();
+
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(requireActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -191,5 +201,25 @@ public class PostFragment extends Fragment {
                         post_button.setText(getResources().getString(R.string.post_loading));
                     });
         }
+    }
+
+    private void postNotification() {
+        NotificationChannel notificationChannel = new NotificationChannel("1", "1", NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
+
+        notificationManager.createNotificationChannel(notificationChannel);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "1")
+                .setSmallIcon(R.drawable.bunews_logo)
+                .setContentTitle("Upload successful")
+                .setContentText("We have received your post. It will be reviewed by our team and will be posted soon.")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getContext());
+        if(ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
+            return;
+        }
+        notificationManagerCompat.notify(1, builder.build());
     }
 }

@@ -44,6 +44,8 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+        email = view.findViewById(R.id.email);
+        password = view.findViewById(R.id.password);
 
         if (user != null) {
             startActivity(new Intent(getActivity(), DashboardActivity.class));
@@ -51,9 +53,6 @@ public class LoginFragment extends Fragment {
 
             login_button = view.findViewById(R.id.login_button);
             login_button.setOnClickListener(v -> {
-
-                email = view.findViewById(R.id.email);
-                password = view.findViewById(R.id.password);
 
                 String email_text = email.getText().toString();
                 String password_text = password.getText().toString();

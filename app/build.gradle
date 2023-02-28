@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.github.dhaval2404:imagepicker:2.1' // Image Picker
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0" // Swipe Refresh Layout
     implementation 'com.google.firebase:firebase-messaging:23.1.1' // Firebase Messaging
+    implementation 'com.android.volley:volley:1.2.1' // Volley
     testImplementation 'junit:junit:4.13.2' // JUnit
     androidTestImplementation 'androidx.test.ext:junit:1.1.5' // JUnit
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // Espresso

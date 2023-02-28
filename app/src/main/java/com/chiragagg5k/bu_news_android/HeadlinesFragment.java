@@ -55,7 +55,7 @@ public class HeadlinesFragment extends Fragment implements CategoriesRvAdaptor.C
         super.onViewCreated(view, savedInstanceState);
 
         categories_rv = view.findViewById(R.id.categories_rv);
-        news_rv = view.findViewById(R.id.news_rv_home);
+        news_rv = view.findViewById(R.id.news_rv_headlines);
         progressBar = view.findViewById(R.id.progress_bar_home);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_home);
 

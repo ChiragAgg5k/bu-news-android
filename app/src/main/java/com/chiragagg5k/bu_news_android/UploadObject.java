@@ -11,9 +11,11 @@ public class UploadObject {
     private final String category;
     private final boolean authorized;
     private final String username;
+    private final boolean promoted;
 
     public UploadObject(String newsHeading, String newsDescription, String category, String imageUrl) {
         this.authorized = false;
+        this.promoted = false;
         this.category = category;
         this.mImageUrl = imageUrl;
         this.newsDescription = newsDescription;
@@ -57,6 +59,10 @@ public class UploadObject {
 
     public String getUsername() {
         return username;
+    }
+
+    public boolean isPromoted() {
+        return promoted;
     }
 
 }

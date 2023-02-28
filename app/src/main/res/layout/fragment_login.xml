@@ -1,94 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:layout_marginVertical="40dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/bunews_logo" />
-
-    <TextView
-        android:id="@+id/tagline"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="@string/tagline"
-        android:textAlignment="center"
-        android:textSize="17sp" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/register_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Login here"
-        android:textSize="25sp"
-        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/secTxt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="20sp"
-        android:text="Student Email" />
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="40dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bunews_logo" />
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginHorizontal="40dp"
-        android:autofillHints="email"
-        android:backgroundTint="@color/textColor"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:singleLine="true" />
+        <TextView
+            android:id="@+id/tagline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/tagline"
+            android:textAlignment="center"
+            android:textSize="17sp" />
 
-    <TextView
-        android:id="@+id/thirdTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:text="Password" />
+        <TextView
+            android:id="@+id/register_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Login here"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginHorizontal="40dp"
-        android:autofillHints="password"
-        android:backgroundTint="@color/textColor"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:singleLine="true" />
+        <TextView
+            android:id="@+id/secTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="20sp"
+            android:text="Student Email" />
 
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#8D3339"
-        android:paddingHorizontal="40dp"
-        android:paddingVertical="10dp"
-        android:text="Login" />
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="40dp"
+            android:autofillHints="email"
+            android:backgroundTint="@color/textColor"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:singleLine="true" />
 
-    <TextView
-        android:id="@+id/link_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="New to the app?\n Swipe right to register"
-        android:textSize="17sp" />
+        <TextView
+            android:id="@+id/thirdTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:text="Password" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="40dp"
+            android:autofillHints="password"
+            android:backgroundTint="@color/textColor"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#8D3339"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="10dp"
+            android:text="Login" />
+
+        <TextView
+            android:id="@+id/link_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="New to the app?\n Swipe right to register"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+</ScrollView>

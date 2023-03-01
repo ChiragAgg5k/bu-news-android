@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -21,6 +23,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView back_button;
     TextView profile_name, full_name_text, email_text;
     Button edit_profile_button, change_password_button;
+    DatabaseReference databaseRef;
 
     CircleImageView profile_image;
 
@@ -30,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+        databaseRef = FirebaseDatabase.getInstance().getReference("users");
 
         profile_name = findViewById(R.id.profile_name);
         full_name_text = findViewById(R.id.full_name_text);

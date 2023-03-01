@@ -36,5 +36,6 @@ public class NewsDetailActivity extends AppCompatActivity {
         Picasso.get().load(news_image_url).into(news_image_iv);
         news_description_tv.setText(news_description);
 
+
     }
 }

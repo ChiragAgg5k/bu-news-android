@@ -47,6 +47,16 @@
             android:windowSoftInputMode="stateVisible|adjustPan">
         </activity>
 
+        <activity
+            android:name=".SubscribeActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan">
+        </activity>
+
+        <activity
+            android:name=".HistoryActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan">
+        </activity>
+
         <service android:name=".NotificationHandler"
             android:enabled="true"
             android:exported="false">

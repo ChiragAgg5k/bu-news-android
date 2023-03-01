@@ -1,19 +1,19 @@
-package com.chiragagg5k.bu_news_android;
+package com.chiragagg5k.bu_news_android.objects;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class UploadObject {
+public class NewsObject {
 
     private final String newsHeading;
     private final String newsDescription;
     private final String mImageUrl;
     private final String category;
-    private final boolean authorized;
+    private boolean authorized;
     private final String username;
     private final boolean promoted;
 
-    public UploadObject(String newsHeading, String newsDescription, String category, String imageUrl) {
+    public NewsObject(String newsHeading, String newsDescription, String category, String imageUrl) {
         this.authorized = false;
         this.promoted = false;
         this.category = category;
@@ -29,7 +29,7 @@ public class UploadObject {
         }
     }
 
-    public UploadObject() {
+    public NewsObject() {
         // !IMPORTANT: This constructor is required for Firebase to work
 
         this("", "", "", "");
@@ -52,7 +52,6 @@ public class UploadObject {
         return authorized;
     }
 
-
     public String getCategory() {
         return category;
     }
@@ -63,6 +62,10 @@ public class UploadObject {
 
     public boolean isPromoted() {
         return promoted;
+    }
+
+    public void setAuthorized(boolean authorized) {
+        this.authorized = authorized;
     }
 
 }

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.chiragagg5k.bu_news_android.objects.NewsObject;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +35,7 @@ public class HeadlinesFragment extends Fragment implements CategoriesRvAdaptor.C
     CategoriesRvAdaptor categories_adaptor;
     NewsRvAdaptor news_adaptor;
     ProgressBar progressBar;
-    ArrayList<UploadObject> uploadObjects;
+    ArrayList<NewsObject> uploadObjects;
     DatabaseReference databaseReference;
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -56,7 +57,7 @@ public class HeadlinesFragment extends Fragment implements CategoriesRvAdaptor.C
 
         categories_rv = view.findViewById(R.id.categories_rv);
         news_rv = view.findViewById(R.id.news_rv_headlines);
-        progressBar = view.findViewById(R.id.progress_bar_home);
+        progressBar = view.findViewById(R.id.progress_bar_headlines);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_home);
 
         uploadObjects = new ArrayList<>();
@@ -103,7 +104,7 @@ public class HeadlinesFragment extends Fragment implements CategoriesRvAdaptor.C
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for (DataSnapshot postSnapShot : snapshot.getChildren()) {
-                    UploadObject upload = postSnapShot.getValue(UploadObject.class);
+                    NewsObject upload = postSnapShot.getValue(NewsObject.class);
 
                     assert upload != null;
 

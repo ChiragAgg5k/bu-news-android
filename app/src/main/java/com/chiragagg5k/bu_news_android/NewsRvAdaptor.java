@@ -11,16 +11,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chiragagg5k.bu_news_android.objects.NewsObject;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class NewsRvAdaptor extends RecyclerView.Adapter<NewsRvAdaptor.ViewHolder> {
 
-    private final List<UploadObject> uploadObjects;
+    private final List<NewsObject> uploadObjects;
     Context context;
 
-    public NewsRvAdaptor(List<UploadObject> uploadObjects, Context context) {
+    public NewsRvAdaptor(List<NewsObject> uploadObjects, Context context) {
         this.uploadObjects = uploadObjects;
         this.context = context;
     }
@@ -39,7 +40,7 @@ public class NewsRvAdaptor extends RecyclerView.Adapter<NewsRvAdaptor.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull NewsRvAdaptor.ViewHolder holder, int position) {
-        UploadObject uploadCurrent = uploadObjects.get(position);
+        NewsObject uploadCurrent = uploadObjects.get(position);
         holder.title.setText(uploadCurrent.getNewsHeading());
         holder.description.setText(uploadCurrent.getNewsDescription());
         holder.uploader.setText("- "+uploadCurrent.getUsername());

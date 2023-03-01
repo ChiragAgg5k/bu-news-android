@@ -13,11 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.chiragagg5k.bu_news_android.objects.UserObject;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,10 +29,11 @@ import java.util.Objects;
 public class RegisterFragment extends Fragment {
 
     final private String STUDENT_ID = "^e[1-2][1-9]cseu\\d\\d\\d\\d@bennett.edu.in";
-    EditText full_name, email, password;
+    EditText full_name, email, password, confirm_password, phone_no;
     Button register_button;
     FirebaseAuth mAuth;
     FirebaseUser user;
+    DatabaseReference databaseRef;
 
 
     public RegisterFragment() {
@@ -51,8 +55,11 @@ public class RegisterFragment extends Fragment {
         email = view.findViewById(R.id.email);
         password = view.findViewById(R.id.password);
         register_button = view.findViewById(R.id.register_button);
+        confirm_password = view.findViewById(R.id.confirm_password);
+        phone_no = view.findViewById(R.id.phone);
 
         mAuth = FirebaseAuth.getInstance();
+        databaseRef = FirebaseDatabase.getInstance().getReference("users");
 
         register_button.setOnClickListener(v -> {
 
@@ -61,34 +68,42 @@ public class RegisterFragment extends Fragment {
 
             String email = this.email.getText().toString().toLowerCase();
             String password = this.password.getText().toString();
+            String confirm_password = this.confirm_password.getText().toString();
+            String phone_no = this.phone_no.getText().toString();
 
             register_button.setText(getResources().getString(R.string.registering));
 
             if (full_name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                YoYo.with(Techniques.Bounce)
-                        .duration(700)
-                        .repeat(0)
-                        .playOn(view.findViewById(R.id.register_button));
-
                 Toast.makeText(getContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 register_button.setText(getResources().getString(R.string.register));
+                playShakeAnimation();
                 return;
             }
 
             if (!email.matches(STUDENT_ID)) {
-                YoYo.with(Techniques.Bounce)
-                        .duration(700)
-                        .repeat(0)
-                        .playOn(view.findViewById(R.id.register_button));
-
                 Toast.makeText(getContext(), "Please enter a valid student email", Toast.LENGTH_SHORT).show();
                 register_button.setText(getResources().getString(R.string.register));
+                playShakeAnimation();
+                return;
+            }
+
+            if (!password.equals(confirm_password)) {
+                Toast.makeText(getContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+                register_button.setText(getResources().getString(R.string.register));
+                playShakeAnimation();
                 return;
             }
 
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     user = mAuth.getCurrentUser();
+
+                    // Add user to database
+                    assert user != null;
+                    String userId = user.getUid();
+                    UserObject newUser = new UserObject(finalFull_name, phone_no);
+
+                    databaseRef.child(userId).setValue(newUser);
 
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                             .setDisplayName(finalFull_name)
@@ -115,5 +130,12 @@ public class RegisterFragment extends Fragment {
 
             register_button.setText(getResources().getString(R.string.register));
         });
+    }
+
+    private void playShakeAnimation() {
+        YoYo.with(Techniques.Shake)
+                .duration(700)
+                .repeat(0)
+                .playOn(requireView().findViewById(R.id.register_button));
     }
 }

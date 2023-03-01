@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.BUNewsAndroidDark"
+    tools:context=".SubscribeActivity">
+
+    <RelativeLayout
+        android:id="@+id/subscribe_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/arrow_back_white"
+            app:tint="@color/textColor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:text="Subscribe To Categories"
+            android:textAlignment="textEnd"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="10dp"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/subscribe_header_divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/subscribe_header"
+        android:layout_marginHorizontal="8dp"
+        android:backgroundTint="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/subscribe_header_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select the categories you want to subscribe to"
+        android:textAlignment="center"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        android:layout_below="@id/subscribe_header_divider"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        />
+
+    <View
+        android:id="@+id/subscribe_header_divider2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/subscribe_header_text"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/backgroundColorDark" />
+
+
+    <CheckBox
+        android:id="@+id/subscribe_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="All News - Don't miss a thing!"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        android:layout_below="@id/subscribe_header_divider2"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp" />
+
+    <CheckBox
+        android:id="@+id/subscribe_general"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Genenral News - for the casual reader"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        android:layout_below="@id/subscribe_all"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp" />
+
+    <CheckBox
+        android:id="@+id/subscribe_sports"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sports News - for the sports fan"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        android:layout_below="@id/subscribe_general"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp" />
+
+    <CheckBox
+        android:id="@+id/subscribe_events"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Events News - for the event goer"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        android:layout_below="@id/subscribe_sports"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp" />
+
+    <CheckBox
+        android:id="@+id/subscribe_club_related"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Club Related News - for the clubs enthusiast"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        android:layout_below="@id/subscribe_events"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp" />
+
+    <Button
+        android:id="@+id/subscribe_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subscribe"
+        android:layout_below="@id/subscribe_club_related"
+        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorPrimaryDark"
+        />
+
+</RelativeLayout>

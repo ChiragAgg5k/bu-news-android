@@ -1,6 +1,6 @@
 package com.chiragagg5k.bu_news_android;
 
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,9 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.chiragagg5k.bu_news_android.objects.NewsObject;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -40,22 +42,33 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 
-    private final String OPEN_WEATHER_MAP_API_KEY = "58ed8b67f0af15587b5f4f88b3457b15";
-    private final String OPEN_WEATHER_MAP_API_URL = "https://api.openweathermap.org/data/2.5/weather";
+    final String OPEN_WEATHER_MAP_API_KEY = "58ed8b67f0af15587b5f4f88b3457b15";
+    final String OPEN_WEATHER_MAP_API_URL = "https://api.openweathermap.org/data/2.5/weather";
     String selectedCity = "Delhi";
-
     ImageView weatherIcon;
-    TextView weatherDescriptionText, greetingText;
+    TextView weatherDescriptionText, greetingText, greetingUserText;
     RecyclerView newsRecyclerView;
     NewsRvAdaptor newsRvAdaptor;
     DatabaseReference databaseReference;
-    ArrayList<UploadObject> uploadObjects;
+    ArrayList<NewsObject> uploadObjects;
     FirebaseUser user;
+    Button subscribeButton;
+    ProgressBar progressBar;
+    final int duration = 10;
+    final int pixelsToMove = 30;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Runnable SCROLLING_RUNNABLE = new Runnable() {
+
+        @Override
+        public void run() {
+            newsRecyclerView.smoothScrollBy(pixelsToMove, 0);
+            mHandler.postDelayed(this, duration);
+        }
+    };
 
     public HomeFragment() {
         // Required empty public constructor
@@ -74,17 +87,49 @@ public class HomeFragment extends Fragment {
 
         weatherDescriptionText = view.findViewById(R.id.weatherDescriptionText);
         greetingText = view.findViewById(R.id.greetingText);
+        greetingUserText = view.findViewById(R.id.greetingUserText);
         weatherIcon = view.findViewById(R.id.weatherIcon);
         newsRecyclerView = view.findViewById(R.id.news_rv_home);
+        subscribeButton = view.findViewById(R.id.subscribeButton);
+        progressBar = view.findViewById(R.id.progress_bar_home);
+        progressBar.setVisibility(View.VISIBLE);
+
+        subscribeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), SubscribeActivity.class);
+            startActivity(intent);
+        });
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
 
         uploadObjects = new ArrayList<>();
         newsRvAdaptor = new NewsRvAdaptor(uploadObjects,getContext());
-        newsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        newsRecyclerView.setLayoutManager(linearLayoutManager);
         newsRecyclerView.setAdapter(newsRvAdaptor);
 
+
+        // Horizontal scrolling of news
+        newsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastItem = linearLayoutManager.findLastCompletelyVisibleItemPosition();
+                if(lastItem == linearLayoutManager.getItemCount()-1){
+                    mHandler.removeCallbacks(SCROLLING_RUNNABLE);
+                    Handler postHandler = new Handler();
+                    postHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            newsRecyclerView.setAdapter(null);
+                            newsRecyclerView.setAdapter(newsRvAdaptor);
+                            mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
+                        }
+                    }, 2000);
+                }
+            }
+        });
+        mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
 
         String displayName = user.getDisplayName();
         String firstName = displayName.split(" ")[0];
@@ -103,8 +148,8 @@ public class HomeFragment extends Fragment {
             greeting = "Good Night";
         }
 
-
-        greetingText.setText(greeting + "\n" + firstName);
+        greetingText.setText(greeting);
+        greetingUserText.setText(firstName);
 
         String tempUrl = OPEN_WEATHER_MAP_API_URL + "?q=" + selectedCity + "&appid=" + OPEN_WEATHER_MAP_API_KEY;
 
@@ -150,14 +195,17 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 uploadObjects.clear();
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    UploadObject news = dataSnapshot.getValue(UploadObject.class);
+                    NewsObject news = dataSnapshot.getValue(NewsObject.class);
                     if (news.isPromoted()) {
                         uploadObjects.add(news);
                     }
                 }
+
                 Collections.reverse(uploadObjects);
                 newsRvAdaptor.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

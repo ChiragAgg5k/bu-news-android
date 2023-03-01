@@ -28,9 +28,28 @@
                 android:textStyle="bold"
                 />
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/greetingUserText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Username"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/greetingText"
+                />
+
+            <TextView
+                android:id="@+id/dateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/greetingUserText"
+                android:text="Tuesday, 28 February"
+                />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
                 android:layout_toEndOf="@id/greetingText"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="50dp"
@@ -56,7 +75,8 @@
                     android:layout_height="50dp"
                     app:tint="@color/textColor"
                     android:layout_marginTop="10dp"
-                    android:layout_toRightOf="@+id/weatherDescriptionText"
+                    android:layout_toEndOf="@+id/weatherDescriptionText"
+                    android:layout_centerVertical="true"
                     />
 
             </RelativeLayout>
@@ -90,8 +110,19 @@
             android:layout_below="@+id/topNewsText"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:nestedScrollingEnabled="false"
+            />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/textColorHint"
+            android:layout_below="@+id/topNewsText"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="100dp"
+            android:visibility="gone"
             />
 
         <View
@@ -117,15 +148,36 @@
             />
 
         <TextView
+            android:id="@+id/noSubscribedNewsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Coming Soon"
+            android:text="No subscribed news yet. Subscribe to your desired categories to get news from them."
             android:layout_below="@+id/subscribedNewsText"
             android:layout_marginTop="10dp"
             android:layout_marginStart="15dp"
             />
 
+        <Button
+            android:id="@+id/subscribeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subscribe"
+            android:layout_below="@+id/noSubscribedNewsText"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"/>
 
+        <View
+            android:id="@+id/subscribedNewsDivider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/subscribeButton"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/backgroundColorDark"
+            android:layout_marginHorizontal="10dp"
+            />
 
     </RelativeLayout>
 </ScrollView>

@@ -1,6 +1,8 @@
 package com.chiragagg5k.bu_news_android;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,10 +16,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -31,6 +37,7 @@ public class EditProfileActivity extends AppCompatActivity {
     Button saveBtn;
     TextView name, studentMail;
     EditText editName;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +53,7 @@ public class EditProfileActivity extends AppCompatActivity {
         studentMail = findViewById(R.id.student_mail);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+        storageReference = FirebaseStorage.getInstance().getReference("profile_images");
 
         assert user != null;
         if (user.getPhotoUrl() != null)
@@ -56,7 +64,7 @@ public class EditProfileActivity extends AppCompatActivity {
         studentMail.setText(user.getEmail());
 
         backBtn.setOnClickListener(v -> {
-            finish();
+            onBackPressed();
         });
 
         edit_image_btn.setOnClickListener(v -> {
@@ -69,7 +77,15 @@ public class EditProfileActivity extends AppCompatActivity {
 
         saveBtn.setOnClickListener(v -> {
             if (imageUri == null)
-                imageUri = user.getPhotoUrl();
+                return;
+
+            StorageTask uploadTask = storageReference.child(user.getUid()).putFile(imageUri);
+            uploadTask.addOnSuccessListener(o -> storageReference.child(user.getUid()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    imageUri = uri;
+                }
+            }));
 
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                     .setDisplayName(editName.getText().toString())
@@ -83,6 +99,25 @@ public class EditProfileActivity extends AppCompatActivity {
             startActivity(new Intent(this, DashboardActivity.class));
             finish();
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (imageUri != null || !editName.getText().toString().equals(user.getDisplayName())) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure you want to discard changes?");
+            builder.setPositiveButton("Yes", (dialog, which) -> {
+                dialog.dismiss();
+                finish();
+            });
+            builder.setNegativeButton("No", (dialog, which) -> {
+                dialog.dismiss();
+            });
+            Dialog dialog = builder.create();
+            dialog.show();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override

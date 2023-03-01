@@ -71,10 +71,30 @@
             android:layout_marginHorizontal="40dp"
             android:backgroundTint="@color/textColor"
             android:ems="10"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:inputType="textEmailAddress"
+            />
 
         <TextView
             android:id="@+id/thirdTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:text="Phone Number" />
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:backgroundTint="@color/textColor"
+            android:ems="10"
+            android:singleLine="true"
+            android:inputType="phone"
+            />
+
+        <TextView
+            android:id="@+id/fourthTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
@@ -82,6 +102,24 @@
 
         <EditText
             android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:autofillHints="password"
+            android:backgroundTint="@color/textColor"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/fifthTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:text="Confirm Password" />
+
+        <EditText
+            android:id="@+id/confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
@@ -110,7 +148,9 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="Already Registered?\n Swipe left to login"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:layout_marginBottom="100dp"
+            />
 
     </LinearLayout>
 

@@ -96,7 +96,9 @@ public class DashboardActivity extends AppCompatActivity {
                     .duration(1000)
                     .repeat(0)
                     .playOn(postButton);
-            loadFragment(new PostFragment());
+
+            if (!(getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof PostFragment))
+                loadFragment(new PostFragment());
         });
     }
 
@@ -108,7 +110,6 @@ public class DashboardActivity extends AppCompatActivity {
 
         } else if (menuItem.getItemId() == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
-            finish();
             Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, AuthenticationActivity.class));
 

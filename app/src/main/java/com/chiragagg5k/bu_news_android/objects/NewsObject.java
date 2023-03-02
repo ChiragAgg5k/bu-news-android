@@ -9,9 +9,9 @@ public class NewsObject {
     private final String newsDescription;
     private final String mImageUrl;
     private final String category;
-    private boolean authorized;
     private final String username;
     private final boolean promoted;
+    private boolean authorized;
 
     public NewsObject(String newsHeading, String newsDescription, String category, String imageUrl) {
         this.authorized = false;
@@ -52,6 +52,10 @@ public class NewsObject {
         return authorized;
     }
 
+    public void setAuthorized(boolean authorized) {
+        this.authorized = authorized;
+    }
+
     public String getCategory() {
         return category;
     }
@@ -62,10 +66,6 @@ public class NewsObject {
 
     public boolean isPromoted() {
         return promoted;
-    }
-
-    public void setAuthorized(boolean authorized) {
-        this.authorized = authorized;
     }
 
 }

@@ -43,7 +43,7 @@ public class NewsRvAdaptor extends RecyclerView.Adapter<NewsRvAdaptor.ViewHolder
         NewsObject uploadCurrent = uploadObjects.get(position);
         holder.title.setText(uploadCurrent.getNewsHeading());
         holder.description.setText(uploadCurrent.getNewsDescription());
-        holder.uploader.setText("- "+uploadCurrent.getUsername());
+        holder.uploader.setText(String.format("- %s", uploadCurrent.getUsername()));
 
         Picasso.get().load(uploadCurrent.getmImageUrl()).fit().centerCrop().into(holder.image);
 

@@ -34,6 +34,10 @@ public class UserObject {
         return categories;
     }
 
+    public void setCategories(ArrayList<String> categories) {
+        this.categories = categories;
+    }
+
     public void addCategory(String category) {
         categories.add(category);
     }
@@ -42,12 +46,12 @@ public class UserObject {
         categories.remove(category);
     }
 
-    public void setCategories(ArrayList<String> categories) {
-        this.categories = categories;
-    }
-
     public boolean isAdmin() {
         return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     public String getPhoneNo() {
@@ -56,10 +60,6 @@ public class UserObject {
 
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
     }
 
 }

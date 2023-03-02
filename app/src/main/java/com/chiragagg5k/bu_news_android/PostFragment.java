@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +32,9 @@ import androidx.fragment.app.Fragment;
 import com.chiragagg5k.bu_news_android.objects.NewsObject;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -49,7 +46,7 @@ public class PostFragment extends Fragment {
     EditText heading, description;
     Button choose_image, post_button;
     StorageReference storageRef;
-    DatabaseReference databaseRef, userDatabaseRef;
+    DatabaseReference databaseRef;
     FirebaseUser user;
     StorageTask uploadTask;
     Uri image_uri;
@@ -209,19 +206,19 @@ public class PostFragment extends Fragment {
 
     private void postNotification() {
         NotificationChannel notificationChannel = new NotificationChannel("1", "1", NotificationManager.IMPORTANCE_DEFAULT);
-        NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
+        NotificationManager notificationManager = requireActivity().getSystemService(NotificationManager.class);
 
         notificationManager.createNotificationChannel(notificationChannel);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "1")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), "1")
                 .setSmallIcon(R.drawable.bunews_logo)
                 .setContentTitle("Upload successful")
                 .setContentText("We have received your post. It will be reviewed by our team and will be posted soon.")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true);
 
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getContext());
-        if(ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(requireContext());
+        if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         notificationManagerCompat.notify(1, builder.build());

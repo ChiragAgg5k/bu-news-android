@@ -18,7 +18,7 @@
         android:title="Events" />
     <item
         android:id="@+id/lost_found"
-        android:icon="@drawable/lost_found_icon_foreground"
+        android:icon="@mipmap/lost_found_icon_foreground"
         android:title="Lost Found" />
 
 </menu>

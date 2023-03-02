@@ -110,9 +110,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 dialog.dismiss();
                 finish();
             });
-            builder.setNegativeButton("No", (dialog, which) -> {
-                dialog.dismiss();
-            });
+            builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
             Dialog dialog = builder.create();
             dialog.show();
         } else {

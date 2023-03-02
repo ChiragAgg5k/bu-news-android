@@ -48,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
         full_name_text.setText(user.getDisplayName());
         email_text.setText(user.getEmail());
 
-        if(user.getPhotoUrl() != null)
+        if (user.getPhotoUrl() != null)
             profile_image.setImageURI(user.getPhotoUrl());
 
         back_button.setOnClickListener(v -> finish());

@@ -151,10 +151,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="No subscribed news yet. Subscribe to your desired categories to get news from them."
-            android:visibility="gone"
             android:layout_below="@+id/subscribedNewsText"
             android:layout_marginTop="10dp"
             android:layout_marginStart="15dp"
+            android:layout_marginBottom="20dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/subscribedNews_rv_home"
+            android:layout_below="@+id/noSubscribedNewsText"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="false"
             />
 
         <Button
@@ -162,8 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Subscribe"
-            android:layout_below="@+id/noSubscribedNewsText"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/subscribedNews_rv_home"
             android:layout_marginStart="15dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:textColor="@color/white"

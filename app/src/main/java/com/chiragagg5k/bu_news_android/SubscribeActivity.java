@@ -52,20 +52,20 @@ public class SubscribeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.hasChild("general")) {
-                    generalCheckBox.setChecked(dataSnapshot.child("general").getValue().toString().equals("true"));
+                if (dataSnapshot.hasChild("General")) {
+                    generalCheckBox.setChecked(dataSnapshot.child("General").getValue().toString().equals("true"));
                 }
 
-                if (dataSnapshot.hasChild("sports")) {
-                    sportsCheckBox.setChecked(dataSnapshot.child("sports").getValue().toString().equals("true"));
+                if (dataSnapshot.hasChild("Sports")) {
+                    sportsCheckBox.setChecked(dataSnapshot.child("Sports").getValue().toString().equals("true"));
                 }
 
-                if (dataSnapshot.hasChild("events")) {
-                    eventsCheckBox.setChecked(dataSnapshot.child("events").getValue().toString().equals("true"));
+                if (dataSnapshot.hasChild("Event")) {
+                    eventsCheckBox.setChecked(dataSnapshot.child("Event").getValue().toString().equals("true"));
                 }
 
-                if (dataSnapshot.hasChild("club_related")) {
-                    clubRelatedCheckBox.setChecked(dataSnapshot.child("club_related").getValue().toString().equals("true"));
+                if (dataSnapshot.hasChild("Clubs Related")) {
+                    clubRelatedCheckBox.setChecked(dataSnapshot.child("Clubs Related").getValue().toString().equals("true"));
                 }
 
                 allCheckBox.setChecked(generalCheckBox.isChecked() && sportsCheckBox.isChecked() && eventsCheckBox.isChecked() && clubRelatedCheckBox.isChecked());
@@ -156,15 +156,15 @@ public class SubscribeActivity extends AppCompatActivity {
         }, 1000);
 
         if (allCheckBox.isChecked()) {
-            databaseReference.child("categories").child("general").setValue(true);
-            databaseReference.child("categories").child("sports").setValue(true);
-            databaseReference.child("categories").child("events").setValue(true);
-            databaseReference.child("categories").child("club_related").setValue(true);
+            databaseReference.child("categories").child("General").setValue(true);
+            databaseReference.child("categories").child("Sports").setValue(true);
+            databaseReference.child("categories").child("Event").setValue(true);
+            databaseReference.child("categories").child("Clubs Related").setValue(true);
         } else {
-            databaseReference.child("categories").child("general").setValue(generalCheckBox.isChecked());
-            databaseReference.child("categories").child("sports").setValue(sportsCheckBox.isChecked());
-            databaseReference.child("categories").child("events").setValue(eventsCheckBox.isChecked());
-            databaseReference.child("categories").child("club_related").setValue(clubRelatedCheckBox.isChecked());
+            databaseReference.child("categories").child("General").setValue(generalCheckBox.isChecked());
+            databaseReference.child("categories").child("Sports").setValue(sportsCheckBox.isChecked());
+            databaseReference.child("categories").child("Event").setValue(eventsCheckBox.isChecked());
+            databaseReference.child("categories").child("Clubs Related").setValue(clubRelatedCheckBox.isChecked());
         }
     }
 }

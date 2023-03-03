@@ -1,7 +1,14 @@
 package com.chiragagg5k.bu_news_android;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,6 +25,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,9 +49,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class HomeFragment extends Fragment {
@@ -56,18 +67,19 @@ public class HomeFragment extends Fragment {
     String selectedCity = "Delhi";
     ImageView weatherIcon;
     TextView weatherDescriptionText, greetingText, greetingUserText, dateText, noSubscribedCategoriesText;
-    RecyclerView newsRecyclerView;
+    RecyclerView promotedRecyclerView, subscribedRecyclerView;
+    boolean hasSubscribedCategories = false;
     private final Runnable SCROLLING_RUNNABLE = new Runnable() {
 
         @Override
         public void run() {
-            newsRecyclerView.smoothScrollBy(pixelsToMove, 0);
+            promotedRecyclerView.smoothScrollBy(pixelsToMove, 0);
             mHandler.postDelayed(this, duration);
         }
     };
-    NewsRvAdaptor newsRvAdaptor;
+    NewsRvAdaptor promotedNewsRvAdaptor, subscribedNewsRvAdaptor;
     DatabaseReference databaseReference, userReference;
-    ArrayList<NewsObject> uploadObjects;
+    ArrayList<NewsObject> promotedNewsObjects, subscribedNewsObjects;
     FirebaseUser user;
     Button subscribeButton;
     ProgressBar progressBar;
@@ -97,8 +109,12 @@ public class HomeFragment extends Fragment {
         weatherDescriptionText = view.findViewById(R.id.weatherDescriptionText);
         greetingText = view.findViewById(R.id.greetingText);
         greetingUserText = view.findViewById(R.id.greetingUserText);
+
         weatherIcon = view.findViewById(R.id.weatherIcon);
-        newsRecyclerView = view.findViewById(R.id.news_rv_home);
+
+        promotedRecyclerView = view.findViewById(R.id.news_rv_home);
+        subscribedRecyclerView = view.findViewById(R.id.subscribedNews_rv_home);
+
         subscribeButton = view.findViewById(R.id.subscribeButton);
         progressBar = view.findViewById(R.id.progress_bar_home);
         progressBar.setVisibility(View.VISIBLE);
@@ -116,15 +132,22 @@ public class HomeFragment extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
         userReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
 
-        uploadObjects = new ArrayList<>();
-        newsRvAdaptor = new NewsRvAdaptor(uploadObjects, getContext());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-        newsRecyclerView.setLayoutManager(linearLayoutManager);
-        newsRecyclerView.setAdapter(newsRvAdaptor);
+        promotedNewsObjects = new ArrayList<>();
+        subscribedNewsObjects = new ArrayList<>();
 
+        promotedNewsRvAdaptor = new NewsRvAdaptor(promotedNewsObjects, getContext());
+        subscribedNewsRvAdaptor = new NewsRvAdaptor(subscribedNewsObjects, getContext());
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+
+        subscribedRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        promotedRecyclerView.setLayoutManager(linearLayoutManager);
+
+        promotedRecyclerView.setAdapter(promotedNewsRvAdaptor);
+        subscribedRecyclerView.setAdapter(subscribedNewsRvAdaptor);
 
         // Horizontal scrolling of news
-        newsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        promotedRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -133,8 +156,8 @@ public class HomeFragment extends Fragment {
                     mHandler.removeCallbacks(SCROLLING_RUNNABLE);
                     Handler postHandler = new Handler();
                     postHandler.postDelayed(() -> {
-                        newsRecyclerView.setAdapter(null);
-                        newsRecyclerView.setAdapter(newsRvAdaptor);
+                        promotedRecyclerView.setAdapter(null);
+                        promotedRecyclerView.setAdapter(promotedNewsRvAdaptor);
                         mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
                     }, 2000);
                 }
@@ -164,7 +187,23 @@ public class HomeFragment extends Fragment {
         greetingText.setText(greeting);
         greetingUserText.setText(firstName);
 
+        LocationManager locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+
+        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+        if (location != null) {
+            selectedCity = getCityName(location.getLatitude(), location.getLongitude());
+}
+        if (selectedCity == null || selectedCity.equals("")) {
+            selectedCity = "Greater Noida";
+        }
+
+
         String tempUrl = OPEN_WEATHER_MAP_API_URL + "?q=" + selectedCity + "&appid=" + OPEN_WEATHER_MAP_API_KEY;
+        Log.d("Selected City: ", selectedCity);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, new Response.Listener<String>() {
             @Override
@@ -206,19 +245,19 @@ public class HomeFragment extends Fragment {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                uploadObjects.clear();
+                promotedNewsObjects.clear();
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     NewsObject news = dataSnapshot.getValue(NewsObject.class);
 
                     assert news != null;
                     if (news.isPromoted()) {
-                        uploadObjects.add(news);
+                        promotedNewsObjects.add(news);
                     }
                 }
 
-                Collections.reverse(uploadObjects);
-                newsRvAdaptor.notifyDataSetChanged();
+                Collections.reverse(promotedNewsObjects);
+                promotedNewsRvAdaptor.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
             }
 
@@ -231,17 +270,28 @@ public class HomeFragment extends Fragment {
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                subscribedNewsObjects.clear();
+                hasSubscribedCategories = false;
+
                 if (snapshot.hasChild("categories")) {
                     for (DataSnapshot dataSnapshot : snapshot.child("categories").getChildren()) {
 
-                        String category = Objects.requireNonNull(dataSnapshot.getValue()).toString();
-                        if (category.equals("true")) {
+                        String value = Objects.requireNonNull(dataSnapshot.getValue()).toString();
+                        String key = dataSnapshot.getKey();
+
+                        if (value.equals("true")) {
+                            hasSubscribedCategories = true;
+                            subscribedRecyclerView.setVisibility(View.VISIBLE);
                             noSubscribedCategoriesText.setVisibility(View.GONE);
-                            return;
+                            getNews(key);
                         }
                     }
 
-                    noSubscribedCategoriesText.setVisibility(View.VISIBLE);
+                    if (!hasSubscribedCategories) {
+                        noSubscribedCategoriesText.setVisibility(View.VISIBLE);
+                        subscribedRecyclerView.setVisibility(View.GONE);
+                    }
                 }
             }
 
@@ -250,5 +300,63 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void getNews(String category) {
+
+        progressBar.setVisibility(View.VISIBLE);
+        subscribedNewsObjects.clear();
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot postSnapShot : snapshot.getChildren()) {
+                    NewsObject upload = postSnapShot.getValue(NewsObject.class);
+
+                    assert upload != null;
+
+                    if (upload.isAuthorized()) {
+                        if (upload.getCategory().equals(category) || category.equals("All")) {
+                            subscribedNewsObjects.add(upload);
+                        }
+                    }
+                }
+
+                Collections.reverse(promotedNewsObjects);
+
+                progressBar.setVisibility(View.GONE);
+                subscribedNewsRvAdaptor.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private String getCityName(double longitude, double latitude) {
+        String cityName = "";
+        Geocoder gcd = new Geocoder(getContext(), Locale.getDefault());
+        try {
+            List<Address> addresses = gcd.getFromLocation(latitude, longitude, 1);
+
+            for (Address address : addresses) {
+                if (address != null) {
+                    String city = address.getLocality();
+                    if (city != null && !city.equals("")) {
+
+                        Log.d("City", city);
+                        cityName = city;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return cityName;
     }
 }

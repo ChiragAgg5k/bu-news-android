@@ -32,7 +32,6 @@ import androidx.fragment.app.Fragment;
 import com.chiragagg5k.bu_news_android.objects.NewsObject;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -47,12 +46,11 @@ public class PostFragment extends Fragment {
     Button choose_image, post_button;
     StorageReference storageRef;
     DatabaseReference databaseRef;
-    FirebaseUser user;
     StorageTask uploadTask;
     Uri image_uri;
     Spinner category_spinner;
     ArrayAdapter<CharSequence> category_adapter;
-    boolean isAdmin;
+
     /**
      * This is the callback for the result of the activity started by selectImage()
      */

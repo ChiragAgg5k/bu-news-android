@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -63,29 +62,20 @@ public class EditProfileActivity extends AppCompatActivity {
         editName.setText(user.getDisplayName());
         studentMail.setText(user.getEmail());
 
-        backBtn.setOnClickListener(v -> {
-            onBackPressed();
-        });
+        backBtn.setOnClickListener(v -> onBackPressed());
 
-        edit_image_btn.setOnClickListener(v -> {
-            ImagePicker.Companion.with(this)
-                    .crop()
-                    .compress(1024)
-                    .maxResultSize(1080, 1080)
-                    .start();
-        });
+        edit_image_btn.setOnClickListener(v -> ImagePicker.Companion.with(this)
+                .crop()
+                .compress(1024)
+                .maxResultSize(1080, 1080)
+                .start());
 
         saveBtn.setOnClickListener(v -> {
             if (imageUri == null)
                 return;
 
             StorageTask uploadTask = storageReference.child(user.getUid()).putFile(imageUri);
-            uploadTask.addOnSuccessListener(o -> storageReference.child(user.getUid()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    imageUri = uri;
-                }
-            }));
+            uploadTask.addOnSuccessListener(o -> storageReference.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> imageUri = uri));
 
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                     .setDisplayName(editName.getText().toString())

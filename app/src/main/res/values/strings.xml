@@ -44,5 +44,13 @@
     <string name="post_loading">Posting…</string>
     <string name="no_image_selected">No image selected</string>
     <string name="selected_image">Selected image: %1$s</string>
+    <string name="subscribing">Subscribing...</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="placeholder_title">Placeholder title</string>
+    <string name="detailed_news_image">Detailed News Image</string>
+    <string name="placeholder_description">Placeholder description</string>
+    <string name="profile_icon">profile icon</string>
+    <string name="full_name">Full Name</string>
+    <string name="email_icon">email icon</string>
 
 </resources>

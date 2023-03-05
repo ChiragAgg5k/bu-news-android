@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Placeholder title"
+        android:text="@string/placeholder_title"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
@@ -26,12 +26,14 @@
         android:layout_marginHorizontal="10dp"
         android:scaleType="fitStart"
         android:adjustViewBounds="true"
-        android:id="@+id/detailed_news_image"/>
+        android:id="@+id/detailed_news_image"
+        android:contentDescription="@string/detailed_news_image"
+        />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Placeholder description"
+        android:text="@string/placeholder_description"
         android:textSize="16sp"
         android:layout_below="@+id/detailed_news_image"
         android:layout_marginTop="20dp"

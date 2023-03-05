@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class UserObject {
     private String name;
-    private ArrayList<String> categories;
-    private String phoneNo;
-    private boolean admin;
+    private final ArrayList<String> categories;
+    private final String phoneNo;
+    private final boolean admin;
 
     public UserObject() {
         // !IMPORTANT: This constructor is required for Firebase to work
@@ -20,6 +20,7 @@ public class UserObject {
         this.name = name;
         this.admin = false;
         this.phoneNo = phoneNo;
+        this.categories = new ArrayList<>();
     }
 
     public String getName() {
@@ -28,38 +29,6 @@ public class UserObject {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public ArrayList<String> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(ArrayList<String> categories) {
-        this.categories = categories;
-    }
-
-    public void addCategory(String category) {
-        categories.add(category);
-    }
-
-    public void removeCategory(String category) {
-        categories.remove(category);
-    }
-
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
-
-    public String getPhoneNo() {
-        return phoneNo;
-    }
-
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
     }
 
 }

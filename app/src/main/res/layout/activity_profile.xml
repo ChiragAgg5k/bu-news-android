@@ -26,11 +26,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/account_settings"
             android:textAlignment="textEnd"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_toEndOf="@+id/back_button"
+            />
 
     </RelativeLayout>
 
@@ -90,15 +92,18 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/profile_icon"
-            app:tint="@color/colorPrimary" />
+            app:tint="@color/colorPrimary"
+            android:contentDescription="@string/profile_icon"
+            />
 
         <TextView
+            android:id="@+id/full_name_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/mini_profile_icon"
             android:gravity="center"
-            android:text="Full Name"
+            android:text="@string/full_name"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -107,10 +112,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:gravity="center"
             android:text="@string/placeholder_name_text"
             android:textSize="14sp"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/full_name_label"
+            android:textAlignment="textEnd"
+            />
 
     </RelativeLayout>
 
@@ -135,7 +142,9 @@
             android:id="@+id/mini_email_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/email_logo" />
+            android:src="@drawable/email_logo"
+            android:contentDescription="@string/email_icon"
+            />
 
         <TextView
             android:layout_width="wrap_content"

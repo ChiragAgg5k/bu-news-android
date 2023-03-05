@@ -12,7 +12,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +31,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.chiragagg5k.bu_news_android.objects.NewsObject;
@@ -50,6 +48,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -64,11 +63,10 @@ public class HomeFragment extends Fragment {
     final int duration = 10;
     final int pixelsToMove = 30;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
-    String selectedCity = "Delhi";
+    String selectedCity = "Delhi", greeting;
     ImageView weatherIcon;
     TextView weatherDescriptionText, greetingText, greetingUserText, dateText, noSubscribedCategoriesText;
     RecyclerView promotedRecyclerView, subscribedRecyclerView;
-    boolean hasSubscribedCategories = false;
     private final Runnable SCROLLING_RUNNABLE = new Runnable() {
 
         @Override
@@ -77,6 +75,7 @@ public class HomeFragment extends Fragment {
             mHandler.postDelayed(this, duration);
         }
     };
+    boolean hasSubscribedCategories = false;
     NewsRvAdaptor promotedNewsRvAdaptor, subscribedNewsRvAdaptor;
     DatabaseReference databaseReference, userReference;
     ArrayList<NewsObject> promotedNewsObjects, subscribedNewsObjects;
@@ -94,10 +93,10 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        Calendar calendar = Calendar.getInstance();
-        day = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, getResources().getConfiguration().locale);
-        date = DateFormat.format("dd", calendar).toString();
-        month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, getResources().getConfiguration().locale);
+        LocalDate localDate = LocalDate.now();
+        day = UtilityClass.convertToTitleCase(localDate.getDayOfWeek().toString());
+        date = localDate.getDayOfMonth() + "";
+        month = UtilityClass.convertToTitleCase(localDate.getMonth().toString());
 
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
@@ -169,7 +168,6 @@ public class HomeFragment extends Fragment {
 
         assert displayName != null;
         String firstName = displayName.split(" ")[0];
-        String greeting = "";
 
         Calendar currentTime = Calendar.getInstance();
         int hour = currentTime.get(Calendar.HOUR_OF_DAY);
@@ -196,42 +194,40 @@ public class HomeFragment extends Fragment {
 
         if (location != null) {
             selectedCity = getCityName(location.getLatitude(), location.getLongitude());
-}
+        }
         if (selectedCity == null || selectedCity.equals("")) {
             selectedCity = "Greater Noida";
         }
 
 
+        
         String tempUrl = OPEN_WEATHER_MAP_API_URL + "?q=" + selectedCity + "&appid=" + OPEN_WEATHER_MAP_API_KEY;
         Log.d("Selected City: ", selectedCity);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONArray jsonArray = jsonObject.getJSONArray("weather");
-                    JSONObject weatherObject = jsonArray.getJSONObject(0);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, response -> {
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                JSONArray jsonArray = jsonObject.getJSONArray("weather");
+                JSONObject weatherObject = jsonArray.getJSONObject(0);
 
-                    String description = weatherObject.getString("description");
+                String description = weatherObject.getString("description");
 
-                    JSONObject mainObject = jsonObject.getJSONObject("main");
+                JSONObject mainObject = jsonObject.getJSONObject("main");
 
-                    double temp = mainObject.getDouble("temp") - 273.15;
-                    String icon = weatherObject.getString("icon");
-                    String iconUrl = "https://openweathermap.org/img/w/" + icon + ".png";
+                double temp = mainObject.getDouble("temp") - 273.15;
+                String icon = weatherObject.getString("icon");
+                String iconUrl = "https://openweathermap.org/img/w/" + icon + ".png";
 
-                    temp = Math.round(temp * 100.0) / 100.0;
+                temp = Math.round(temp * 100.0) / 100.0;
 
-                    weatherDescriptionText.setText(String.format("%s\n%s°C", description, temp));
-                    Picasso.get().load(iconUrl).into(weatherIcon);
+                weatherDescriptionText.setText(String.format("%s\n%s°C", description, temp));
+                Picasso.get().load(iconUrl).into(weatherIcon);
 
 
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
             }
+
         },
                 error -> {
                     Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
@@ -277,21 +273,24 @@ public class HomeFragment extends Fragment {
                 if (snapshot.hasChild("categories")) {
                     for (DataSnapshot dataSnapshot : snapshot.child("categories").getChildren()) {
 
-                        String value = Objects.requireNonNull(dataSnapshot.getValue()).toString();
+                        boolean value = (boolean) Objects.requireNonNull(dataSnapshot.getValue());
                         String key = dataSnapshot.getKey();
 
-                        if (value.equals("true")) {
+                        Log.d("Key, Value", key + " " + value);
+
+                        if (value) {
                             hasSubscribedCategories = true;
-                            subscribedRecyclerView.setVisibility(View.VISIBLE);
-                            noSubscribedCategoriesText.setVisibility(View.GONE);
                             getNews(key);
                         }
                     }
+                }
 
-                    if (!hasSubscribedCategories) {
-                        noSubscribedCategoriesText.setVisibility(View.VISIBLE);
-                        subscribedRecyclerView.setVisibility(View.GONE);
-                    }
+                if (!hasSubscribedCategories) {
+                    subscribedRecyclerView.setVisibility(View.GONE);
+                    noSubscribedCategoriesText.setVisibility(View.VISIBLE);
+                } else {
+                    subscribedRecyclerView.setVisibility(View.VISIBLE);
+                    noSubscribedCategoriesText.setVisibility(View.GONE);
                 }
             }
 

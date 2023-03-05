@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 /**
  * Apologies for so much repeated code. I know it's not the best way to do it, but I am lazy.
  */
@@ -53,19 +55,19 @@ public class SubscribeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.hasChild("General")) {
-                    generalCheckBox.setChecked(dataSnapshot.child("General").getValue().toString().equals("true"));
+                    generalCheckBox.setChecked(Objects.requireNonNull(dataSnapshot.child("General").getValue()).toString().equals("true"));
                 }
 
                 if (dataSnapshot.hasChild("Sports")) {
-                    sportsCheckBox.setChecked(dataSnapshot.child("Sports").getValue().toString().equals("true"));
+                    sportsCheckBox.setChecked(Objects.requireNonNull(dataSnapshot.child("Sports").getValue()).toString().equals("true"));
                 }
 
                 if (dataSnapshot.hasChild("Event")) {
-                    eventsCheckBox.setChecked(dataSnapshot.child("Event").getValue().toString().equals("true"));
+                    eventsCheckBox.setChecked(Objects.requireNonNull(dataSnapshot.child("Event").getValue()).toString().equals("true"));
                 }
 
                 if (dataSnapshot.hasChild("Clubs Related")) {
-                    clubRelatedCheckBox.setChecked(dataSnapshot.child("Clubs Related").getValue().toString().equals("true"));
+                    clubRelatedCheckBox.setChecked(Objects.requireNonNull(dataSnapshot.child("Clubs Related").getValue()).toString().equals("true"));
                 }
 
                 allCheckBox.setChecked(generalCheckBox.isChecked() && sportsCheckBox.isChecked() && eventsCheckBox.isChecked() && clubRelatedCheckBox.isChecked());
@@ -132,25 +134,21 @@ public class SubscribeActivity extends AppCompatActivity {
             }
         });
 
-        backBtn.setOnClickListener(v -> {
-            finish();
-        });
+        backBtn.setOnClickListener(v -> finish());
 
-        subscribeBtn.setOnClickListener(v -> {
-            subscribe();
-        });
+        subscribeBtn.setOnClickListener(v -> subscribe());
 
     }
 
     private void subscribe() {
 
-        subscribeBtn.setText("Subscribing...");
+        subscribeBtn.setText(R.string.subscribing);
         subscribeBtn.setEnabled(false);
 
         handler.postDelayed(() -> {
             Toast.makeText(this, "Subscribed Successfully", Toast.LENGTH_SHORT).show();
 
-            subscribeBtn.setText("Subscribe");
+            subscribeBtn.setText(R.string.subscribe);
             subscribeBtn.setEnabled(true);
             finish();
         }, 1000);

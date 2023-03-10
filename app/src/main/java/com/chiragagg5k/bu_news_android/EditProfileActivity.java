@@ -37,6 +37,7 @@ public class EditProfileActivity extends AppCompatActivity {
     TextView name, studentMail;
     EditText editName;
     StorageReference storageReference;
+    DashboardActivity dashboardActivity = new DashboardActivity();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,11 +72,26 @@ public class EditProfileActivity extends AppCompatActivity {
                 .start());
 
         saveBtn.setOnClickListener(v -> {
-            if (imageUri == null)
-                return;
 
-            StorageTask uploadTask = storageReference.child(user.getUid()).putFile(imageUri);
-            uploadTask.addOnSuccessListener(o -> storageReference.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> imageUri = uri));
+            String name = editName.getText().toString();
+
+            if (imageUri == null && name.equals(user.getDisplayName())){
+                Toast.makeText(this, "No changes made", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (name.isEmpty()) {
+                editName.setError("Name is required");
+                editName.requestFocus();
+                return;
+            }
+
+            if (imageUri != null) {
+                StorageTask uploadTask = storageReference.child(user.getUid()).putFile(imageUri);
+                uploadTask.addOnSuccessListener(o -> storageReference.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> imageUri = uri));
+            }else{
+                imageUri = user.getPhotoUrl();
+            }
 
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                     .setDisplayName(editName.getText().toString())
@@ -86,8 +102,11 @@ public class EditProfileActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(this, DashboardActivity.class));
             finish();
+            Intent intent = new Intent(this, DashboardActivity.class);
+            intent.putExtra("name", editName.getText().toString());
+            intent.putExtra("imageUri", imageUri.toString());
+            startActivity(intent);
         });
     }
 

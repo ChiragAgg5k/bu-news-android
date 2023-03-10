@@ -10,8 +10,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +25,9 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -60,23 +60,14 @@ public class HomeFragment extends Fragment {
 
     final String OPEN_WEATHER_MAP_API_KEY = "58ed8b67f0af15587b5f4f88b3457b15";
     final String OPEN_WEATHER_MAP_API_URL = "https://api.openweathermap.org/data/2.5/weather";
-    final int duration = 10;
-    final int pixelsToMove = 30;
-    private final Handler mHandler = new Handler(Looper.getMainLooper());
     String selectedCity = "Delhi", greeting;
     ImageView weatherIcon;
     TextView weatherDescriptionText, greetingText, greetingUserText, dateText, noSubscribedCategoriesText;
     RecyclerView promotedRecyclerView, subscribedRecyclerView;
-    private final Runnable SCROLLING_RUNNABLE = new Runnable() {
-
-        @Override
-        public void run() {
-            promotedRecyclerView.smoothScrollBy(pixelsToMove, 0);
-            mHandler.postDelayed(this, duration);
-        }
-    };
+    SnapHelper snapHelper;
     boolean hasSubscribedCategories = false;
-    NewsRvAdaptor promotedNewsRvAdaptor, subscribedNewsRvAdaptor;
+    TopNewsRvAdaptor promotedNewsRvAdaptor;
+    NewsRvAdaptor subscribedNewsRvAdaptor;
     DatabaseReference databaseReference, userReference;
     ArrayList<NewsObject> promotedNewsObjects, subscribedNewsObjects;
     FirebaseUser user;
@@ -134,7 +125,7 @@ public class HomeFragment extends Fragment {
         promotedNewsObjects = new ArrayList<>();
         subscribedNewsObjects = new ArrayList<>();
 
-        promotedNewsRvAdaptor = new NewsRvAdaptor(promotedNewsObjects, getContext());
+        promotedNewsRvAdaptor = new TopNewsRvAdaptor(promotedNewsObjects, getContext());
         subscribedNewsRvAdaptor = new NewsRvAdaptor(subscribedNewsObjects, getContext());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
@@ -143,26 +134,10 @@ public class HomeFragment extends Fragment {
         promotedRecyclerView.setLayoutManager(linearLayoutManager);
 
         promotedRecyclerView.setAdapter(promotedNewsRvAdaptor);
-        subscribedRecyclerView.setAdapter(subscribedNewsRvAdaptor);
+        snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(promotedRecyclerView);
 
-        // Horizontal scrolling of news
-        promotedRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int lastItem = linearLayoutManager.findLastCompletelyVisibleItemPosition();
-                if (lastItem == linearLayoutManager.getItemCount() - 1) {
-                    mHandler.removeCallbacks(SCROLLING_RUNNABLE);
-                    Handler postHandler = new Handler();
-                    postHandler.postDelayed(() -> {
-                        promotedRecyclerView.setAdapter(null);
-                        promotedRecyclerView.setAdapter(promotedNewsRvAdaptor);
-                        mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
-                    }, 2000);
-                }
-            }
-        });
-        mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
+        subscribedRecyclerView.setAdapter(subscribedNewsRvAdaptor);
 
         String displayName = user.getDisplayName();
 
@@ -200,7 +175,6 @@ public class HomeFragment extends Fragment {
         }
 
 
-        
         String tempUrl = OPEN_WEATHER_MAP_API_URL + "?q=" + selectedCity + "&appid=" + OPEN_WEATHER_MAP_API_KEY;
         Log.d("Selected City: ", selectedCity);
 

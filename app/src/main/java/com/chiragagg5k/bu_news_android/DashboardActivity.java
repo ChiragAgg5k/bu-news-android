@@ -2,6 +2,7 @@ package com.chiragagg5k.bu_news_android;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.HapticFeedbackConstants;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -37,6 +39,8 @@ public class DashboardActivity extends AppCompatActivity {
     NavigationView sideNavigationView;
     TextView sideNavUsername, buHeadline;
     FirebaseUser user;
+    Intent intent;
+    Uri imageUri;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -52,12 +56,22 @@ public class DashboardActivity extends AppCompatActivity {
         sideNavUsername = sideNavigationView.getHeaderView(0).findViewById(R.id.side_nav_username);
         sideNavProfileImage = sideNavigationView.getHeaderView(0).findViewById(R.id.side_nav_profile_image);
 
+        intent = getIntent();
         user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            if (user.getPhotoUrl() != null)
-                sideNavProfileImage.setImageURI(user.getPhotoUrl());
-            sideNavUsername.setText(user.getDisplayName());
+
+        if (intent.getStringExtra("imageUri") != null) {
+            imageUri = Uri.parse(intent.getStringExtra("imageUri"));
+            Picasso.get().load(imageUri).into(sideNavProfileImage);
+
+        } else {
+            if (user != null)
+                Picasso.get().load(user.getPhotoUrl()).into(sideNavProfileImage);
         }
+
+        if (intent.getStringExtra("name") != null)
+            sideNavUsername.setText(intent.getStringExtra("name"));
+        else if (user != null)
+            sideNavUsername.setText(user.getDisplayName());
 
         // disabling middle icon
         bottomNavigationView.getMenu().getItem(2).setEnabled(false);

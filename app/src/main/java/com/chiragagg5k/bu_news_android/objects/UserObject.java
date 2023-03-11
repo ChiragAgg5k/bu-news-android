@@ -3,10 +3,10 @@ package com.chiragagg5k.bu_news_android.objects;
 import java.util.ArrayList;
 
 public class UserObject {
-    private String name;
     private final ArrayList<String> categories;
     private final String phoneNo;
     private final boolean admin;
+    private String name;
 
     public UserObject() {
         // !IMPORTANT: This constructor is required for Firebase to work

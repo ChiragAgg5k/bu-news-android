@@ -75,7 +75,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             String name = editName.getText().toString();
 
-            if (imageUri == null && name.equals(user.getDisplayName())){
+            if (imageUri == null && name.equals(user.getDisplayName())) {
                 Toast.makeText(this, "No changes made", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -89,7 +89,7 @@ public class EditProfileActivity extends AppCompatActivity {
             if (imageUri != null) {
                 StorageTask uploadTask = storageReference.child(user.getUid()).putFile(imageUri);
                 uploadTask.addOnSuccessListener(o -> storageReference.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> imageUri = uri));
-            }else{
+            } else {
                 imageUri = user.getPhotoUrl();
             }
 

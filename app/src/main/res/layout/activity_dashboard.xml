@@ -72,8 +72,7 @@
                 android:id="@+id/app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                >
+                android:layout_gravity="bottom">
 
                 <com.google.android.material.bottomnavigation.BottomNavigationView
                     android:id="@+id/bottom_navigation"
@@ -92,11 +91,10 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorPrimary"
                 android:src="@drawable/post_icon_foreground"
+                app:borderWidth="0dp"
                 app:layout_anchor="@id/app_bar"
                 app:maxImageSize="40dp"
-                app:tint="@color/white"
-                app:borderWidth="0dp"
-                />
+                app:tint="@color/white" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 public class NewsDetailActivity extends AppCompatActivity {
 
     TextView news_heading_tv, news_description_tv;
-    ImageView news_image_iv;
+    ImageView news_image_iv, backBtn;
 
     String news_heading, news_description, news_image_url;
 
@@ -30,11 +30,14 @@ public class NewsDetailActivity extends AppCompatActivity {
         news_heading_tv = findViewById(R.id.detailed_news_title);
         news_description_tv = findViewById(R.id.detailed_news_description);
         news_image_iv = findViewById(R.id.detailed_news_image);
+        backBtn = findViewById(R.id.back_button);
 
         news_heading_tv.setText(news_heading);
         Picasso.get().load(news_image_url).into(news_image_iv);
         news_description_tv.setText(news_description);
 
-
+        backBtn.setOnClickListener(v -> {
+            finish();
+        });
     }
 }

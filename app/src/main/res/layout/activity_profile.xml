@@ -27,12 +27,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/back_button"
             android:text="@string/account_settings"
             android:textAlignment="textEnd"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_toEndOf="@+id/back_button"
-            />
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
@@ -63,12 +62,11 @@
             android:id="@+id/profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/placeholder_name_text"
             android:textAlignment="center"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            />
+            android:textStyle="bold" />
 
         <View
             android:layout_width="match_parent"
@@ -91,10 +89,9 @@
             android:id="@+id/mini_profile_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/profile_icon"
-            app:tint="@color/colorPrimary"
             android:contentDescription="@string/profile_icon"
-            />
+            android:src="@drawable/profile_icon"
+            app:tint="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/full_name_label"
@@ -112,12 +109,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="@string/placeholder_name_text"
-            android:textSize="14sp"
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/full_name_label"
+            android:text="@string/placeholder_name_text"
             android:textAlignment="textEnd"
-            />
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
@@ -142,9 +138,8 @@
             android:id="@+id/mini_email_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/email_logo"
             android:contentDescription="@string/email_icon"
-            />
+            android:src="@drawable/email_logo" />
 
         <TextView
             android:layout_width="wrap_content"

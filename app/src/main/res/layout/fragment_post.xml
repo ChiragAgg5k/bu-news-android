@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:ignore="HardcodedText"
     android:layout_marginBottom="20dp"
-    >
+    tools:ignore="HardcodedText">
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -97,8 +96,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/post_description_et"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:layout_marginHorizontal="20dp"/>
+                android:layout_marginHorizontal="20dp"
+                android:backgroundTint="@color/colorPrimaryDark" />
 
         </LinearLayout>
 

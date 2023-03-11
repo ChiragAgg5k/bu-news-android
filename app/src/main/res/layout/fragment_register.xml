@@ -71,9 +71,8 @@
             android:layout_marginHorizontal="40dp"
             android:backgroundTint="@color/textColor"
             android:ems="10"
-            android:singleLine="true"
             android:inputType="textEmailAddress"
-            />
+            android:singleLine="true" />
 
         <TextView
             android:id="@+id/thirdTxt"
@@ -89,9 +88,8 @@
             android:layout_marginHorizontal="40dp"
             android:backgroundTint="@color/textColor"
             android:ems="10"
-            android:singleLine="true"
             android:inputType="phone"
-            />
+            android:singleLine="true" />
 
         <TextView
             android:id="@+id/fourthTxt"
@@ -146,11 +144,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="100dp"
             android:gravity="center"
             android:text="Already Registered?\n Swipe left to login"
-            android:textSize="15sp"
-            android:layout_marginBottom="100dp"
-            />
+            android:textSize="15sp" />
 
     </LinearLayout>
 

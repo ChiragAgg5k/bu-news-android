@@ -7,6 +7,7 @@
     <!--Dark Mode-->
     <color name="backgroundColor">#292D36</color>
     <color name="backgroundColorDark">#333843</color>
+    <color name="backgroundColorDarker">#333843</color>
     <color name="textColor">#FFFFFF</color>w
     <color name="textColorHint">#CCCCCC</color>
 </resources>

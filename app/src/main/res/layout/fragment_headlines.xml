@@ -26,19 +26,18 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="5dp"
         android:backgroundTint="@color/backgroundColorDark" />
-    
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/swipe_refresh_home"
-        android:layout_below="@id/top_news_divider"
-        >
+        android:layout_below="@id/top_news_divider">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/news_rv_headlines"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/top_news_divider" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/news_rv_headlines"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/top_news_divider" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -47,9 +46,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="gone"
         android:indeterminateTint="@color/textColorHint"
-        />
+        android:visibility="gone" />
 
 
 </RelativeLayout>

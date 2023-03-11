@@ -1,44 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="fill_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_marginBottom="30dp">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/placeholder_title"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="10dp"
-        android:id="@+id/detailed_news_title"/>
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/detailed_news_title"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="10dp"
-        android:scaleType="fitStart"
-        android:adjustViewBounds="true"
-        android:id="@+id/detailed_news_image"
-        android:contentDescription="@string/detailed_news_image"
-        />
+        <RelativeLayout
+            android:id="@+id/profile_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/placeholder_description"
-        android:textSize="16sp"
-        android:layout_below="@+id/detailed_news_image"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="10dp"
-        android:id="@+id/detailed_news_description"/>
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@string/back_button"
+                android:src="@drawable/arrow_back_white"
+                app:tint="@color/textColor" />
 
-</RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@+id/back_button"
+                android:text="Detailed News"
+                android:textAlignment="textEnd"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/profile_header_divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/profile_header"
+            android:layout_marginHorizontal="8dp"
+            android:backgroundTint="@color/colorPrimaryDark" />
+
+
+        <TextView
+            android:id="@+id/detailed_news_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_header_divider"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/placeholder_title"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/detailed_news_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detailed_news_title"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/detailed_news_image"
+            android:maxHeight="500dp"
+            android:scaleType="fitStart" />
+
+        <TextView
+            android:id="@+id/detailed_news_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detailed_news_image"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/placeholder_description"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
 </ScrollView>

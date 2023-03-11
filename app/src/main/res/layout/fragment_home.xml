@@ -13,11 +13,11 @@
 
         <RelativeLayout
             android:id="@+id/greetingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:id="@+id/greetingText"
@@ -25,18 +25,16 @@
                 android:layout_height="wrap_content"
                 android:text="Greetings"
                 android:textSize="25sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/greetingUserText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/greetingText"
                 android:text="Username"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_below="@+id/greetingText"
-                />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/dateText"
@@ -49,34 +47,31 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                android:layout_toEndOf="@id/greetingText"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="50dp"
-                >
+                android:layout_toEndOf="@id/greetingText">
 
                 <TextView
                     android:id="@+id/weatherDescriptionText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="7dp"
+                    android:layout_marginEnd="20dp"
                     android:text="Loading..."
                     android:textAlignment="center"
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="20dp"
-                    />
+                    android:textStyle="bold" />
 
 
                 <ImageView
                     android:id="@+id/weatherIcon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    app:tint="@color/textColor"
+                    android:layout_centerVertical="true"
                     android:layout_marginTop="10dp"
                     android:layout_toEndOf="@+id/weatherDescriptionText"
-                    android:layout_centerVertical="true"
-                    />
+                    app:tint="@color/textColor" />
 
             </RelativeLayout>
 
@@ -87,106 +82,97 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_below="@id/greetingLayout"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/backgroundColorDark"
             android:layout_marginHorizontal="10dp"
-            />
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/backgroundColorDark" />
 
         <TextView
             android:id="@+id/topNewsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/greetingDivider"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
             android:text="Top News"
             android:textSize="20sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/news_rv_home"
-            android:layout_below="@+id/topNewsText"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:layout_below="@+id/topNewsText"
+            android:layout_marginTop="10dp"
             android:nestedScrollingEnabled="false"
-            android:scrollbars="horizontal"
-            />
+            android:scrollbars="horizontal" />
 
         <ProgressBar
             android:id="@+id/progress_bar_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminateTint="@color/textColorHint"
             android:layout_below="@+id/topNewsText"
             android:layout_centerInParent="true"
             android:layout_marginTop="100dp"
-            android:visibility="gone"
-            />
+            android:indeterminateTint="@color/textColorHint"
+            android:visibility="gone" />
 
         <View
             android:id="@+id/newsDivider"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_below="@id/news_rv_home"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/backgroundColorDark"
             android:layout_marginHorizontal="10dp"
-            />
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/backgroundColorDark" />
 
         <TextView
             android:id="@+id/subscribedNewsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/newsDivider"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:text="Subscribed News"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginStart="15dp"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/noSubscribedNewsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No subscribed news yet. Subscribe to your desired categories to get news from them."
             android:layout_below="@+id/subscribedNewsText"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            />
+            android:text="No subscribed news yet. Subscribe to your desired categories to get news from them." />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/subscribedNews_rv_home"
-            android:layout_below="@+id/noSubscribedNewsText"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:nestedScrollingEnabled="false"
-            />
+            android:layout_below="@+id/noSubscribedNewsText"
+            android:layout_marginTop="10dp"
+            android:nestedScrollingEnabled="false" />
 
         <Button
             android:id="@+id/subscribeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Subscribe"
             android:layout_below="@+id/subscribedNews_rv_home"
+            android:layout_centerInParent="true"
             android:layout_marginStart="15dp"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:textColor="@color/white"
-            android:layout_centerInParent="true"/>
+            android:text="Subscribe"
+            android:textColor="@color/white" />
 
         <View
             android:id="@+id/subscribedNewsDivider"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_below="@id/subscribeButton"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/backgroundColorDark"
             android:layout_marginHorizontal="10dp"
-            />
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/backgroundColorDark" />
 
     </RelativeLayout>
 </ScrollView>

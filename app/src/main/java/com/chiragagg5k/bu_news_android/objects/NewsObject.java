@@ -12,7 +12,6 @@ public class NewsObject {
     private final String username;
     private final boolean promoted;
     private final boolean authorized;
-
     public NewsObject(String newsHeading, String newsDescription, String category, String imageUrl) {
         this.authorized = false;
         this.promoted = false;
@@ -25,7 +24,7 @@ public class NewsObject {
         if (user != null) {
             this.username = user.getDisplayName();
         } else {
-            this.username = "Unable to fetch username";
+            this.username = "Anonymous";
         }
     }
 

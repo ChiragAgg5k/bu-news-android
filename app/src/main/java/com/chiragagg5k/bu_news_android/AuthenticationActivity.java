@@ -12,6 +12,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+/**
+ * Activity containing the login and register fragments
+ * Uses FragmentPagerAdapter to switch between the fragments (Depreciated, to be replaced with FragmentStatePagerAdapter)
+ */
 public class AuthenticationActivity extends AppCompatActivity {
 
     @Override

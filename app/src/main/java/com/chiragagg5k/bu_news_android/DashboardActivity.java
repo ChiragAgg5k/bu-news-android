@@ -28,6 +28,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
+/**
+ * @author Chirag Aggarwal
+ */
 public class DashboardActivity extends AppCompatActivity {
 
     final String GITHUB_URL = "https://github.com/ChiragAgg5k/bu-news-android";
@@ -63,9 +66,8 @@ public class DashboardActivity extends AppCompatActivity {
             imageUri = Uri.parse(intent.getStringExtra("imageUri"));
             Picasso.get().load(imageUri).into(sideNavProfileImage);
 
-        } else {
-            if (user != null)
-                Picasso.get().load(user.getPhotoUrl()).into(sideNavProfileImage);
+        } else if (user.getPhotoUrl() != null) {
+            Picasso.get().load(user.getPhotoUrl()).into(sideNavProfileImage);
         }
 
         if (intent.getStringExtra("name") != null)

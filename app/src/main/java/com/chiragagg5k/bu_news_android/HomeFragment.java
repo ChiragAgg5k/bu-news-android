@@ -73,8 +73,6 @@ public class HomeFragment extends Fragment {
     FirebaseUser user;
     Button subscribeButton;
     ProgressBar progressBar;
-    String day, date, month;
-
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -82,13 +80,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        LocalDate localDate = LocalDate.now();
-        day = UtilityClass.convertToTitleCase(localDate.getDayOfWeek().toString());
-        date = localDate.getDayOfMonth() + "";
-        month = UtilityClass.convertToTitleCase(localDate.getMonth().toString());
-
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -111,7 +102,7 @@ public class HomeFragment extends Fragment {
         noSubscribedCategoriesText = view.findViewById(R.id.noSubscribedNewsText);
 
         dateText = view.findViewById(R.id.dateText);
-        dateText.setText(String.format("%s, %s %s", day, date, month));
+        dateText.setText(UtilityClass.getDate(LocalDate.now()));
 
         subscribeButton.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), SubscribeActivity.class);
@@ -297,7 +288,7 @@ public class HomeFragment extends Fragment {
                     }
                 }
 
-                Collections.reverse(promotedNewsObjects);
+                Collections.reverse(subscribedNewsObjects);
 
                 progressBar.setVisibility(View.GONE);
                 subscribedNewsRvAdaptor.notifyDataSetChanged();

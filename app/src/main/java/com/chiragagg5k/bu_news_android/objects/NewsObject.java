@@ -1,8 +1,16 @@
 package com.chiragagg5k.bu_news_android.objects;
 
+import com.chiragagg5k.bu_news_android.UtilityClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.time.LocalDate;
+
+/**
+ * Object to store news data
+ *
+ * @author Chirag Aggarwal
+ */
 public class NewsObject {
 
     private final String newsHeading;
@@ -10,8 +18,10 @@ public class NewsObject {
     private final String mImageUrl;
     private final String category;
     private final String username;
+    private final String date;
     private final boolean promoted;
     private final boolean authorized;
+
     public NewsObject(String newsHeading, String newsDescription, String category, String imageUrl) {
         this.authorized = false;
         this.promoted = false;
@@ -19,6 +29,7 @@ public class NewsObject {
         this.mImageUrl = imageUrl;
         this.newsDescription = newsDescription;
         this.newsHeading = newsHeading;
+        this.date = UtilityClass.getDate(LocalDate.now());
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -46,7 +57,6 @@ public class NewsObject {
         return mImageUrl;
     }
 
-
     public boolean isAuthorized() {
         return authorized;
     }
@@ -61,6 +71,10 @@ public class NewsObject {
 
     public boolean isPromoted() {
         return promoted;
+    }
+
+    public String getDate() {
+        return date;
     }
 
 }

@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.chiragagg5k.bu_news_android.objects.UserObject;
 import com.daimajia.androidanimations.library.Techniques;
@@ -28,13 +30,13 @@ import java.util.Objects;
 
 public class RegisterFragment extends Fragment {
 
-    final private String STUDENT_ID = "^e[1-2][1-9]cseu\\d\\d\\d\\d@bennett.edu.in";
     EditText full_name, email, password, confirm_password, phone_no;
     Button register_button;
     FirebaseAuth mAuth;
     FirebaseUser user;
     DatabaseReference databaseRef;
 
+    private final String emailRegex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -80,12 +82,13 @@ public class RegisterFragment extends Fragment {
                 return;
             }
 
-            if (!email.matches(STUDENT_ID)) {
-                Toast.makeText(getContext(), "Please enter a valid student email", Toast.LENGTH_SHORT).show();
+            if (!email.matches(emailRegex)) {
+                Toast.makeText(getContext(), "Please enter a valid email", Toast.LENGTH_SHORT).show();
                 register_button.setText(getResources().getString(R.string.register));
                 playShakeAnimation();
                 return;
             }
+
 
             if (!password.equals(confirm_password)) {
                 Toast.makeText(getContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
@@ -108,6 +111,7 @@ public class RegisterFragment extends Fragment {
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                             .setDisplayName(finalFull_name)
                             .build();
+
                     user.updateProfile(profileUpdates).addOnCompleteListener(
                             task1 -> {
                                 if (task1.isSuccessful()) {
@@ -118,6 +122,7 @@ public class RegisterFragment extends Fragment {
                                 }
                             }
                     );
+
                 } else {
                     YoYo.with(Techniques.Bounce)
                             .duration(700)

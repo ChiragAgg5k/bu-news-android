@@ -26,6 +26,20 @@ public class NewsRvAdaptor extends RecyclerView.Adapter<NewsRvAdaptor.ViewHolder
         this.context = context;
     }
 
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView title, description, uploader;
+        ImageView image;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            title = itemView.findViewById(R.id.news_heading);
+            description = itemView.findViewById(R.id.news_description);
+            image = itemView.findViewById(R.id.news_image);
+            uploader = itemView.findViewById(R.id.news_uploader);
+        }
+    }
+
 
     @NonNull
     @Override
@@ -58,19 +72,5 @@ public class NewsRvAdaptor extends RecyclerView.Adapter<NewsRvAdaptor.ViewHolder
 
             this.context.startActivity(intent);
         });
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView title, description, uploader;
-        ImageView image;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            title = itemView.findViewById(R.id.news_heading);
-            description = itemView.findViewById(R.id.news_description);
-            image = itemView.findViewById(R.id.news_image);
-            uploader = itemView.findViewById(R.id.news_uploader);
-        }
     }
 }

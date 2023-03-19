@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 
+import java.time.LocalDate;
+
 /**
  * Utility class to hold the methods which are used in multiple classes
  */
@@ -55,6 +57,14 @@ public class UtilityClass {
         String name = returnCursor.getString(nameIndex);
         returnCursor.close();
         return name;
+    }
+
+    public static String getDate(LocalDate localDate){
+        String day = UtilityClass.convertToTitleCase(localDate.getDayOfWeek().toString());
+        String date = localDate.getDayOfMonth() + "";
+        String month = UtilityClass.convertToTitleCase(localDate.getMonth().toString());
+
+        return day + ", " + date + " " + month;
     }
 
 }

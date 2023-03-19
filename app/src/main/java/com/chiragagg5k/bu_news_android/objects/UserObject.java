@@ -31,4 +31,16 @@ public class UserObject {
         this.name = name;
     }
 
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public ArrayList<String> getCategories() {
+        return categories;
+    }
+
 }

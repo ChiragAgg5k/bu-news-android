@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="40dp"
-            android:text="Full Name" />
+            android:text="Full Name *" />
 
         <EditText
             android:id="@+id/fullName"
@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:text="Student Email" />
+            android:text="Email *" />
 
         <EditText
             android:id="@+id/email"
@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:text="Phone Number" />
+            android:text="Contact Number" />
 
         <EditText
             android:id="@+id/phone"
@@ -93,20 +93,19 @@
 
         <TextView
             android:id="@+id/fourthTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:text="Password" />
-
-        <EditText
-            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:autofillHints="password"
+            android:text="City or Zip Code" />
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
             android:backgroundTint="@color/textColor"
             android:ems="10"
-            android:inputType="textPassword"
+            android:inputType="phone"
             android:singleLine="true" />
 
         <TextView
@@ -114,10 +113,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:text="Confirm Password" />
+            android:text="Password *" />
 
         <EditText
-            android:id="@+id/confirm_password"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"

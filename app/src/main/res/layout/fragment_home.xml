@@ -51,27 +51,27 @@
                 android:layout_marginStart="50dp"
                 android:layout_toEndOf="@id/greetingText">
 
+                <ImageView
+                    android:id="@+id/weatherIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"
+                    app:tint="@color/textColor" />
+
                 <TextView
                     android:id="@+id/weatherDescriptionText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="7dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_below="@+id/weatherIcon"
+                    android:layout_centerHorizontal="true"
                     android:text="Loading..."
+                    android:maxLines="2"
+                    android:ellipsize="end"
                     android:textAlignment="center"
                     android:textSize="14sp"
                     android:textStyle="bold" />
-
-
-                <ImageView
-                    android:id="@+id/weatherIcon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_toEndOf="@+id/weatherDescriptionText"
-                    app:tint="@color/textColor" />
 
             </RelativeLayout>
 

@@ -2,13 +2,9 @@ package com.chiragagg5k.bu_news_android;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,9 +16,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
@@ -34,6 +31,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.chiragagg5k.bu_news_android.objects.NewsObject;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -60,7 +59,7 @@ public class HomeFragment extends Fragment {
 
     final String OPEN_WEATHER_MAP_API_KEY = "58ed8b67f0af15587b5f4f88b3457b15";
     final String OPEN_WEATHER_MAP_API_URL = "https://api.openweathermap.org/data/2.5/weather";
-    String selectedCity = "Delhi", greeting;
+    String selectedCity = "", greeting;
     ImageView weatherIcon;
     TextView weatherDescriptionText, greetingText, greetingUserText, dateText, noSubscribedCategoriesText;
     RecyclerView promotedRecyclerView, subscribedRecyclerView;
@@ -73,6 +72,8 @@ public class HomeFragment extends Fragment {
     FirebaseUser user;
     Button subscribeButton;
     ProgressBar progressBar;
+    FusedLocationProviderClient fusedLocationClient;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -86,6 +87,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
 
         weatherDescriptionText = view.findViewById(R.id.weatherDescriptionText);
         greetingText = view.findViewById(R.id.greetingText);
@@ -151,86 +154,16 @@ public class HomeFragment extends Fragment {
         greetingText.setText(greeting);
         greetingUserText.setText(firstName);
 
-        LocationManager locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
-
-        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-        if (location != null) {
-            selectedCity = getCityName(location.getLatitude(), location.getLongitude());
-        }
-        if (selectedCity == null || selectedCity.equals("")) {
-            selectedCity = "Greater Noida";
-        }
-
-
-        String tempUrl = OPEN_WEATHER_MAP_API_URL + "?q=" + selectedCity + "&appid=" + OPEN_WEATHER_MAP_API_KEY;
-        Log.d("Selected City: ", selectedCity);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, response -> {
-            try {
-                JSONObject jsonObject = new JSONObject(response);
-                JSONArray jsonArray = jsonObject.getJSONArray("weather");
-                JSONObject weatherObject = jsonArray.getJSONObject(0);
-
-                String description = weatherObject.getString("description");
-
-                JSONObject mainObject = jsonObject.getJSONObject("main");
-
-                double temp = mainObject.getDouble("temp") - 273.15;
-                String icon = weatherObject.getString("icon");
-                String iconUrl = "https://openweathermap.org/img/w/" + icon + ".png";
-
-                temp = Math.round(temp * 100.0) / 100.0;
-
-                weatherDescriptionText.setText(String.format("%s\n%s°C", description, temp));
-                Picasso.get().load(iconUrl).into(weatherIcon);
-
-
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
-            }
-
-        },
-                error -> {
-                    Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
-                    Log.d("Error", Objects.requireNonNull(error.getMessage()));
-                });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-        requestQueue.add(stringRequest);
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                promotedNewsObjects.clear();
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    NewsObject news = dataSnapshot.getValue(NewsObject.class);
-
-                    assert news != null;
-                    if (news.isPromoted()) {
-                        promotedNewsObjects.add(news);
-                    }
-                }
-
-                Collections.reverse(promotedNewsObjects);
-                promotedNewsRvAdaptor.notifyDataSetChanged();
-                progressBar.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                selectedCity = snapshot.child("city").getValue(String.class);
+                try {
+                    fetchWeather(selectedCity);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
                 subscribedNewsObjects.clear();
                 hasSubscribedCategories = false;
@@ -257,6 +190,31 @@ public class HomeFragment extends Fragment {
                     subscribedRecyclerView.setVisibility(View.VISIBLE);
                     noSubscribedCategoriesText.setVisibility(View.GONE);
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                promotedNewsObjects.clear();
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    NewsObject news = dataSnapshot.getValue(NewsObject.class);
+
+                    assert news != null;
+                    if (news.isPromoted()) {
+                        promotedNewsObjects.add(news);
+                    }
+                }
+
+                Collections.reverse(promotedNewsObjects);
+                promotedNewsRvAdaptor.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -299,6 +257,43 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void fetchWeather(String selectedCity){
+        String tempUrl = OPEN_WEATHER_MAP_API_URL + "?q=" + selectedCity + "&appid=" + OPEN_WEATHER_MAP_API_KEY;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, response -> {
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                JSONArray jsonArray = jsonObject.getJSONArray("weather");
+                JSONObject weatherObject = jsonArray.getJSONObject(0);
+
+                String description = weatherObject.getString("description");
+
+                JSONObject mainObject = jsonObject.getJSONObject("main");
+
+                double temp = mainObject.getDouble("temp") - 273.15;
+                String icon = weatherObject.getString("icon");
+                String iconUrl = "https://openweathermap.org/img/w/" + icon + ".png";
+
+                temp = Math.round(temp * 100.0) / 100.0;
+
+                weatherDescriptionText.setText(String.format("%s\n%s°C", description, temp));
+                Picasso.get().load(iconUrl).into(weatherIcon);
+
+
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+
+        },
+                error -> {
+                    Toast.makeText(getContext(), "Could not fetch weather data", Toast.LENGTH_SHORT).show();
+                    weatherDescriptionText.setText("Weather data unavailable");
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+        requestQueue.add(stringRequest);
     }
 
     private String getCityName(double longitude, double latitude) {

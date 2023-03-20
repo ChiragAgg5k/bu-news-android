@@ -6,12 +6,14 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +22,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -35,9 +42,10 @@ public class EditProfileActivity extends AppCompatActivity {
     CircleImageView profile_image;
     Button saveBtn;
     TextView name, studentMail;
-    EditText editName;
+    EditText editName, editContact, editAddress;
     StorageReference storageReference;
-    DashboardActivity dashboardActivity = new DashboardActivity();
+    DatabaseReference databaseReference;
+    String contact, address;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,10 +58,28 @@ public class EditProfileActivity extends AppCompatActivity {
         saveBtn = findViewById(R.id.save_button);
         name = findViewById(R.id.profile_name_edit_profile);
         editName = findViewById(R.id.edit_name);
+        editContact = findViewById(R.id.edit_contact_text);
+        editAddress = findViewById(R.id.edit_address_text);
         studentMail = findViewById(R.id.student_mail);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         storageReference = FirebaseStorage.getInstance().getReference("profile_images");
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+
+        databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                contact = dataSnapshot.child("phoneNo").getValue(String.class);
+                address = dataSnapshot.child("city").getValue(String.class);
+                editAddress.setText(address);
+                editContact.setText(contact);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("ProfileActivity", "onCancelled: ", databaseError.toException());
+            }
+        });
 
         assert user != null;
         if (user.getPhotoUrl() != null)
@@ -74,8 +100,10 @@ public class EditProfileActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(v -> {
 
             String name = editName.getText().toString();
+            String contact = editContact.getText().toString();
+            String address = editAddress.getText().toString();
 
-            if (imageUri == null && name.equals(user.getDisplayName())) {
+            if (imageUri == null && name.equals(user.getDisplayName()) && contact.equals(this.contact) && address.equals(this.address)) {
                 Toast.makeText(this, "No changes made", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -99,6 +127,9 @@ public class EditProfileActivity extends AppCompatActivity {
                     .build();
 
             user.updateProfile(profileUpdates);
+
+            databaseReference.child(user.getUid()).child("phoneNo").setValue(contact);
+            databaseReference.child(user.getUid()).child("city").setValue(address);
 
             Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show();
 

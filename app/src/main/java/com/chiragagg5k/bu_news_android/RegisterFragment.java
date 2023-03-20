@@ -30,7 +30,7 @@ import java.util.Objects;
 
 public class RegisterFragment extends Fragment {
 
-    EditText full_name, email, password, confirm_password, phone_no;
+    EditText full_name, email, password, address, phone_no;
     Button register_button;
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -57,7 +57,7 @@ public class RegisterFragment extends Fragment {
         email = view.findViewById(R.id.email);
         password = view.findViewById(R.id.password);
         register_button = view.findViewById(R.id.register_button);
-        confirm_password = view.findViewById(R.id.confirm_password);
+        address = view.findViewById(R.id.address);
         phone_no = view.findViewById(R.id.phone);
 
         mAuth = FirebaseAuth.getInstance();
@@ -70,8 +70,8 @@ public class RegisterFragment extends Fragment {
 
             String email = this.email.getText().toString().toLowerCase();
             String password = this.password.getText().toString();
-            String confirm_password = this.confirm_password.getText().toString();
             String phone_no = this.phone_no.getText().toString();
+            String address = this.address.getText().toString();
 
             register_button.setText(getResources().getString(R.string.registering));
 
@@ -89,14 +89,6 @@ public class RegisterFragment extends Fragment {
                 return;
             }
 
-
-            if (!password.equals(confirm_password)) {
-                Toast.makeText(getContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
-                register_button.setText(getResources().getString(R.string.register));
-                playShakeAnimation();
-                return;
-            }
-
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     user = mAuth.getCurrentUser();
@@ -104,7 +96,7 @@ public class RegisterFragment extends Fragment {
                     // Add user to database
                     assert user != null;
                     String userId = user.getUid();
-                    UserObject newUser = new UserObject(finalFull_name, phone_no);
+                    UserObject newUser = new UserObject(finalFull_name, phone_no,address);
 
                     databaseRef.child(userId).setValue(newUser);
 

@@ -191,26 +191,120 @@
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/backgroundColorDark" />
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/user_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/line_divider2"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_marginTop="15dp"
+        android:paddingHorizontal="15dp">
 
-        <Button
-            android:id="@+id/save_button"
+        <ImageView
+            android:id="@+id/mini_contact_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="Contact Icon"
+            android:src="@drawable/phone_icon"
+            app:tint="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/contact_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:clickable="true"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/mini_contact_icon"
             android:gravity="center"
-            android:paddingHorizontal="20dp"
-            android:text="Save Changes"
-            android:textColor="@color/white" />
+            android:text="Contact"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
 
-    </LinearLayout>
+        <EditText
+            android:id="@+id/edit_contact_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/contact_label"
+            android:text="Placeholder Contact"
+            android:backgroundTint="@color/textColor"
+            android:textAlignment="textEnd"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line_divider3"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@id/user_contact"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/backgroundColorDark" />
+
+    <RelativeLayout
+        android:id="@+id/user_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line_divider3"
+        android:layout_marginTop="15dp"
+        android:paddingHorizontal="15dp">
+
+        <ImageView
+            android:id="@+id/mini_address_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="Address Icon"
+            android:src="@drawable/address_icon"
+            app:tint="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/address_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/mini_address_icon"
+            android:gravity="center"
+            android:text="City or Zip Code"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edit_address_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/address_label"
+            android:text="Placeholder Address"
+            android:backgroundTint="@color/textColor"
+            android:textAlignment="textEnd"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line_divider4"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@id/user_address"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/backgroundColorDark" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line_divider4"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:clickable="true"
+        android:gravity="center"
+        android:paddingHorizontal="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Save Changes"
+        android:textColor="@color/white" />
 
 
 </RelativeLayout>

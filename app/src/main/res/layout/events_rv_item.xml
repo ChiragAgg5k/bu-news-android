@@ -15,33 +15,48 @@
         android:backgroundTint="@color/colorPrimaryDark">
 
         <TextView
+            android:id="@+id/event_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@android:color/white"
+            android:padding="15dp"
+            android:paddingHorizontal="17dp"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            />
+
+
+        <TextView
             android:id="@+id/event_heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="3dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginTop="5dp"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:maxLines="2"
-            android:padding="3dp"
+            android:maxLines="1"
             android:text="Event Heading"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/event_date"
+            />
 
         <TextView
             android:id="@+id/event_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/event_heading"
-            android:layout_margin="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="4dp"
             android:backgroundTint="@color/colorPrimaryDark"
+            android:maxLines="1"
             android:ellipsize="end"
-            android:padding="3dp"
             android:text="Event Description"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:layout_toRightOf="@+id/event_date"
+            />
 
     </RelativeLayout>
 

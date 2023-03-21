@@ -295,27 +295,4 @@ public class HomeFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
         requestQueue.add(stringRequest);
     }
-
-    private String getCityName(double longitude, double latitude) {
-        String cityName = "";
-        Geocoder gcd = new Geocoder(getContext(), Locale.getDefault());
-        try {
-            List<Address> addresses = gcd.getFromLocation(latitude, longitude, 1);
-
-            for (Address address : addresses) {
-                if (address != null) {
-                    String city = address.getLocality();
-                    if (city != null && !city.equals("")) {
-
-                        Log.d("City", city);
-                        cityName = city;
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return cityName;
-    }
 }

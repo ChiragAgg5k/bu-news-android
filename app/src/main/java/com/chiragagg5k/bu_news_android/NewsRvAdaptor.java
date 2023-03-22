@@ -69,6 +69,7 @@ public class NewsRvAdaptor extends RecyclerView.Adapter<NewsRvAdaptor.ViewHolder
             intent.putExtra("news_image_url", uploadCurrent.getmImageUrl());
             intent.putExtra("news_uploader", uploadCurrent.getUsername());
             intent.putExtra("news_category", uploadCurrent.getCategory());
+            intent.putExtra("news_uploadDate", uploadCurrent.getDate());
 
             this.context.startActivity(intent);
         });

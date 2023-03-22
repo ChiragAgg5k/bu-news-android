@@ -136,7 +136,8 @@ public class EditProfileActivity extends AppCompatActivity {
             finish();
             Intent intent = new Intent(this, DashboardActivity.class);
             intent.putExtra("name", editName.getText().toString());
-            intent.putExtra("imageUri", imageUri.toString());
+            if(imageUri != null)
+                intent.putExtra("imageUri", imageUri.toString());
             startActivity(intent);
         });
     }

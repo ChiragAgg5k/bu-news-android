@@ -9,13 +9,11 @@ public class EventsObject {
     private final String eventHeading;
     private final String eventDescription;
     private final String eventDate;
-    private final LocalDate eventLocalDate;
 
-    public EventsObject(String eventHeading, String eventDescription, LocalDate eventDate) {
+    public EventsObject(String eventHeading, String eventDescription, String eventDate) {
         this.eventHeading = eventHeading;
         this.eventDescription = eventDescription;
-        this.eventLocalDate = eventDate;
-        this.eventDate = UtilityClass.getDate(eventDate);
+        this.eventDate = eventDate;
     }
 
     public String getEventHeading() {
@@ -30,7 +28,4 @@ public class EventsObject {
         return eventDate;
     }
 
-    public LocalDate getEventLocalDate() {
-        return eventLocalDate;
-    }
 }

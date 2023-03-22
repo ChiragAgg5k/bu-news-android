@@ -22,14 +22,14 @@ public class NewsObject {
     private final boolean promoted;
     private final boolean authorized;
 
-    public NewsObject(String newsHeading, String newsDescription, String category, String imageUrl) {
-        this.authorized = false;
+    public NewsObject(String newsHeading, String newsDescription, String category, String imageUrl, String date) {
+        this.authorized = true;
         this.promoted = false;
         this.category = category;
         this.mImageUrl = imageUrl;
         this.newsDescription = newsDescription;
         this.newsHeading = newsHeading;
-        this.date = UtilityClass.getDate(LocalDate.now());
+        this.date = date;
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -42,7 +42,7 @@ public class NewsObject {
     public NewsObject() {
         // !IMPORTANT: This constructor is required for Firebase to work
 
-        this("", "", "", "");
+        this("", "", "", "", "");
     }
 
     public String getNewsHeading() {

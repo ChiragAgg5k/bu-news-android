@@ -102,6 +102,18 @@
             android:textAlignment="textEnd"
             />
 
+        <TextView
+            android:id="@+id/detailed_news_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detailed_news_author"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:text="News Date"
+            android:textSize="16sp"
+            android:textAlignment="textEnd"
+            />
+
 
     </RelativeLayout>
 </ScrollView>

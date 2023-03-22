@@ -5,21 +5,20 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="10dp"
-    app:cardBackgroundColor="@color/backgroundColorDark"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimaryDark">
+        android:backgroundTint="@color/backgroundColorDarker">
 
         <TextView
             android:id="@+id/event_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/backgroundColorDarker"
             android:textColor="@android:color/white"
             android:padding="15dp"
             android:paddingHorizontal="17dp"
@@ -33,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/backgroundColorDarker"
             android:maxLines="1"
             android:text="Event Heading"
             android:textColor="@color/white"
@@ -49,7 +48,7 @@
             android:layout_below="@id/event_heading"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="4dp"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/backgroundColorDarker"
             android:maxLines="1"
             android:ellipsize="end"
             android:text="Event Description"

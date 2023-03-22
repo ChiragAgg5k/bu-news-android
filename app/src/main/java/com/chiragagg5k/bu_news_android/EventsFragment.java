@@ -1,6 +1,7 @@
 package com.chiragagg5k.bu_news_android;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +13,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiragagg5k.bu_news_android.objects.EventsObject;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class EventsFragment extends Fragment {
 
     RecyclerView eventsRv;
+    DatabaseReference eventsRef;
+    List<EventsObject> eventsObjects;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.ENGLISH);
 
     public EventsFragment() {
         // Required empty public constructor
@@ -41,18 +50,31 @@ public class EventsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         eventsRv = view.findViewById(R.id.events_rv);
+        eventsRef = FirebaseDatabase.getInstance().getReference("events");
 
-        List<EventsObject> eventsObjects = new ArrayList<>();
-        eventsObjects.add(new EventsObject("Event 1", "Event 1 Description", LocalDate.now().plus(1, ChronoUnit.DAYS)));
-        eventsObjects.add(new EventsObject("Event 2", "Event 2 Description", LocalDate.now().plus(2, ChronoUnit.DAYS)));
-        eventsObjects.add(new EventsObject("Event 3", "Event 3 Description", LocalDate.now().plus(3, ChronoUnit.DAYS)));
-        eventsObjects.add(new EventsObject("Event 4", "Event 4 Description", LocalDate.now().plus(0, ChronoUnit.DAYS)));
+        eventsObjects = new ArrayList<>();
+        eventsObjects.add(new EventsObject("Event 1", "Event 1 description", UtilityClass.getDate(LocalDate.now())));
+        eventsObjects.add(new EventsObject("Event 2", "Event 2 description", UtilityClass.getDate(LocalDate.now().plusDays(1))));
+        eventsObjects.add(new EventsObject("Event 3", "Event 3 description", UtilityClass.getDate(LocalDate.now().plusDays(2))));
 
-        List<EventsObject> sortedEventsObjects = eventsObjects.stream()
-                .sorted(Comparator.comparing(EventsObject::getEventLocalDate))
-                .collect(Collectors.toList());
+        eventsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("EventsFragment", "onDataChange: " + snapshot);
+                eventsObjects.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    EventsObject eventsObject = dataSnapshot.getValue(EventsObject.class);
+                    eventsObjects.add(eventsObject);
+                }
+            }
 
-        EventsRvAdaptor eventsRvAdaptor = new EventsRvAdaptor(sortedEventsObjects, getContext());
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        EventsRvAdaptor eventsRvAdaptor = new EventsRvAdaptor(eventsObjects, getContext());
         eventsRv.setAdapter(eventsRvAdaptor);
         eventsRv.setLayoutManager(new LinearLayoutManager(getContext()));
     }

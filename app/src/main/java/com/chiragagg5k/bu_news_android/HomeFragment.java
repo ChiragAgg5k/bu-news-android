@@ -88,8 +88,6 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
-
         weatherDescriptionText = view.findViewById(R.id.weatherDescriptionText);
         greetingText = view.findViewById(R.id.greetingText);
         greetingUserText = view.findViewById(R.id.greetingUserText);
@@ -174,8 +172,6 @@ public class HomeFragment extends Fragment {
                         boolean value = (boolean) Objects.requireNonNull(dataSnapshot.getValue());
                         String key = dataSnapshot.getKey();
 
-                        Log.d("Key, Value", key + " " + value);
-
                         if (value) {
                             hasSubscribedCategories = true;
                             getNews(key);
@@ -219,7 +215,6 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -254,7 +249,6 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

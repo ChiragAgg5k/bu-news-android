@@ -67,4 +67,8 @@ public class UtilityClass {
         return day + ", " + date + " " + month;
     }
 
+    public static String getCurrentDate() {
+        LocalDate localDate = LocalDate.now();
+        return getDate(localDate);
+    }
 }

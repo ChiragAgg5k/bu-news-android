@@ -170,7 +170,7 @@ public class PostFragment extends Fragment {
 
                         // get the download url of the image
                         fileReference.getDownloadUrl().addOnSuccessListener(uri -> {
-                            NewsObject upload = new NewsObject(heading.getText().toString(), description.getText().toString(), category_spinner.getSelectedItem().toString(), uri.toString());
+                            NewsObject upload = new NewsObject(heading.getText().toString(), description.getText().toString(), category_spinner.getSelectedItem().toString(), uri.toString(), UtilityClass.getCurrentDate());
                             String uploadId = databaseRef.push().getKey();
                             if (uploadId != null) databaseRef.child(uploadId).setValue(upload);
                         });

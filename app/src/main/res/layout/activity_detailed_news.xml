@@ -78,7 +78,10 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="20dp"
             android:text="@string/placeholder_description"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            />
 
         <View
             android:id="@+id/detailed_news_divider"

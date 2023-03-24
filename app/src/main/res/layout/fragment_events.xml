@@ -37,4 +37,16 @@
         android:orientation="horizontal"
         android:scrollbars="none" />
 
+    <Button
+        android:id="@+id/add_event_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="Add Event"
+        android:textColor="@color/white" />
+
+
 </RelativeLayout>

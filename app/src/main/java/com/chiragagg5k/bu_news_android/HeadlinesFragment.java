@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.chiragagg5k.bu_news_android.adaptors.CategoriesRvAdaptor;
+import com.chiragagg5k.bu_news_android.adaptors.NewsRvAdaptor;
 import com.chiragagg5k.bu_news_android.objects.NewsObject;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -82,7 +84,7 @@ public class HeadlinesFragment extends Fragment implements CategoriesRvAdaptor.C
         swipeRefreshLayout.setOnRefreshListener(() -> {
             getNews("All");
             categories_rv.smoothScrollToPosition(0);
-            categories_adaptor.selectedPosition = 0;
+            categories_adaptor.setSelectedPosition(0);
             categories_adaptor.notifyDataSetChanged();
             swipeRefreshLayout.setRefreshing(false);
         });

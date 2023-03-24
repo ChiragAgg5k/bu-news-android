@@ -1,4 +1,4 @@
-package com.chiragagg5k.bu_news_android;
+package com.chiragagg5k.bu_news_android.adaptors;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.chiragagg5k.bu_news_android.R;
 
 import java.util.ArrayList;
 
@@ -40,6 +42,10 @@ public class CategoriesRvAdaptor extends RecyclerView.Adapter<CategoriesRvAdapto
     @Override
     public int getItemCount() {
         return categories.size();
+    }
+
+    public void setSelectedPosition(int selectedPosition) {
+        this.selectedPosition = selectedPosition;
     }
 
     @SuppressLint("NotifyDataSetChanged")

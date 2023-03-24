@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.provider.OpenableColumns;
 
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Utility class to hold the methods which are used in multiple classes
@@ -59,16 +61,17 @@ public class UtilityClass {
         return name;
     }
 
-    public static String getDate(LocalDate localDate){
-        String day = UtilityClass.convertToTitleCase(localDate.getDayOfWeek().toString());
-        String date = localDate.getDayOfMonth() + "";
-        String month = UtilityClass.convertToTitleCase(localDate.getMonth().toString());
-
+    public static String getDate(long dateInMilliSeconds) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(dateInMilliSeconds);
+        int date = calendar.get(Calendar.DATE);
+        String  day = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+        String month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         return day + ", " + date + " " + month;
     }
 
-    public static String getCurrentDate() {
-        LocalDate localDate = LocalDate.now();
-        return getDate(localDate);
+
+    public static long getCurrentDateInMilliSeconds() {
+        return Calendar.getInstance().getTimeInMillis();
     }
 }

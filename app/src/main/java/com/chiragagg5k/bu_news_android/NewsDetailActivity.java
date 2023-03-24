@@ -17,7 +17,8 @@ public class NewsDetailActivity extends AppCompatActivity {
     TextView news_heading_tv, news_description_tv, news_uploader_tv, news_date_tv;
     ImageView news_image_iv, backBtn;
 
-    String news_heading, news_description, news_image_url, username, date;
+    String news_heading, news_description, news_image_url, username;
+    Long date;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         news_description = intent.getStringExtra("news_description");
         news_image_url = intent.getStringExtra("news_image_url");
         username = intent.getStringExtra("news_uploader");
-        date = intent.getStringExtra("news_uploadDate");
+        date = intent.getLongExtra("news_uploadDate",0);
 
         news_heading_tv = findViewById(R.id.detailed_news_title);
         news_description_tv = findViewById(R.id.detailed_news_description);
@@ -43,9 +44,11 @@ public class NewsDetailActivity extends AppCompatActivity {
         news_description_tv.setText(news_description);
         news_uploader_tv.setText(String.format("- %s", username));
 
-        if(date == null || date.equals(""))
+        if(date==0)
             news_date_tv.setText("Date not available");
-        else news_date_tv.setText(date);
+        else {
+            news_date_tv.setText(UtilityClass.getDate(date));
+        }
 
         backBtn.setOnClickListener(v -> {
             finish();

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,7 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chiragagg5k.bu_news_android.adaptors.EventsRvAdaptor;
 import com.chiragagg5k.bu_news_android.objects.EventsObject;
+import com.chiragagg5k.bu_news_android.objects.UserObject;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,17 +27,17 @@ import com.google.firebase.database.ValueEventListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 public class EventsFragment extends Fragment {
 
     RecyclerView eventsRv;
-    DatabaseReference eventsRef;
     List<EventsObject> eventsObjects;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.ENGLISH);
+    Button addEventBtn;
+    DatabaseReference userRef;
+    FirebaseUser user;
 
     public EventsFragment() {
         // Required empty public constructor
@@ -50,22 +55,18 @@ public class EventsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         eventsRv = view.findViewById(R.id.events_rv);
-        eventsRef = FirebaseDatabase.getInstance().getReference("events");
+        addEventBtn = view.findViewById(R.id.add_event_btn);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
 
-        eventsObjects = new ArrayList<>();
-        eventsObjects.add(new EventsObject("Event 1", "Event 1 description", UtilityClass.getDate(LocalDate.now())));
-        eventsObjects.add(new EventsObject("Event 2", "Event 2 description", UtilityClass.getDate(LocalDate.now().plusDays(1))));
-        eventsObjects.add(new EventsObject("Event 3", "Event 3 description", UtilityClass.getDate(LocalDate.now().plusDays(2))));
-
-        eventsRef.addValueEventListener(new ValueEventListener() {
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("EventsFragment", "onDataChange: " + snapshot);
-                eventsObjects.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    EventsObject eventsObject = dataSnapshot.getValue(EventsObject.class);
-                    eventsObjects.add(eventsObject);
-                }
+                Boolean isAdmin = Boolean.parseBoolean(snapshot.child("admin").getValue().toString());
+                if(isAdmin)
+                    addEventBtn.setVisibility(View.VISIBLE);
+                else
+                    addEventBtn.setVisibility(View.GONE);
             }
 
             @Override
@@ -73,6 +74,19 @@ public class EventsFragment extends Fragment {
 
             }
         });
+
+        addEventBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        eventsObjects = new ArrayList<>();
+        long today = Calendar.getInstance().getTimeInMillis();
+        eventsObjects.add(new EventsObject("Event 1", "This is the description of the event", UtilityClass.getDate(today)));
+        eventsObjects.add(new EventsObject("Event 2", "This is the description of the event", UtilityClass.getDate(today)));
+        eventsObjects.add(new EventsObject("Event 3", "This is the description of the event", UtilityClass.getDate(today)));
 
         EventsRvAdaptor eventsRvAdaptor = new EventsRvAdaptor(eventsObjects, getContext());
         eventsRv.setAdapter(eventsRvAdaptor);

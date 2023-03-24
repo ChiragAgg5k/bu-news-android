@@ -1,12 +1,8 @@
 package com.chiragagg5k.bu_news_android;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -30,9 +24,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.chiragagg5k.bu_news_android.adaptors.NewsRvAdaptor;
+import com.chiragagg5k.bu_news_android.adaptors.TopNewsRvAdaptor;
 import com.chiragagg5k.bu_news_android.objects.NewsObject;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -46,13 +41,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 public class HomeFragment extends Fragment {
@@ -103,7 +94,7 @@ public class HomeFragment extends Fragment {
         noSubscribedCategoriesText = view.findViewById(R.id.noSubscribedNewsText);
 
         dateText = view.findViewById(R.id.dateText);
-        dateText.setText(UtilityClass.getDate(LocalDate.now()));
+        dateText.setText(UtilityClass.getDate(Calendar.getInstance().getTimeInMillis()));
 
         subscribeButton.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), SubscribeActivity.class);

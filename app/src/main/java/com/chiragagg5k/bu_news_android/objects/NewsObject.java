@@ -1,10 +1,7 @@
 package com.chiragagg5k.bu_news_android.objects;
 
-import com.chiragagg5k.bu_news_android.UtilityClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.time.LocalDate;
 
 /**
  * Object to store news data
@@ -18,18 +15,18 @@ public class NewsObject {
     private final String mImageUrl;
     private final String category;
     private final String username;
-    private final String date;
+    private final long dateInMilliseconds;
     private final boolean promoted;
     private final boolean authorized;
 
-    public NewsObject(String newsHeading, String newsDescription, String category, String imageUrl, String date) {
+    public NewsObject(String newsHeading, String newsDescription, String category, String imageUrl, long date) {
         this.authorized = true;
         this.promoted = false;
         this.category = category;
         this.mImageUrl = imageUrl;
         this.newsDescription = newsDescription;
         this.newsHeading = newsHeading;
-        this.date = date;
+        this.dateInMilliseconds = date;
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -42,7 +39,7 @@ public class NewsObject {
     public NewsObject() {
         // !IMPORTANT: This constructor is required for Firebase to work
 
-        this("", "", "", "", "");
+        this("", "", "", "", 0);
     }
 
     public String getNewsHeading() {
@@ -73,8 +70,8 @@ public class NewsObject {
         return promoted;
     }
 
-    public String getDate() {
-        return date;
+    public long getDateInMilliseconds() {
+        return dateInMilliseconds;
     }
 
 }

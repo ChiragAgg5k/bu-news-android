@@ -27,6 +27,8 @@
             android:layout_below="@id/top_news_image"
             android:layout_margin="3dp"
             android:maxLines="2"
+            android:minLines="2"
+            android:ellipsize="end"
             android:padding="3dp"
             android:text="News Heading"
             android:textSize="18sp"

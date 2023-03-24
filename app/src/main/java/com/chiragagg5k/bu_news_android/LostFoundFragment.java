@@ -5,9 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
+import com.chiragagg5k.bu_news_android.adaptors.LostFoundAdapter;
+import com.google.android.material.tabs.TabLayout;
 
 public class LostFoundFragment extends Fragment {
+
+    TabLayout tabLayout;
+    ViewPager viewPager;
 
     public LostFoundFragment() {
         // Required empty public constructor
@@ -18,5 +27,26 @@ public class LostFoundFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_lost_found, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        tabLayout = view.findViewById(R.id.tab_layout);
+        viewPager = view.findViewById(R.id.lostFoundViewPager);
+
+        tabLayout.addTab(tabLayout.newTab().setText("Lost"));
+        tabLayout.addTab(tabLayout.newTab().setText("Found"));
+
+        tabLayout.setupWithViewPager(viewPager);
+        prepareViewPager(viewPager);
+    }
+
+    private void prepareViewPager(ViewPager viewPager) {
+        LostFoundAdapter adapter = new LostFoundAdapter(getChildFragmentManager());
+        adapter.addFragment(new LostFragment(), "Lost");
+        adapter.addFragment(new FoundFragment(), "Found");
+        viewPager.setAdapter(adapter);
     }
 }

@@ -1,9 +1,5 @@
 package com.chiragagg5k.bu_news_android.objects;
 
-import com.chiragagg5k.bu_news_android.UtilityClass;
-
-import java.time.LocalDate;
-
 public class EventsObject {
 
     private final String eventHeading;

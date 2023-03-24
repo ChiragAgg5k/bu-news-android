@@ -15,4 +15,9 @@
         <item name="android:textColorHint">@color/textColorHint</item>
     </style>
 
+    <style name="NavigationTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

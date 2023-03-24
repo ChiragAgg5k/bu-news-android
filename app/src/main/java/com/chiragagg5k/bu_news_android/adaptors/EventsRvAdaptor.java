@@ -1,4 +1,4 @@
-package com.chiragagg5k.bu_news_android;
+package com.chiragagg5k.bu_news_android.adaptors;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chiragagg5k.bu_news_android.R;
 import com.chiragagg5k.bu_news_android.objects.EventsObject;
 
 import java.util.List;

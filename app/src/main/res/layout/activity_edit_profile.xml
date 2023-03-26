@@ -133,7 +133,9 @@
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/textColor"
             android:text="@string/placeholder_name_text"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:singleLine="true"
+            />
 
     </RelativeLayout>
 
@@ -229,7 +231,9 @@
             android:text="Placeholder Contact"
             android:backgroundTint="@color/textColor"
             android:textAlignment="textEnd"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:singleLine="true"
+            />
 
     </RelativeLayout>
 
@@ -279,7 +283,9 @@
             android:text="Placeholder Address"
             android:backgroundTint="@color/textColor"
             android:textAlignment="textEnd"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:singleLine="true"
+            />
 
     </RelativeLayout>
 

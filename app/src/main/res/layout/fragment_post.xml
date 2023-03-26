@@ -131,11 +131,22 @@
             android:text="No image selected"
             android:textAlignment="center" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="100dp"
+            android:id="@+id/preview_image"
+            android:layout_below="@+id/selected_image_tv"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone" />
+
         <Button
             android:id="@+id/post_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/selected_image_tv"
+            android:layout_below="@+id/preview_image"
             android:layout_centerInParent="true"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"

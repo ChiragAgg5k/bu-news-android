@@ -63,7 +63,6 @@ public class HomeFragment extends Fragment {
     FirebaseUser user;
     Button subscribeButton;
     ProgressBar progressBar;
-    FusedLocationProviderClient fusedLocationClient;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -273,7 +272,6 @@ public class HomeFragment extends Fragment {
 
         },
                 error -> {
-                    Toast.makeText(getContext(), "Could not fetch weather data", Toast.LENGTH_SHORT).show();
                     weatherDescriptionText.setText("Weather data unavailable");
                 });
 

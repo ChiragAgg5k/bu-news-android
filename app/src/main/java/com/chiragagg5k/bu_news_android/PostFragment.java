@@ -16,6 +16,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.squareup.picasso.Picasso;
 
 @SuppressWarnings("rawtypes")
 public class PostFragment extends Fragment {
@@ -44,6 +46,7 @@ public class PostFragment extends Fragment {
     TextView image_status;
     EditText heading, description;
     Button choose_image, post_button;
+    ImageView preview_image;
     StorageReference storageRef;
     DatabaseReference databaseRef;
     StorageTask uploadTask;
@@ -66,6 +69,8 @@ public class PostFragment extends Fragment {
 
                         String name = UtilityClass.queryName(requireActivity().getContentResolver(), image_uri);
                         image_status.setText(getResources().getString(R.string.selected_image, name));
+                        Picasso.get().load(image_uri).into(preview_image);
+                        preview_image.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -91,6 +96,7 @@ public class PostFragment extends Fragment {
         post_button = view.findViewById(R.id.post_btn);
         image_status = view.findViewById(R.id.selected_image_tv);
         category_spinner = view.findViewById(R.id.categories_spinner);
+        preview_image = view.findViewById(R.id.preview_image);
 
         storageRef = FirebaseStorage.getInstance().getReference("uploads");
         databaseRef = FirebaseDatabase.getInstance().getReference("uploads");
@@ -181,9 +187,8 @@ public class PostFragment extends Fragment {
                             description.setText("");
                             image_status.setText(getResources().getString(R.string.no_image_selected));
                             image_uri = null;
+                            preview_image.setVisibility(View.GONE);
                         }, 1000);
-
-                        postNotification();
 
                     })
                     .addOnFailureListener(e -> {
@@ -200,25 +205,5 @@ public class PostFragment extends Fragment {
                         post_button.setText(getResources().getString(R.string.post_loading));
                     });
         }
-    }
-
-    private void postNotification() {
-        NotificationChannel notificationChannel = new NotificationChannel("1", "1", NotificationManager.IMPORTANCE_DEFAULT);
-        NotificationManager notificationManager = requireActivity().getSystemService(NotificationManager.class);
-
-        notificationManager.createNotificationChannel(notificationChannel);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), "1")
-                .setSmallIcon(R.drawable.bunews_logo)
-                .setContentTitle("Upload successful")
-                .setContentText("We have received your post. It will be reviewed by our team and will be posted soon.")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setAutoCancel(true);
-
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(requireContext());
-        if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        notificationManagerCompat.notify(1, builder.build());
     }
 }

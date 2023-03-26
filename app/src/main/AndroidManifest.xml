@@ -34,7 +34,7 @@
 
         <activity
             android:name=".DashboardActivity"
-            android:windowSoftInputMode="stateVisible|adjustPan">
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <activity
@@ -54,11 +54,6 @@
 
         <activity
             android:name=".SubscribeActivity"
-            android:windowSoftInputMode="stateVisible|adjustPan">
-        </activity>
-
-        <activity
-            android:name=".HistoryActivity"
             android:windowSoftInputMode="stateVisible|adjustPan">
         </activity>
 

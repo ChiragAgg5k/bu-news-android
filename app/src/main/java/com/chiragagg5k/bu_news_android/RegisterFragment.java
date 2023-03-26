@@ -63,13 +63,13 @@ public class RegisterFragment extends Fragment {
 
         register_button.setOnClickListener(v -> {
 
-            String full_name = this.full_name.getText().toString();
+            String full_name = this.full_name.getText().toString().trim();
             String finalFull_name = UtilityClass.convertToTitleCase(full_name);
 
-            String email = this.email.getText().toString().toLowerCase();
-            String password = this.password.getText().toString();
-            String phone_no = this.phone_no.getText().toString();
-            String address = this.address.getText().toString();
+            String email = this.email.getText().toString().toLowerCase().trim();
+            String password = this.password.getText().toString().trim();
+            String phone_no = this.phone_no.getText().toString().trim();
+            String address = this.address.getText().toString().trim();
 
             register_button.setText(getResources().getString(R.string.registering));
 

@@ -1,7 +1,7 @@
 package com.chiragagg5k.bu_news_android;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiragagg5k.bu_news_android.adaptors.EventsRvAdaptor;
 import com.chiragagg5k.bu_news_android.objects.EventsObject;
-import com.chiragagg5k.bu_news_android.objects.UserObject;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,19 +23,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public class EventsFragment extends Fragment {
 
     RecyclerView eventsRv;
     List<EventsObject> eventsObjects;
     Button addEventBtn;
-    DatabaseReference userRef;
+    DatabaseReference userRef, eventsRef;
     FirebaseUser user;
 
     public EventsFragment() {
@@ -58,12 +53,13 @@ public class EventsFragment extends Fragment {
         addEventBtn = view.findViewById(R.id.add_event_btn);
         user = FirebaseAuth.getInstance().getCurrentUser();
         userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+        eventsRef = FirebaseDatabase.getInstance().getReference("events");
 
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Boolean isAdmin = Boolean.parseBoolean(snapshot.child("admin").getValue().toString());
-                if(isAdmin)
+                if (isAdmin)
                     addEventBtn.setVisibility(View.VISIBLE);
                 else
                     addEventBtn.setVisibility(View.GONE);
@@ -78,15 +74,43 @@ public class EventsFragment extends Fragment {
         addEventBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getContext(), AddEventActivity.class);
+                startActivity(intent);
             }
         });
 
         eventsObjects = new ArrayList<>();
-        long today = Calendar.getInstance().getTimeInMillis();
-        eventsObjects.add(new EventsObject("Event 1", "This is the description of the event", UtilityClass.getDate(today)));
-        eventsObjects.add(new EventsObject("Event 2", "This is the description of the event", UtilityClass.getDate(today)));
-        eventsObjects.add(new EventsObject("Event 3", "This is the description of the event", UtilityClass.getDate(today)));
+        eventsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                eventsObjects.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    EventsObject eventsObject = dataSnapshot.getValue(EventsObject.class);
+                    eventsObjects.add(eventsObject);
+                }
+                setEventsRv();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void setEventsRv() {
+
+        // Sort the events by date
+        eventsObjects.sort((o1, o2) -> {
+            long o1Date = o1.getEventDate();
+            long o2Date = o2.getEventDate();
+            if (o1Date > o2Date)
+                return 1;
+            else if (o1Date < o2Date)
+                return -1;
+            else
+                return 0;
+        });
 
         EventsRvAdaptor eventsRvAdaptor = new EventsRvAdaptor(eventsObjects, getContext());
         eventsRv.setAdapter(eventsRvAdaptor);

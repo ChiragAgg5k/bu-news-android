@@ -1,12 +1,20 @@
 package com.chiragagg5k.bu_news_android.objects;
 
+import java.util.Calendar;
+
 public class EventsObject {
 
     private final String eventHeading;
     private final String eventDescription;
-    private final String eventDate;
+    private final long eventDate;
 
-    public EventsObject(String eventHeading, String eventDescription, String eventDate) {
+    public EventsObject() {
+        this.eventHeading = "";
+        this.eventDescription = "";
+        this.eventDate = 0;
+    }
+
+    public EventsObject(String eventHeading, String eventDescription, long eventDate) {
         this.eventHeading = eventHeading;
         this.eventDescription = eventDescription;
         this.eventDate = eventDate;
@@ -20,8 +28,7 @@ public class EventsObject {
         return eventDescription;
     }
 
-    public String getEventDate() {
+    public long getEventDate() {
         return eventDate;
     }
-
 }

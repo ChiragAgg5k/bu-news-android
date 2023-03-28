@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiragagg5k.bu_news_android.R;
+import com.chiragagg5k.bu_news_android.UtilityClass;
 import com.chiragagg5k.bu_news_android.objects.EventsObject;
 
 import java.util.List;
@@ -18,6 +19,8 @@ public class EventsRvAdaptor extends RecyclerView.Adapter<EventsRvAdaptor.ViewHo
 
     private final List<EventsObject> eventObjects;
     Context context;
+    int previousExpandedPosition = -1;
+    int mExpandedPosition = -1;
 
     public EventsRvAdaptor(List<EventsObject> eventsObjects, Context context) {
         this.eventObjects = eventsObjects;
@@ -48,7 +51,30 @@ public class EventsRvAdaptor extends RecyclerView.Adapter<EventsRvAdaptor.ViewHo
         holder.event_heading.setText(eventObjects.get(position).getEventHeading());
         holder.event_description.setText(eventObjects.get(position).getEventDescription());
 
-        String date = eventObjects.get(position).getEventDate();
+        final boolean isExpanded = position == mExpandedPosition;
+        if (isExpanded) {
+            holder.event_heading.setMaxLines(2);
+            holder.event_description.setMaxLines(3);
+        }
+        else{
+            holder.event_heading.setMaxLines(1);
+            holder.event_description.setMaxLines(1);
+        }
+        holder.itemView.setActivated(isExpanded);
+
+        if (isExpanded)
+            previousExpandedPosition = position;
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mExpandedPosition = isExpanded ? -1:position;
+                notifyItemChanged(previousExpandedPosition);
+                notifyItemChanged(position);
+            }
+        });
+
+        String date = UtilityClass.getDate(eventObjects.get(position).getEventDate());
         String day = date.split(",")[0];
         String month = date.split(",")[1].trim();
 

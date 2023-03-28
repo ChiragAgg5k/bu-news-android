@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.BUNewsAndroidDark"
+    tools:context=".EditProfileActivity">
+
+    <RelativeLayout
+        android:id="@+id/addEventHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/back_button_add_event"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/arrow_back_white"
+            app:tint="@color/textColor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:text="Add Event"
+            android:textAlignment="textEnd"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/addEventHeader"
+        android:layout_marginHorizontal="8dp"
+        android:backgroundTint="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/event_heading_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event Heading"
+        android:layout_below="@id/line1"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="18dp"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/event_heading_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_heading_label"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Enter Event Heading"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/event_description_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event Description"
+        android:layout_below="@id/event_heading_edit_text"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="18dp"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/event_description_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_description_label"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Enter Event Description"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/event_date_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event Date"
+        android:layout_below="@id/event_description_edit_text"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="18dp"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/select_date_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_date_label"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Select Date"
+        android:textSize="12sp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        />
+
+    <TextView
+        android:id="@+id/selected_date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@id/select_date_button"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        />
+
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/select_date_button"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="18dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="Submit"
+        android:textSize="12sp" />
+
+</RelativeLayout>

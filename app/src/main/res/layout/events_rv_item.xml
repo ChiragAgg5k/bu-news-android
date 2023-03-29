@@ -17,14 +17,13 @@
             android:id="@+id/event_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
+            android:layout_centerVertical="true"
             android:backgroundTint="@color/backgroundColorDarker"
-            android:textColor="@android:color/white"
             android:padding="15dp"
             android:paddingHorizontal="17dp"
-            android:layout_centerVertical="true"
-            android:textStyle="bold"
-            />
+            android:text="Date"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
 
         <TextView
@@ -32,15 +31,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/event_date"
             android:backgroundTint="@color/backgroundColorDarker"
+            android:ellipsize="end"
             android:maxLines="1"
             android:text="Event Heading"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_toRightOf="@+id/event_date"
-            android:ellipsize="end"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/event_description"
@@ -49,14 +47,13 @@
             android:layout_below="@id/event_heading"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="8dp"
+            android:layout_toRightOf="@+id/event_date"
             android:backgroundTint="@color/backgroundColorDarker"
-            android:maxLines="1"
             android:ellipsize="end"
+            android:maxLines="1"
             android:text="Event Description"
             android:textColor="@color/white"
-            android:textSize="14sp"
-            android:layout_toRightOf="@+id/event_date"
-            />
+            android:textSize="14sp" />
 
     </RelativeLayout>
 

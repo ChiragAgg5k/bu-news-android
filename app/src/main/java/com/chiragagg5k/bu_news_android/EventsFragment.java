@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class EventsFragment extends Fragment {
 
@@ -58,7 +59,7 @@ public class EventsFragment extends Fragment {
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Boolean isAdmin = Boolean.parseBoolean(snapshot.child("admin").getValue().toString());
+                boolean isAdmin = Boolean.parseBoolean(Objects.requireNonNull(snapshot.child("admin").getValue()).toString());
                 if (isAdmin)
                     addEventBtn.setVisibility(View.VISIBLE);
                 else
@@ -71,12 +72,9 @@ public class EventsFragment extends Fragment {
             }
         });
 
-        addEventBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), AddEventActivity.class);
-                startActivity(intent);
-            }
+        addEventBtn.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getContext(), AddEventActivity.class);
+            startActivity(intent);
         });
 
         eventsObjects = new ArrayList<>();
@@ -104,12 +102,7 @@ public class EventsFragment extends Fragment {
         eventsObjects.sort((o1, o2) -> {
             long o1Date = o1.getEventDate();
             long o2Date = o2.getEventDate();
-            if (o1Date > o2Date)
-                return 1;
-            else if (o1Date < o2Date)
-                return -1;
-            else
-                return 0;
+            return Long.compare(o1Date, o2Date);
         });
 
         EventsRvAdaptor eventsRvAdaptor = new EventsRvAdaptor(eventsObjects, getContext());

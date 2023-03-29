@@ -9,30 +9,27 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:backgroundTint="@null"
+        app:tabBackground="@color/backgroundColorDark"
         app:tabGravity="fill"
         app:tabIndicatorColor="@null"
         app:tabMode="fixed"
         app:tabRippleColor="@null"
         app:tabSelectedTextColor="@color/colorPrimary"
-        app:tabBackground="@color/backgroundColorDark"
-        app:tabTextAppearance="@style/NavigationTabTextAppearance"
-        />
+        app:tabTextAppearance="@style/NavigationTabTextAppearance" />
 
     <View
         android:id="@+id/lineDivider1"
         android:layout_width="wrap_content"
         android:layout_height="2dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:layout_marginTop="10dp"
         android:layout_below="@+id/tab_layout"
         android:layout_marginHorizontal="20dp"
-        />
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/colorPrimaryDark" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/lostFoundViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/lineDivider1"
-        />
+        android:layout_below="@+id/lineDivider1" />
 
 </RelativeLayout>

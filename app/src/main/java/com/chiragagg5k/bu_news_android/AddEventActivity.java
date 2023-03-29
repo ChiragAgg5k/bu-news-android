@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 public class AddEventActivity extends AppCompatActivity {
 
@@ -42,9 +42,7 @@ public class AddEventActivity extends AppCompatActivity {
         eventsRef = FirebaseDatabase.getInstance().getReference("events");
         date = getIntent().getLongExtra("date", 0);
 
-        backBtn.setOnClickListener(v -> {
-            finish();
-        });
+        backBtn.setOnClickListener(v -> finish());
 
         selectDateBtn.setOnClickListener(v -> {
             // on below line we are getting
@@ -63,7 +61,7 @@ public class AddEventActivity extends AppCompatActivity {
                     AddEventActivity.this,
                     (view, year1, monthOfYear, dayOfMonth) -> {
                         selectedDateTV.setVisibility(View.VISIBLE);
-                        selectedDateTV.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year1);
+                        selectedDateTV.setText(String.format(Locale.US,"%d-%d-%d", dayOfMonth, monthOfYear + 1, year1));
 
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(year1, monthOfYear, dayOfMonth);
@@ -74,9 +72,9 @@ public class AddEventActivity extends AppCompatActivity {
         });
 
         submitBtn.setOnClickListener(v -> {
-            if(date == 0) {
+            if (date == 0) {
                 selectedDateTV.setVisibility(View.VISIBLE);
-                selectedDateTV.setText("Please select a date");
+                selectedDateTV.setText(R.string.select_date_label);
                 return;
             }
 

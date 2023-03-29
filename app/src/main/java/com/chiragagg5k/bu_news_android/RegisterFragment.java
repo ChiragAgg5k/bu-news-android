@@ -34,7 +34,7 @@ public class RegisterFragment extends Fragment {
     FirebaseUser user;
     DatabaseReference databaseRef;
 
-    private final String emailRegex = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+    private final String emailRegex = "^[a-zA-Z\\d+_.-]+@[a-zA-Z\\d.-]+$";
 
     public RegisterFragment() {
         // Required empty public constructor

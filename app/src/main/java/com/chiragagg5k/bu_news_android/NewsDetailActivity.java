@@ -8,8 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 public class NewsDetailActivity extends AppCompatActivity {
@@ -30,7 +28,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         news_description = intent.getStringExtra("news_description");
         news_image_url = intent.getStringExtra("news_image_url");
         username = intent.getStringExtra("news_uploader");
-        date = intent.getLongExtra("news_uploadDate",0);
+        date = intent.getLongExtra("news_uploadDate", 0);
 
         news_heading_tv = findViewById(R.id.detailed_news_title);
         news_description_tv = findViewById(R.id.detailed_news_description);
@@ -44,14 +42,12 @@ public class NewsDetailActivity extends AppCompatActivity {
         news_description_tv.setText(news_description);
         news_uploader_tv.setText(String.format("- %s", username));
 
-        if(date==0)
-            news_date_tv.setText("Date not available");
+        if (date == 0)
+            news_date_tv.setText(R.string.date_unavailable_label);
         else {
             news_date_tv.setText(UtilityClass.getDate(date));
         }
 
-        backBtn.setOnClickListener(v -> {
-            finish();
-        });
+        backBtn.setOnClickListener(v -> finish());
     }
 }

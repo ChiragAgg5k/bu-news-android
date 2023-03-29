@@ -132,10 +132,9 @@
             android:layout_marginTop="35dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/textColor"
-            android:text="@string/placeholder_name_text"
-            android:textSize="14sp"
             android:singleLine="true"
-            />
+            android:text="@string/placeholder_name_text"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
@@ -218,8 +217,7 @@
             android:gravity="center"
             android:text="Contact"
             android:textSize="16sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edit_contact_text"
@@ -228,12 +226,11 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/contact_label"
-            android:text="Placeholder Contact"
             android:backgroundTint="@color/textColor"
-            android:textAlignment="textEnd"
-            android:textSize="14sp"
             android:singleLine="true"
-            />
+            android:text="Placeholder Contact"
+            android:textAlignment="textEnd"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
@@ -280,12 +277,11 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/address_label"
-            android:text="Placeholder Address"
             android:backgroundTint="@color/textColor"
-            android:textAlignment="textEnd"
-            android:textSize="14sp"
             android:singleLine="true"
-            />
+            android:text="Placeholder Address"
+            android:textAlignment="textEnd"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
@@ -303,12 +299,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/line_divider4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:clickable="true"
         android:gravity="center"
         android:paddingHorizontal="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:text="Save Changes"
         android:textColor="@color/white" />
 

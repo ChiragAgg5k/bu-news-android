@@ -36,6 +36,7 @@ public class NewsObject {
         }
     }
 
+    @SuppressWarnings("unused")
     public NewsObject() {
         // !IMPORTANT: This constructor is required for Firebase to work
 

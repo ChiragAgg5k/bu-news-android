@@ -51,7 +51,7 @@ public class EventsRvAdaptor extends RecyclerView.Adapter<EventsRvAdaptor.ViewHo
         holder.event_heading.setText(eventObjects.get(position).getEventHeading());
         holder.event_description.setText(eventObjects.get(position).getEventDescription());
 
-        final boolean isExpanded = position == mExpandedPosition;
+        final boolean isExpanded = holder.getAdapterPosition() == mExpandedPosition;
         if (isExpanded) {
             holder.event_heading.setMaxLines(2);
             holder.event_description.setMaxLines(3);
@@ -63,22 +63,19 @@ public class EventsRvAdaptor extends RecyclerView.Adapter<EventsRvAdaptor.ViewHo
         holder.itemView.setActivated(isExpanded);
 
         if (isExpanded)
-            previousExpandedPosition = position;
+            previousExpandedPosition = holder.getAdapterPosition();
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mExpandedPosition = isExpanded ? -1:position;
-                notifyItemChanged(previousExpandedPosition);
-                notifyItemChanged(position);
-            }
+        holder.itemView.setOnClickListener(v -> {
+            mExpandedPosition = isExpanded ? -1:holder.getAdapterPosition();
+            notifyItemChanged(previousExpandedPosition);
+            notifyItemChanged(position);
         });
 
-        String date = UtilityClass.getDate(eventObjects.get(position).getEventDate());
+        String date = UtilityClass.getDate(eventObjects.get(holder.getAdapterPosition()).getEventDate());
         String day = date.split(",")[0];
         String month = date.split(",")[1].trim();
 
-        holder.event_date.setText(day + '\n' + month);
+        holder.event_date.setText(String.format("%s\n%s", day, month));
     }
 
     @Override

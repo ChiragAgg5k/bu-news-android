@@ -1,13 +1,12 @@
 package com.chiragagg5k.bu_news_android.objects;
 
-import java.util.Calendar;
-
 public class EventsObject {
 
     private final String eventHeading;
     private final String eventDescription;
     private final long eventDate;
 
+    @SuppressWarnings("unused")
     public EventsObject() {
         this.eventHeading = "";
         this.eventDescription = "";

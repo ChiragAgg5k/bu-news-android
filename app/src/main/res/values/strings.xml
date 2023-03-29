@@ -54,5 +54,7 @@
     <string name="email_icon">email icon</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select_date_label">Please select a date</string>
+    <string name="date_unavailable_label">Date not available</string>
 
 </resources>

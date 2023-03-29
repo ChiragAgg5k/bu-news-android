@@ -46,10 +46,10 @@
         android:id="@+id/event_heading_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Event Heading"
         android:layout_below="@id/line1"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="18dp"
+        android:text="Event Heading"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -69,10 +69,10 @@
         android:id="@+id/event_description_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Event Description"
         android:layout_below="@id/event_heading_edit_text"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="18dp"
+        android:text="Event Description"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -93,10 +93,10 @@
         android:id="@+id/event_date_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Event Date"
         android:layout_below="@id/event_description_edit_text"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="18dp"
+        android:text="Event Date"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -107,21 +107,19 @@
         android:layout_below="@id/event_date_label"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
-        android:text="Select Date"
-        android:textSize="12sp"
         android:backgroundTint="@color/colorPrimaryDark"
-        />
+        android:text="Select Date"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/selected_date_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:layout_below="@id/select_date_button"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
-        android:visibility="gone"
-        />
+        android:text=""
+        android:visibility="gone" />
 
 
     <Button

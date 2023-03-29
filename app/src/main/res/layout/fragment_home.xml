@@ -55,20 +55,20 @@
                     android:id="@+id/weatherIcon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
                     app:tint="@color/textColor" />
 
                 <TextView
                     android:id="@+id/weatherDescriptionText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_below="@+id/weatherIcon"
                     android:layout_centerHorizontal="true"
-                    android:text="Loading..."
-                    android:maxLines="2"
+                    android:layout_centerVertical="true"
                     android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="Loading..."
                     android:textAlignment="center"
                     android:textSize="14sp"
                     android:textStyle="bold" />

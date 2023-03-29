@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -115,7 +116,7 @@ public class EditProfileActivity extends AppCompatActivity {
             }
 
             if (imageUri != null) {
-                StorageTask uploadTask = storageReference.child(user.getUid()).putFile(imageUri);
+                StorageTask<UploadTask.TaskSnapshot> uploadTask = storageReference.child(user.getUid()).putFile(imageUri);
                 uploadTask.addOnSuccessListener(o -> storageReference.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> imageUri = uri));
             } else {
                 imageUri = user.getPhotoUrl();

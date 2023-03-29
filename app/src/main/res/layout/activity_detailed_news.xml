@@ -77,11 +77,10 @@
             android:layout_below="@+id/detailed_news_image"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="20dp"
-            android:text="@string/placeholder_description"
-            android:textSize="16sp"
-            android:linksClickable="true"
             android:autoLink="web"
-            />
+            android:linksClickable="true"
+            android:text="@string/placeholder_description"
+            android:textSize="16sp" />
 
         <View
             android:id="@+id/detailed_news_divider"
@@ -89,9 +88,8 @@
             android:layout_height="2dp"
             android:layout_below="@id/detailed_news_description"
             android:layout_marginHorizontal="8dp"
-            android:backgroundTint="@color/colorPrimaryDark"
             android:layout_marginTop="20dp"
-            />
+            android:backgroundTint="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/detailed_news_author"
@@ -101,9 +99,8 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="20dp"
             android:text="News Author"
-            android:textSize="16sp"
             android:textAlignment="textEnd"
-            />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/detailed_news_date"
@@ -113,9 +110,8 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:text="News Date"
-            android:textSize="16sp"
             android:textAlignment="textEnd"
-            />
+            android:textSize="16sp" />
 
 
     </RelativeLayout>

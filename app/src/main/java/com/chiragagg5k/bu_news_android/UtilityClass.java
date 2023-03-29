@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -65,7 +64,7 @@ public class UtilityClass {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(dateInMilliSeconds);
         int date = calendar.get(Calendar.DATE);
-        String  day = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+        String day = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
         String month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         return day + ", " + date + " " + month;
     }

@@ -56,6 +56,9 @@ public class EventsFragment extends Fragment {
         userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
         eventsRef = FirebaseDatabase.getInstance().getReference("events");
 
+        eventsObjects = new ArrayList<>();
+        setEventsRv();
+
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -77,7 +80,6 @@ public class EventsFragment extends Fragment {
             startActivity(intent);
         });
 
-        eventsObjects = new ArrayList<>();
         eventsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

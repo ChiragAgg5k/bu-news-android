@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -72,5 +73,18 @@ public class UtilityClass {
 
     public static long getCurrentDateInMilliSeconds() {
         return Calendar.getInstance().getTimeInMillis();
+    }
+
+    public static String arrayListToString(ArrayList<String> arrayList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = 0; i < arrayList.size(); i++) {
+            stringBuilder.append(arrayList.get(i));
+            if(i != arrayList.size() - 1) {
+                stringBuilder.append(", ");
+            }else{
+                stringBuilder.append(".");
+            }
+        }
+        return stringBuilder.toString();
     }
 }

@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +26,6 @@ import com.android.volley.toolbox.Volley;
 import com.chiragagg5k.bu_news_android.adaptors.NewsRvAdaptor;
 import com.chiragagg5k.bu_news_android.adaptors.TopNewsRvAdaptor;
 import com.chiragagg5k.bu_news_android.objects.NewsObject;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -149,12 +147,14 @@ public class HomeFragment extends Fragment {
                 selectedCity = snapshot.child("city").getValue(String.class);
                 try {
                     fetchWeather(selectedCity);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
                 subscribedNewsObjects.clear();
                 hasSubscribedCategories = false;
+
+                ArrayList<String> subscribedCategories = new ArrayList<>();
 
                 if (snapshot.hasChild("categories")) {
                     for (DataSnapshot dataSnapshot : snapshot.child("categories").getChildren()) {
@@ -163,6 +163,7 @@ public class HomeFragment extends Fragment {
                         String key = dataSnapshot.getKey();
 
                         if (value) {
+                            subscribedCategories.add(key);
                             hasSubscribedCategories = true;
                             getNews(key);
                         }
@@ -171,10 +172,10 @@ public class HomeFragment extends Fragment {
 
                 if (!hasSubscribedCategories) {
                     subscribedRecyclerView.setVisibility(View.GONE);
-                    noSubscribedCategoriesText.setVisibility(View.VISIBLE);
+                    noSubscribedCategoriesText.setText(R.string.no_sub_news);
                 } else {
                     subscribedRecyclerView.setVisibility(View.VISIBLE);
-                    noSubscribedCategoriesText.setVisibility(View.GONE);
+                    noSubscribedCategoriesText.setText(String.format("You have subscribed to the following categories: %s", UtilityClass.arrayListToString(subscribedCategories)));
                 }
             }
 
@@ -243,7 +244,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void fetchWeather(String selectedCity){
+    private void fetchWeather(String selectedCity) {
         String tempUrl = OPEN_WEATHER_MAP_API_URL + "?q=" + selectedCity + "&appid=" + OPEN_WEATHER_MAP_API_KEY;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, response -> {
@@ -271,9 +272,7 @@ public class HomeFragment extends Fragment {
             }
 
         },
-                error -> {
-                    weatherDescriptionText.setText("Weather data unavailable");
-                });
+                error -> weatherDescriptionText.setText(R.string.weather_unavailable));
 
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
         requestQueue.add(stringRequest);

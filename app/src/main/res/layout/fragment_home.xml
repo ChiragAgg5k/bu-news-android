@@ -57,7 +57,9 @@
                     android:layout_height="50dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    app:tint="@color/textColor" />
+                    app:tint="@color/textColor"
+                    android:contentDescription="Weather Icon"
+                    />
 
                 <TextView
                     android:id="@+id/weatherDescriptionText"
@@ -144,7 +146,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:text="No subscribed news yet. Subscribe to your desired categories to get news from them." />
+            android:text="" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/subscribedNews_rv_home"

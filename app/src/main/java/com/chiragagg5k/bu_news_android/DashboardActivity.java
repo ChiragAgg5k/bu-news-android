@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -116,6 +117,24 @@ public class DashboardActivity extends AppCompatActivity {
             if (!(getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof PostFragment))
                 loadFragment(new PostFragment());
         });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof PostFragment) {
+                    loadFragment(new HomeFragment());
+                    bottomNavigationView.setSelectedItemId(R.id.home);
+                } else {
+                    new AlertDialog.Builder(DashboardActivity.this)
+                            .setTitle("Exit")
+                            .setMessage("Are you sure you want to exit?")
+                            .setPositiveButton("Yes", (dialog, which) -> finishAffinity())
+                            .setNegativeButton("No", null)
+                            .show();
+                }
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     private boolean sideNavigationItemSelected(@NonNull MenuItem menuItem) {

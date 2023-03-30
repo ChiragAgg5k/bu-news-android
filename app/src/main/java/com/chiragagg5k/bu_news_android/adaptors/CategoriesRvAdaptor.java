@@ -63,6 +63,8 @@ public class CategoriesRvAdaptor extends RecyclerView.Adapter<CategoriesRvAdapto
         holder.itemView.setOnClickListener(v -> {
             categoryClickListener.onCategoryClick(position);
 
+            v.performHapticFeedback(android.view.HapticFeedbackConstants.VIRTUAL_KEY);
+
             selectedPosition = holder.getAdapterPosition();
             notifyDataSetChanged();
         });

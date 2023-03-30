@@ -102,7 +102,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             String name = UtilityClass.convertToTitleCase(editName.getText().toString().trim());
             String contact = editContact.getText().toString().trim();
-            String address = editAddress.getText().toString().trim();
+            String address = UtilityClass.convertToTitleCase(editAddress.getText().toString().trim());
 
             if (imageUri == null && name.equals(user.getDisplayName()) && contact.equals(this.contact) && address.equals(this.address)) {
                 Toast.makeText(this, "No changes made", Toast.LENGTH_SHORT).show();

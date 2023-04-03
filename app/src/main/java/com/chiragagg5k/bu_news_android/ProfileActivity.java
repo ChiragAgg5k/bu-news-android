@@ -50,6 +50,18 @@ public class ProfileActivity extends AppCompatActivity {
         back_button = findViewById(R.id.back_button);
         edit_profile_button = findViewById(R.id.edit_profile_button);
 
+        back_button.setOnClickListener(v -> finish());
+        edit_profile_button.setOnClickListener(v -> {
+            Intent intent = new Intent(this, EditProfileActivity.class);
+            startActivity(intent);
+        });
+
+        if (user == null) {
+            edit_profile_button.setEnabled(false);
+            edit_profile_button.setBackgroundColor(getResources().getColor(R.color.backgroundColorDarker));
+            return;
+        }
+
         profile_name.setText(user.getDisplayName());
         full_name_text.setText(user.getDisplayName());
         email_text.setText(user.getEmail());
@@ -71,13 +83,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         if (user.getPhotoUrl() != null)
             profile_image.setImageURI(user.getPhotoUrl());
-
-        back_button.setOnClickListener(v -> finish());
-        edit_profile_button.setOnClickListener(v -> {
-            Intent intent = new Intent(this, EditProfileActivity.class);
-            startActivity(intent);
-        });
-
     }
 
     @Override

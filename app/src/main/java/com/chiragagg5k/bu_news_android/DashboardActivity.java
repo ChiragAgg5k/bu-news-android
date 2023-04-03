@@ -67,7 +67,7 @@ public class DashboardActivity extends AppCompatActivity {
             imageUri = Uri.parse(intent.getStringExtra("imageUri"));
             Picasso.get().load(imageUri).into(sideNavProfileImage);
 
-        } else if (user.getPhotoUrl() != null) {
+        } else if (user!=null && user.getPhotoUrl() != null) {
             Picasso.get().load(user.getPhotoUrl()).into(sideNavProfileImage);
         }
 
@@ -114,6 +114,11 @@ public class DashboardActivity extends AppCompatActivity {
                     .repeat(0)
                     .playOn(postButton);
 
+            if (user == null){
+                Toast.makeText(this, "You need to register to post news!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             if (!(getSupportFragmentManager().findFragmentById(R.id.relativeLayout) instanceof PostFragment))
                 loadFragment(new PostFragment());
         });
@@ -144,6 +149,12 @@ public class DashboardActivity extends AppCompatActivity {
             startActivity(intent);
 
         } else if (menuItem.getItemId() == R.id.nav_logout) {
+
+            if (user == null){
+                Toast.makeText(this, "You are not logged in", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, AuthenticationActivity.class));

@@ -52,11 +52,18 @@
     <string name="profile_icon">profile icon</string>
     <string name="full_name">Full Name</string>
     <string name="email_icon">email icon</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="select_date_label">Please select a date</string>
     <string name="date_unavailable_label">Date not available</string>
     <string name="no_sub_news">No subscribed news yet. Subscribe to your desired categories to get news from them.</string>
     <string name="weather_unavailable">Weather data unavailable</string>
+    <string name="login_here">Login here</string>
+    <string name="student_email">Student Email</string>
+    <string name="password">Password</string>
+    <string name="swipe_to_register">New to the app?\n Swipe right to register</string>
+    <string name="anonymous_login_text">Or click here to login anonymously</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="not_provided">Not provided</string>
 
 </resources>

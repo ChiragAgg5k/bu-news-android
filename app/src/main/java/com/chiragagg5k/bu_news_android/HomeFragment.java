@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -100,7 +101,8 @@ public class HomeFragment extends Fragment {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
-        userReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+        if (user != null)
+            userReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
 
         promotedNewsObjects = new ArrayList<>();
         subscribedNewsObjects = new ArrayList<>();
@@ -119,10 +121,13 @@ public class HomeFragment extends Fragment {
 
         subscribedRecyclerView.setAdapter(subscribedNewsRvAdaptor);
 
-        String displayName = user.getDisplayName();
+        String displayName = user != null ? user.getDisplayName() : null;
+        String firstName;
 
-        assert displayName != null;
-        String firstName = displayName.split(" ")[0];
+        if (displayName != null)
+            firstName = displayName.split(" ")[0];
+        else
+            firstName = "User";
 
         Calendar currentTime = Calendar.getInstance();
         int hour = currentTime.get(Calendar.HOUR_OF_DAY);
@@ -140,49 +145,57 @@ public class HomeFragment extends Fragment {
         greetingText.setText(greeting);
         greetingUserText.setText(firstName);
 
-        userReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if(user != null) {
+            userReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                selectedCity = snapshot.child("city").getValue(String.class);
-                try {
-                    fetchWeather(selectedCity);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                    selectedCity = snapshot.child("city").getValue(String.class);
+                    try {
+                        fetchWeather(selectedCity);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-                subscribedNewsObjects.clear();
-                hasSubscribedCategories = false;
+                    subscribedNewsObjects.clear();
+                    hasSubscribedCategories = false;
 
-                ArrayList<String> subscribedCategories = new ArrayList<>();
+                    ArrayList<String> subscribedCategories = new ArrayList<>();
 
-                if (snapshot.hasChild("categories")) {
-                    for (DataSnapshot dataSnapshot : snapshot.child("categories").getChildren()) {
+                    if (snapshot.hasChild("categories")) {
+                        for (DataSnapshot dataSnapshot : snapshot.child("categories").getChildren()) {
 
-                        boolean value = (boolean) Objects.requireNonNull(dataSnapshot.getValue());
-                        String key = dataSnapshot.getKey();
+                            boolean value = (boolean) Objects.requireNonNull(dataSnapshot.getValue());
+                            String key = dataSnapshot.getKey();
 
-                        if (value) {
-                            subscribedCategories.add(key);
-                            hasSubscribedCategories = true;
-                            getNews(key);
+                            if (value) {
+                                subscribedCategories.add(key);
+                                hasSubscribedCategories = true;
+                                getNews(key);
+                            }
                         }
+                    }
+
+                    if (!hasSubscribedCategories) {
+                        subscribedRecyclerView.setVisibility(View.GONE);
+                        noSubscribedCategoriesText.setText(R.string.no_sub_news);
+                    } else {
+                        subscribedRecyclerView.setVisibility(View.VISIBLE);
+                        noSubscribedCategoriesText.setText(String.format("You have subscribed to the following categories: %s", UtilityClass.arrayListToString(subscribedCategories)));
                     }
                 }
 
-                if (!hasSubscribedCategories) {
-                    subscribedRecyclerView.setVisibility(View.GONE);
-                    noSubscribedCategoriesText.setText(R.string.no_sub_news);
-                } else {
-                    subscribedRecyclerView.setVisibility(View.VISIBLE);
-                    noSubscribedCategoriesText.setText(String.format("You have subscribed to the following categories: %s", UtilityClass.arrayListToString(subscribedCategories)));
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
                 }
-            }
+            });
+        }else{
+            noSubscribedCategoriesText.setText("Register to subscribe to news categories");
+            weatherDescriptionText.setText(R.string.weather_unavailable);
+            subscribeButton.setEnabled(false);
+            subscribeButton.setBackgroundColor(getResources().getColor(R.color.backgroundColorDarker));
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")

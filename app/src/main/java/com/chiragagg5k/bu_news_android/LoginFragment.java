@@ -2,11 +2,16 @@ package com.chiragagg5k.bu_news_android;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ClickableSpan;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 
 public class LoginFragment extends Fragment {
@@ -27,6 +33,7 @@ public class LoginFragment extends Fragment {
     Button login_button;
     FirebaseAuth mAuth;
     FirebaseUser user;
+    TextView link_anonymous;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -46,6 +53,18 @@ public class LoginFragment extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
         email = view.findViewById(R.id.email);
         password = view.findViewById(R.id.password);
+        link_anonymous = view.findViewById(R.id.link_anonymous);
+
+        String anonymous = "Or click here to login anonymously";
+        SpannableString spannableString = new SpannableString(anonymous);
+        spannableString.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull @NotNull View widget) {
+                startActivity(new Intent(getActivity(), DashboardActivity.class));
+            }
+        }, 3, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        link_anonymous.setText(spannableString);
+        link_anonymous.setMovementMethod(new android.text.method.LinkMovementMethod());
 
         if (user != null) {
             startActivity(new Intent(getActivity(), DashboardActivity.class));

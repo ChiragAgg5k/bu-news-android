@@ -53,27 +53,16 @@ public class EventsFragment extends Fragment {
         eventsRv = view.findViewById(R.id.events_rv);
         addEventBtn = view.findViewById(R.id.add_event_btn);
         user = FirebaseAuth.getInstance().getCurrentUser();
-        userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
         eventsRef = FirebaseDatabase.getInstance().getReference("events");
 
         eventsObjects = new ArrayList<>();
         setEventsRv();
 
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                boolean isAdmin = Boolean.parseBoolean(Objects.requireNonNull(snapshot.child("admin").getValue()).toString());
-                if (isAdmin)
-                    addEventBtn.setVisibility(View.VISIBLE);
-                else
-                    addEventBtn.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+       if (user != null) {
+            checkAndEnableAddEventBtn();
+        } else {
+            addEventBtn.setVisibility(View.GONE);
+        }
 
         addEventBtn.setOnClickListener(view1 -> {
             Intent intent = new Intent(getContext(), AddEventActivity.class);
@@ -110,5 +99,24 @@ public class EventsFragment extends Fragment {
         EventsRvAdaptor eventsRvAdaptor = new EventsRvAdaptor(eventsObjects, getContext());
         eventsRv.setAdapter(eventsRvAdaptor);
         eventsRv.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    private void checkAndEnableAddEventBtn() {
+        userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean isAdmin = Boolean.parseBoolean(Objects.requireNonNull(snapshot.child("admin").getValue()).toString());
+                if (isAdmin)
+                    addEventBtn.setVisibility(View.VISIBLE);
+                else
+                    addEventBtn.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

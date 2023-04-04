@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/placeholder_name_text"
+            android:text="Anonymous"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -111,7 +111,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/full_name_label"
-            android:text="@string/placeholder_name_text"
+            android:text="@string/not_provided"
             android:textAlignment="textEnd"
             android:textSize="14sp" />
 
@@ -158,7 +158,7 @@
             android:layout_marginStart="35dp"
             android:layout_marginTop="38dp"
             android:gravity="center"
-            android:text="@string/placeholder_email_text"
+            android:text="@string/not_provided"
             android:textSize="14sp" />
 
     </RelativeLayout>
@@ -206,7 +206,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/contact_label"
-            android:text="Placeholder Contact"
+            android:text="@string/not_provided"
             android:textAlignment="textEnd"
             android:textSize="14sp" />
 
@@ -255,7 +255,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/address_label"
-            android:text="Placeholder Address"
+            android:text="@string/not_provided"
             android:textAlignment="textEnd"
             android:textSize="14sp" />
 

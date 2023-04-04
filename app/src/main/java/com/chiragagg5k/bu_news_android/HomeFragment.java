@@ -192,6 +192,8 @@ public class HomeFragment extends Fragment {
         }else{
             noSubscribedCategoriesText.setText("Register to subscribe to news categories");
             weatherDescriptionText.setText(R.string.weather_unavailable);
+            subscribeButton.setEnabled(false);
+            subscribeButton.setBackgroundColor(getResources().getColor(R.color.backgroundColorDarker));
         }
 
 

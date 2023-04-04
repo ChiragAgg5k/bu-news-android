@@ -64,5 +64,6 @@
     <string name="anonymous_login_text">Or click here to login anonymously</string>
     <string name="enter_your_password">Enter your password</string>
     <string name="enter_your_email">Enter your email</string>
+    <string name="not_provided">Not provided</string>
 
 </resources>

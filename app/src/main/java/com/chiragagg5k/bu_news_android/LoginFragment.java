@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ClickableSpan;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +65,6 @@ public class LoginFragment extends Fragment {
         }, 3, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         link_anonymous.setText(spannableString);
         link_anonymous.setMovementMethod(new android.text.method.LinkMovementMethod());
-
 
         if (user != null) {
             startActivity(new Intent(getActivity(), DashboardActivity.class));

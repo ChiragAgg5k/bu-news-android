@@ -111,7 +111,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/full_name_label"
-            android:text="Name not provided"
+            android:text="@string/not_provided"
             android:textAlignment="textEnd"
             android:textSize="14sp" />
 
@@ -158,7 +158,7 @@
             android:layout_marginStart="35dp"
             android:layout_marginTop="38dp"
             android:gravity="center"
-            android:text="Email not provided"
+            android:text="@string/not_provided"
             android:textSize="14sp" />
 
     </RelativeLayout>
@@ -206,7 +206,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/contact_label"
-            android:text="Contact not provided"
+            android:text="@string/not_provided"
             android:textAlignment="textEnd"
             android:textSize="14sp" />
 
@@ -255,7 +255,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/address_label"
-            android:text="City Not provided"
+            android:text="@string/not_provided"
             android:textAlignment="textEnd"
             android:textSize="14sp" />
 

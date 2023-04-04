@@ -19,6 +19,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,6 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView profile_name, full_name_text, email_text, contact_text, address_text;
     Button edit_profile_button;
     DatabaseReference databaseRef;
+    StorageReference storageRef;
 
     CircleImageView profile_image;
 
@@ -81,8 +85,12 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        if (user.getPhotoUrl() != null)
-            profile_image.setImageURI(user.getPhotoUrl());
+        if (user != null){
+            storageRef = FirebaseStorage.getInstance().getReference("profile_images");
+            storageRef.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> {
+                Picasso.get().load(uri).into(profile_image);
+            });
+        }
     }
 
     @Override

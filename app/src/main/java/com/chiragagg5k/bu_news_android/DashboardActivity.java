@@ -27,6 +27,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -45,6 +49,7 @@ public class DashboardActivity extends AppCompatActivity {
     FirebaseUser user;
     Intent intent;
     Uri imageUri;
+    StorageReference userRef;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -67,8 +72,11 @@ public class DashboardActivity extends AppCompatActivity {
             imageUri = Uri.parse(intent.getStringExtra("imageUri"));
             Picasso.get().load(imageUri).into(sideNavProfileImage);
 
-        } else if (user!=null && user.getPhotoUrl() != null) {
-            Picasso.get().load(user.getPhotoUrl()).into(sideNavProfileImage);
+        } else if (user!=null) {
+            userRef = FirebaseStorage.getInstance().getReference("profile_images");
+            userRef.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> {
+                Picasso.get().load(uri).into(sideNavProfileImage);
+            });
         }
 
         if (intent.getStringExtra("name") != null)
@@ -150,14 +158,12 @@ public class DashboardActivity extends AppCompatActivity {
 
         } else if (menuItem.getItemId() == R.id.nav_logout) {
 
-            if (user == null){
-                Toast.makeText(this, "You are not logged in", Toast.LENGTH_SHORT).show();
-                return true;
+            if (user != null) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
             }
 
-            FirebaseAuth.getInstance().signOut();
-            Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, AuthenticationActivity.class));
+            finish();
 
         } else if (menuItem.getItemId() == R.id.about) {
             Intent intent = new Intent(Intent.ACTION_VIEW);

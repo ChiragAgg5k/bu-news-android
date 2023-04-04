@@ -15,17 +15,18 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:layout_marginVertical="40dp"
+            android:layout_marginTop="40dp"
             android:scaleType="fitXY"
             android:src="@drawable/bunews_logo"
             android:contentDescription="@string/app_name" />
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/tagline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
             android:text="@string/tagline"
             android:textAlignment="center"
             android:textSize="17sp" />
@@ -35,10 +36,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="@string/login_here"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
 
         <TextView
             android:id="@+id/secTxt"
@@ -60,7 +62,7 @@
             android:inputType="textEmailAddress"
             android:singleLine="true"
             android:labelFor="@+id/email"
-            android:hint="@string/enter_your_email"
+            android:textSize="17dp"
             />
 
         <TextView
@@ -83,7 +85,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="@string/enter_your_password"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -106,7 +107,7 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="@string/swipe_to_register"
-            android:textSize="17sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/link_anonymous"
@@ -115,7 +116,8 @@
             android:text="@string/anonymous_login_text"
             android:textSize="15sp"
             android:gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
             />
 
     </LinearLayout>

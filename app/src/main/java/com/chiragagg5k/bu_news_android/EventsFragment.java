@@ -58,7 +58,7 @@ public class EventsFragment extends Fragment {
         eventsObjects = new ArrayList<>();
         setEventsRv();
 
-       if (user != null) {
+        if (user != null) {
             checkAndEnableAddEventBtn();
         } else {
             addEventBtn.setVisibility(View.GONE);

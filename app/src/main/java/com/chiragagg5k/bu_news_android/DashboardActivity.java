@@ -27,8 +27,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -72,7 +70,7 @@ public class DashboardActivity extends AppCompatActivity {
             imageUri = Uri.parse(intent.getStringExtra("imageUri"));
             Picasso.get().load(imageUri).into(sideNavProfileImage);
 
-        } else if (user!=null) {
+        } else if (user != null) {
             userRef = FirebaseStorage.getInstance().getReference("profile_images");
             userRef.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> {
                 Picasso.get().load(uri).into(sideNavProfileImage);
@@ -122,7 +120,7 @@ public class DashboardActivity extends AppCompatActivity {
                     .repeat(0)
                     .playOn(postButton);
 
-            if (user == null){
+            if (user == null) {
                 Toast.makeText(this, "You need to register to post news!", Toast.LENGTH_SHORT).show();
                 return;
             }

@@ -85,7 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        if (user != null){
+        if (user != null) {
             storageRef = FirebaseStorage.getInstance().getReference("profile_images");
             storageRef.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> {
                 Picasso.get().load(uri).into(profile_image);

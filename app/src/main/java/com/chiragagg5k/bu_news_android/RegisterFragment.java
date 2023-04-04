@@ -28,13 +28,12 @@ import java.util.Objects;
 
 public class RegisterFragment extends Fragment {
 
+    private final String emailRegex = "^[a-zA-Z\\d+_.-]+@[a-zA-Z\\d.-]+$";
     EditText full_name, email, password, address, phone_no;
     Button register_button;
     FirebaseAuth mAuth;
     FirebaseUser user;
     DatabaseReference databaseRef;
-
-    private final String emailRegex = "^[a-zA-Z\\d+_.-]+@[a-zA-Z\\d.-]+$";
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -94,7 +93,7 @@ public class RegisterFragment extends Fragment {
                     // Add user to database
                     assert user != null;
                     String userId = user.getUid();
-                    UserObject newUser = new UserObject(finalFull_name, phone_no,address);
+                    UserObject newUser = new UserObject(finalFull_name, phone_no, address);
 
                     databaseRef.child(userId).setValue(newUser);
 

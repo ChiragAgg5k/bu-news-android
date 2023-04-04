@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -145,7 +144,7 @@ public class HomeFragment extends Fragment {
         greetingText.setText(greeting);
         greetingUserText.setText(firstName);
 
-        if(user != null) {
+        if (user != null) {
             userReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -189,7 +188,7 @@ public class HomeFragment extends Fragment {
                 public void onCancelled(@NonNull DatabaseError error) {
                 }
             });
-        }else{
+        } else {
             noSubscribedCategoriesText.setText("Register to subscribe to news categories");
             weatherDescriptionText.setText(R.string.weather_unavailable);
             subscribeButton.setEnabled(false);

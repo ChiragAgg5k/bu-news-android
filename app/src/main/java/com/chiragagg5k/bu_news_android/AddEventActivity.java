@@ -61,7 +61,7 @@ public class AddEventActivity extends AppCompatActivity {
                     AddEventActivity.this,
                     (view, year1, monthOfYear, dayOfMonth) -> {
                         selectedDateTV.setVisibility(View.VISIBLE);
-                        selectedDateTV.setText(String.format(Locale.US,"%d-%d-%d", dayOfMonth, monthOfYear + 1, year1));
+                        selectedDateTV.setText(String.format(Locale.US, "%d-%d-%d", dayOfMonth, monthOfYear + 1, year1));
 
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(year1, monthOfYear, dayOfMonth);

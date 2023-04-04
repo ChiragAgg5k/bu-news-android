@@ -16,12 +16,11 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
+            android:contentDescription="@string/app_name"
             android:scaleType="fitXY"
-            android:src="@drawable/bunews_logo"
-            android:contentDescription="@string/app_name" />
+            android:src="@drawable/bunews_logo" />
 
         <TextView
-            android:textStyle="bold"
             android:id="@+id/tagline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +28,8 @@
             android:layout_marginBottom="30dp"
             android:text="@string/tagline"
             android:textAlignment="center"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/register_text"
@@ -37,10 +37,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/login_here"
             android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/secTxt"
@@ -53,17 +53,16 @@
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
-            android:maxWidth="100dp"
             android:layout_height="48dp"
             android:layout_marginHorizontal="40dp"
             android:autofillHints="email"
             android:backgroundTint="@color/textColor"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:singleLine="true"
             android:labelFor="@+id/email"
-            android:textSize="17dp"
-            />
+            android:maxWidth="100dp"
+            android:singleLine="true"
+            android:textSize="17dp" />
 
         <TextView
             android:id="@+id/thirdTxt"
@@ -84,8 +83,7 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                />
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,12 +111,11 @@
             android:id="@+id/link_anonymous"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/anonymous_login_text"
-            android:textSize="15sp"
-            android:gravity="center"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
-            />
+            android:gravity="center"
+            android:text="@string/anonymous_login_text"
+            android:textSize="15sp" />
 
     </LinearLayout>
 </ScrollView>

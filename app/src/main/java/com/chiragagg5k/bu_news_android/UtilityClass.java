@@ -77,11 +77,11 @@ public class UtilityClass {
 
     public static String arrayListToString(ArrayList<String> arrayList) {
         StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i < arrayList.size(); i++) {
+        for (int i = 0; i < arrayList.size(); i++) {
             stringBuilder.append(arrayList.get(i));
-            if(i != arrayList.size() - 1) {
+            if (i != arrayList.size() - 1) {
                 stringBuilder.append(", ");
-            }else{
+            } else {
                 stringBuilder.append(".");
             }
         }

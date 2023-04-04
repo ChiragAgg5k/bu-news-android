@@ -15,7 +15,7 @@ import com.chiragagg5k.bu_news_android.objects.EventsObject;
 
 import java.util.List;
 
-public class EventsRvAdaptor extends RecyclerView.Adapter<EventsRvAdaptor.ViewHolder>{
+public class EventsRvAdaptor extends RecyclerView.Adapter<EventsRvAdaptor.ViewHolder> {
 
     private final List<EventsObject> eventObjects;
     Context context;
@@ -25,18 +25,6 @@ public class EventsRvAdaptor extends RecyclerView.Adapter<EventsRvAdaptor.ViewHo
     public EventsRvAdaptor(List<EventsObject> eventsObjects, Context context) {
         this.eventObjects = eventsObjects;
         this.context = context;
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-
-        TextView event_heading, event_description, event_date;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            event_heading = itemView.findViewById(R.id.event_heading);
-            event_description = itemView.findViewById(R.id.event_description);
-            event_date = itemView.findViewById(R.id.event_date);
-        }
     }
 
     @NonNull
@@ -55,8 +43,7 @@ public class EventsRvAdaptor extends RecyclerView.Adapter<EventsRvAdaptor.ViewHo
         if (isExpanded) {
             holder.event_heading.setMaxLines(2);
             holder.event_description.setMaxLines(3);
-        }
-        else{
+        } else {
             holder.event_heading.setMaxLines(1);
             holder.event_description.setMaxLines(1);
         }
@@ -66,7 +53,7 @@ public class EventsRvAdaptor extends RecyclerView.Adapter<EventsRvAdaptor.ViewHo
             previousExpandedPosition = holder.getAdapterPosition();
 
         holder.itemView.setOnClickListener(v -> {
-            mExpandedPosition = isExpanded ? -1:holder.getAdapterPosition();
+            mExpandedPosition = isExpanded ? -1 : holder.getAdapterPosition();
             notifyItemChanged(previousExpandedPosition);
             notifyItemChanged(position);
         });
@@ -81,5 +68,17 @@ public class EventsRvAdaptor extends RecyclerView.Adapter<EventsRvAdaptor.ViewHo
     @Override
     public int getItemCount() {
         return eventObjects.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView event_heading, event_description, event_date;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            event_heading = itemView.findViewById(R.id.event_heading);
+            event_description = itemView.findViewById(R.id.event_description);
+            event_date = itemView.findViewById(R.id.event_date);
+        }
     }
 }

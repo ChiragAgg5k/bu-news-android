@@ -37,7 +37,7 @@ git clone https://github.com/ChiragAgg5k/bu-news-android.git
 
 ## Info
 
-This application was created as part of our University Project for 1sd year (2nd Sem) of B.Tech. in Computer Science and Engineering at Bennett University. Following are the team members who worked on this project:
+This application was created as part of our University Project for 1st year (2nd Sem) of B.Tech. in Computer Science and Engineering at Bennett University. Following are the team members who worked on this project:
 
 - Chirag Aggarwal 
 - Divesh Saini

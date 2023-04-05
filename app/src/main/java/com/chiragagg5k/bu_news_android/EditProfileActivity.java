@@ -31,6 +31,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -46,7 +47,7 @@ public class EditProfileActivity extends AppCompatActivity {
     EditText editName, editContact, editAddress;
     StorageReference storageReference;
     DatabaseReference databaseReference;
-    String contact, address;
+    String contact, address, username;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,10 +71,13 @@ public class EditProfileActivity extends AppCompatActivity {
         databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                username = dataSnapshot.child("name").getValue(String.class);
                 contact = dataSnapshot.child("phoneNo").getValue(String.class);
                 address = dataSnapshot.child("city").getValue(String.class);
                 editAddress.setText(address);
                 editContact.setText(contact);
+                name.setText(username);
+                editName.setText(username);
             }
 
             @Override
@@ -82,12 +86,13 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-        assert user != null;
-        if (user.getPhotoUrl() != null)
-            profile_image.setImageURI(user.getPhotoUrl());
+        if (user != null) {
+            storageReference.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> {
+                Picasso.get().load(uri).into(profile_image);
+            });
+        }
 
-        name.setText(user.getDisplayName());
-        editName.setText(user.getDisplayName());
+        assert user != null;
         studentMail.setText(user.getEmail());
 
         backBtn.setOnClickListener(v -> onBackPressed());
@@ -104,7 +109,7 @@ public class EditProfileActivity extends AppCompatActivity {
             String contact = editContact.getText().toString().trim();
             String address = UtilityClass.convertToTitleCase(editAddress.getText().toString().trim());
 
-            if (imageUri == null && name.equals(user.getDisplayName()) && contact.equals(this.contact) && address.equals(this.address)) {
+            if (imageUri == null && name.equals(this.username) && contact.equals(this.contact) && address.equals(this.address)) {
                 Toast.makeText(this, "No changes made", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -118,34 +123,27 @@ public class EditProfileActivity extends AppCompatActivity {
             if (imageUri != null) {
                 StorageTask<UploadTask.TaskSnapshot> uploadTask = storageReference.child(user.getUid()).putFile(imageUri);
                 uploadTask.addOnSuccessListener(o -> storageReference.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> imageUri = uri));
-            } else {
-                imageUri = user.getPhotoUrl();
             }
 
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(name)
-                    .setPhotoUri(imageUri)
-                    .build();
-
-            user.updateProfile(profileUpdates);
-
+            databaseReference.child(user.getUid()).child("name").setValue(name);
             databaseReference.child(user.getUid()).child("phoneNo").setValue(contact);
             databaseReference.child(user.getUid()).child("city").setValue(address);
 
             Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show();
 
-            finish();
             Intent intent = new Intent(this, DashboardActivity.class);
             intent.putExtra("name", name);
             if (imageUri != null)
                 intent.putExtra("imageUri", imageUri.toString());
+
+            finish();
             startActivity(intent);
         });
     }
 
     @Override
     public void onBackPressed() {
-        if (imageUri != null || !editName.getText().toString().equals(user.getDisplayName())) {
+        if (imageUri != null || !editName.getText().toString().equals(username)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Are you sure you want to discard changes?");
             builder.setPositiveButton("Yes", (dialog, which) -> {

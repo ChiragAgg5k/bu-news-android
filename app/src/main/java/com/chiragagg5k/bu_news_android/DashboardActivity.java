@@ -136,6 +136,17 @@ public class DashboardActivity extends AppCompatActivity {
                     loadFragment(new HomeFragment());
                     bottomNavigationView.setSelectedItemId(R.id.home);
                 } else {
+
+                    if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        return;
+                    }
+
+                    if (user == null) {
+                        finish();
+                        return;
+                    }
+
                     new AlertDialog.Builder(DashboardActivity.this)
                             .setTitle("Exit")
                             .setMessage("Are you sure you want to exit?")
@@ -166,6 +177,10 @@ public class DashboardActivity extends AppCompatActivity {
         } else if (menuItem.getItemId() == R.id.about) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(android.net.Uri.parse(GITHUB_URL));
+            startActivity(intent);
+        }else if(menuItem.getItemId() == R.id.website){
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(android.net.Uri.parse(WEBSITE_URL));
             startActivity(intent);
         }
 
@@ -212,16 +227,5 @@ public class DashboardActivity extends AppCompatActivity {
         transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         transaction.replace(R.id.relativeLayout, fragment);
         transaction.commit();
-    }
-
-    @Override
-    public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to exit?");
-        builder.setCancelable(true);
-        builder.setPositiveButton("Yes", (dialog, which) -> finishAffinity());
-        builder.setNegativeButton("No", (dialog, which) -> dialog.cancel());
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
     }
 }

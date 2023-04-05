@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.chiragagg5k.bu_news_android.objects.UserObject;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -70,24 +71,21 @@ public class RegisterFragment extends Fragment {
             String phone_no = this.phone_no.getText().toString().trim();
             String address = this.address.getText().toString().trim();
 
-            register_button.setText(getResources().getString(R.string.registering));
-
             if (full_name.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(getContext(), "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                register_button.setText(getResources().getString(R.string.register));
                 playShakeAnimation();
                 return;
             }
 
             if (!email.matches(emailRegex)) {
                 Toast.makeText(getContext(), "Please enter a valid email", Toast.LENGTH_SHORT).show();
-                register_button.setText(getResources().getString(R.string.register));
                 playShakeAnimation();
                 return;
             }
 
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
+                    register_button.setText(getResources().getString(R.string.registering));
                     user = mAuth.getCurrentUser();
 
                     // Add user to database
@@ -95,22 +93,21 @@ public class RegisterFragment extends Fragment {
                     String userId = user.getUid();
                     UserObject newUser = new UserObject(finalFull_name, phone_no, address);
 
-                    databaseRef.child(userId).setValue(newUser);
+                    databaseRef.child(userId).setValue(newUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(getContext(), "User registered successfully", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getContext(), DashboardActivity.class));
+                        }
+                    });
 
-                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                            .setDisplayName(finalFull_name)
-                            .build();
+                    register_button.setText(getResources().getString(R.string.register));
 
-                    user.updateProfile(profileUpdates).addOnCompleteListener(
-                            task1 -> {
-                                if (task1.isSuccessful()) {
-                                    startActivity(new Intent(getContext(), DashboardActivity.class));
-                                    Toast.makeText(getContext(), "User created successfully", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(getContext(), "Error: " + Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            }
-                    );
+                    this.full_name.setText("");
+                    this.email.setText("");
+                    this.password.setText("");
+                    this.phone_no.setText("");
+                    this.address.setText("");
 
                 } else {
                     YoYo.with(Techniques.Bounce)

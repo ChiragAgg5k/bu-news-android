@@ -11,7 +11,12 @@
     <item
         android:icon="@drawable/info_icon_foreground"
         android:id="@+id/about"
-        android:title="About Us" />
+        android:title="Github Repo" />
+
+    <item
+        android:icon="@drawable/web_icon"
+        android:id="@+id/website"
+        android:title="Website" />
 
     <item
         android:icon="@drawable/close_icon_foreground"

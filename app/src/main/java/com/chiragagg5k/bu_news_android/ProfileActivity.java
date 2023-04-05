@@ -43,6 +43,13 @@ public class ProfileActivity extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseRef = FirebaseDatabase.getInstance().getReference("users");
+        storageRef = FirebaseStorage.getInstance().getReference("profile_images");
+
+        if (user != null) {
+            storageRef.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> {
+                Picasso.get().load(uri).into(profile_image);
+            });
+        }
 
         profile_name = findViewById(R.id.profile_name);
         full_name_text = findViewById(R.id.full_name_text);
@@ -57,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
         back_button.setOnClickListener(v -> finish());
         edit_profile_button.setOnClickListener(v -> {
             Intent intent = new Intent(this, EditProfileActivity.class);
+            finish();
             startActivity(intent);
         });
 
@@ -66,17 +74,16 @@ public class ProfileActivity extends AppCompatActivity {
             return;
         }
 
-        profile_name.setText(user.getDisplayName());
-        full_name_text.setText(user.getDisplayName());
-        email_text.setText(user.getEmail());
-
         databaseRef.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String name = dataSnapshot.child("name").getValue(String.class);
                 String contact = dataSnapshot.child("phoneNo").getValue(String.class);
                 String address = dataSnapshot.child("city").getValue(String.class);
                 contact_text.setText(contact);
                 address_text.setText(address);
+                profile_name.setText(name);
+                full_name_text.setText(name);
             }
 
             @Override
@@ -84,13 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.e("ProfileActivity", "onCancelled: ", databaseError.toException());
             }
         });
-
-        if (user != null) {
-            storageRef = FirebaseStorage.getInstance().getReference("profile_images");
-            storageRef.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> {
-                Picasso.get().load(uri).into(profile_image);
-            });
-        }
+        email_text.setText(user.getEmail());
     }
 
     @Override

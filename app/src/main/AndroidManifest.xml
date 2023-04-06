@@ -59,6 +59,11 @@
             android:windowSoftInputMode="stateVisible|adjustPan">
         </activity>
 
+        <activity
+            android:name=".ContactActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan">
+        </activity>
+
         <service android:name=".NotificationHandler"
             android:enabled="true"
             android:exported="false">

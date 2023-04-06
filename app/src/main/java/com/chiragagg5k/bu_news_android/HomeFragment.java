@@ -100,8 +100,27 @@ public class HomeFragment extends Fragment {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
-        if (user != null)
+        if (user != null) {
             userReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+            userReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String username = snapshot.child("name").getValue(String.class);
+
+                    assert username != null;
+                    String firstName = username.split(" ")[0];
+
+                    greetingUserText.setText(firstName);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        } else {
+            greetingUserText.setText("User");
+        }
 
         promotedNewsObjects = new ArrayList<>();
         subscribedNewsObjects = new ArrayList<>();
@@ -120,14 +139,6 @@ public class HomeFragment extends Fragment {
 
         subscribedRecyclerView.setAdapter(subscribedNewsRvAdaptor);
 
-        String displayName = user != null ? user.getDisplayName() : null;
-        String firstName;
-
-        if (displayName != null)
-            firstName = displayName.split(" ")[0];
-        else
-            firstName = "User";
-
         Calendar currentTime = Calendar.getInstance();
         int hour = currentTime.get(Calendar.HOUR_OF_DAY);
 
@@ -142,7 +153,6 @@ public class HomeFragment extends Fragment {
         }
 
         greetingText.setText(greeting);
-        greetingUserText.setText(firstName);
 
         if (user != null) {
             userReference.addValueEventListener(new ValueEventListener() {

@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:id="@+id/profile_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/arrow_back_white"
+            app:tint="@color/textColor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/back_button"
+            android:text="Contact Us"
+            android:textAlignment="textEnd"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/profile_header_divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/profile_header"
+        android:layout_marginHorizontal="8dp"
+        android:backgroundTint="@color/colorPrimaryDark" />
+
+
+    <TextView
+        android:id="@+id/contact_us_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_header_divider"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Hi! Seems like you are facing some issues. Please note Team Obsidian is a small group of 3 college students so we are not able to provide 24/7 support. We will try our best to resolve your issue as soon as possible. Thank you for your patience."
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/contact_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contact_us_text"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="40dp"
+        android:autoLink="email"
+        android:linksClickable="true"
+        android:text="Email: chiragaggarwal5k@gmail.com"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/contact_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contact_email"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:autoLink="phone"
+        android:linksClickable="true"
+        android:text="Phone: +91 9667658415"
+        android:textSize="16sp" />
+
+    <View
+        android:id="@+id/detailed_news_divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/contact_phone"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/colorPrimaryDark" />
+
+</RelativeLayout>

@@ -27,9 +27,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 /**
  * @author Chirag Aggarwal
@@ -47,6 +56,7 @@ public class DashboardActivity extends AppCompatActivity {
     FirebaseUser user;
     Intent intent;
     Uri imageUri;
+    DatabaseReference userDatabaseRef;
     StorageReference userRef;
 
     @Override
@@ -65,6 +75,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         intent = getIntent();
         user = FirebaseAuth.getInstance().getCurrentUser();
+        userDatabaseRef = FirebaseDatabase.getInstance().getReference("users");
 
         if (intent.getStringExtra("imageUri") != null) {
             imageUri = Uri.parse(intent.getStringExtra("imageUri"));
@@ -79,8 +90,22 @@ public class DashboardActivity extends AppCompatActivity {
 
         if (intent.getStringExtra("name") != null)
             sideNavUsername.setText(intent.getStringExtra("name"));
-        else if (user != null)
-            sideNavUsername.setText(user.getDisplayName());
+        else if (user != null) {
+            userDatabaseRef.child(user.getUid()).child("name").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    sideNavUsername.setText(Objects.requireNonNull(snapshot.getValue()).toString());
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+        } else {
+            sideNavUsername.setText("User");
+        }
+
 
         // disabling middle icon
         bottomNavigationView.getMenu().getItem(2).setEnabled(false);
@@ -173,14 +198,18 @@ public class DashboardActivity extends AppCompatActivity {
             }
 
             finish();
+            startActivity(new Intent(this, AuthenticationActivity.class));
 
         } else if (menuItem.getItemId() == R.id.about) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(android.net.Uri.parse(GITHUB_URL));
             startActivity(intent);
-        }else if(menuItem.getItemId() == R.id.website){
+        } else if (menuItem.getItemId() == R.id.website) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(android.net.Uri.parse(WEBSITE_URL));
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.contact_side_nav) {
+            Intent intent = new Intent(this, ContactActivity.class);
             startActivity(intent);
         }
 

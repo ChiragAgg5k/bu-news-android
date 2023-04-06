@@ -19,6 +19,11 @@
         android:title="Website" />
 
     <item
+        android:icon="@drawable/phone_icon"
+        android:id="@+id/contact_side_nav"
+        android:title="Contact Us" />
+
+    <item
         android:icon="@drawable/close_icon_foreground"
         android:id="@+id/nav_logout"
         android:title="Logout" />

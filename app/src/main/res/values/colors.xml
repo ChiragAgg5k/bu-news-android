@@ -7,7 +7,7 @@
     <!--Light Mode-->
     <color name="backgroundColor">#FFFFFF</color>
     <color name="backgroundColorDark">#DADADA</color>
-    <color name="backgroundColorDarker">#A8A8A8</color>
+    <color name="backgroundColorDarker">#858585</color>
     <color name="textColor">#292D36</color>
     <color name="textColorHint">#999999</color>
 

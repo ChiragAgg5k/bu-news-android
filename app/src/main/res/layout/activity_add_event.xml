@@ -18,7 +18,7 @@
             android:id="@+id/back_button_add_event"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:contentDescription="@string/back_button"
+            android:contentDescription="@string/back"
             android:src="@drawable/arrow_back_white"
             app:tint="@color/textColor" />
 
@@ -26,8 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
-            android:text="Add Event"
+            android:layout_marginEnd="10dp"
+            android:text="@string/add_event"
             android:textAlignment="textEnd"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -60,10 +60,11 @@
         android:layout_below="@id/event_heading_label"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Enter Event Heading"
         android:inputType="text"
         android:padding="8dp"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:hint="@string/placeholder_title"
+        />
 
     <TextView
         android:id="@+id/event_description_label"
@@ -83,10 +84,13 @@
         android:layout_below="@id/event_description_label"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Enter Event Description"
         android:inputType="text"
         android:padding="8dp"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:labelFor="@+id/event_description_label"
+        android:hint="@string/placeholder_description"
+        android:autofillHints="Description"
+        />
 
 
     <TextView
@@ -96,7 +100,7 @@
         android:layout_below="@id/event_description_edit_text"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="18dp"
-        android:text="Event Date"
+        android:text="@string/event_date"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -108,7 +112,7 @@
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:text="Select Date"
+        android:text="@string/select_date"
         android:textSize="12sp" />
 
     <TextView
@@ -130,7 +134,7 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="18dp"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textSize="12sp" />
 
 </RelativeLayout>

@@ -44,6 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="5dp"
+                    android:background="@color/colorPrimaryDark"
                     android:backgroundTint="@color/colorPrimaryDark"
                     android:padding="4dp"
                     android:text="BU-News"
@@ -95,7 +96,9 @@
                 app:borderWidth="0dp"
                 app:layout_anchor="@id/app_bar"
                 app:maxImageSize="40dp"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                android:contentDescription="Floating Action Post"
+                />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

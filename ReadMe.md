@@ -4,8 +4,7 @@ This Android programme was created with Bennett University students in mind. It 
 
 ## Install the app
 
-Available on the Google Play Store:
-https://play.google.com/store/apps/details?id=com.chiragagg5k.bu_news_android
+Available on the Google Play Store: https://play.google.com/store/apps/details?id=com.chiragagg5k.bu_news_android
 
 ## Screenshots
 

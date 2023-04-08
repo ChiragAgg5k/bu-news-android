@@ -24,7 +24,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/back_button"
-            android:text="Contact Us"
+            android:text="@string/contact_us"
             android:textAlignment="textEnd"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -47,7 +47,7 @@
         android:layout_below="@+id/profile_header_divider"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="20dp"
-        android:text="Hi! Seems like you are facing some issues. Please note Team Obsidian is a small group of 3 college students so we are not able to provide 24/7 support. We will try our best to resolve your issue as soon as possible. Thank you for your patience."
+        android:text="@string/contact_us_text"
         android:textSize="17sp" />
 
     <TextView
@@ -59,7 +59,7 @@
         android:layout_marginTop="40dp"
         android:autoLink="email"
         android:linksClickable="true"
-        android:text="Email: chiragaggarwal5k@gmail.com"
+        android:text="@string/email_chiragaggarwal5k_gmail_com"
         android:textSize="16sp" />
 
     <TextView
@@ -71,7 +71,7 @@
         android:layout_marginTop="20dp"
         android:autoLink="phone"
         android:linksClickable="true"
-        android:text="Phone: +91 9667658415"
+        android:text="@string/phone_91_9667658415"
         android:textSize="16sp" />
 
     <View

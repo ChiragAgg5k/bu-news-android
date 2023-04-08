@@ -30,7 +30,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
                 android:layout_toEndOf="@+id/back_button"
-                android:text="Detailed News"
+                android:text="@string/detailed_news"
                 android:textAlignment="textEnd"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -98,7 +98,7 @@
             android:layout_below="@+id/detailed_news_divider"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="20dp"
-            android:text="News Author"
+            android:text="@string/news_author"
             android:textAlignment="textEnd"
             android:textSize="16sp" />
 
@@ -109,7 +109,7 @@
             android:layout_below="@+id/detailed_news_author"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
-            android:text="News Date"
+            android:text="@string/news_date"
             android:textAlignment="textEnd"
             android:textSize="16sp" />
 

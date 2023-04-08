@@ -26,8 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
-            android:text="Edit Profile"
+            android:layout_marginEnd="10dp"
+            android:text="@string/edit_profile"
             android:textAlignment="textEnd"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -75,7 +75,8 @@
                 app:layout_constraintHorizontal_bias="0.676"
                 app:layout_constraintStart_toStartOf="parent"
                 app:maxImageSize="25dp"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                android:contentDescription="@string/edit_profile_image" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -112,7 +113,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/profile_icon"
-            app:tint="@color/colorPrimary" />
+            app:tint="@color/colorPrimary"
+            android:contentDescription="@string/profile_image" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -120,7 +122,7 @@
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/mini_profile_icon"
             android:gravity="center"
-            android:text="Edit Full Name"
+            android:text="@string/edit_full_name"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -133,8 +135,12 @@
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/textColor"
             android:singleLine="true"
-            android:text="@string/placeholder_name_text"
-            android:textSize="14sp" />
+            android:text="@string/placeholder_name_to_be_replaced"
+            android:textSize="14sp"
+            android:autofillHints="Edit Name"
+            android:inputType="text"
+            android:labelFor="@+id/edit_name"
+            />
 
     </RelativeLayout>
 
@@ -167,7 +173,7 @@
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/mini_email_icon"
             android:gravity="center"
-            android:text="You can't change your email"
+            android:text="@string/you_can_t_change_your_email"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -204,7 +210,7 @@
             android:id="@+id/mini_contact_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:contentDescription="Contact Icon"
+            android:contentDescription="@string/contact_icon"
             android:src="@drawable/phone_icon"
             app:tint="@color/colorPrimary" />
 
@@ -215,7 +221,7 @@
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/mini_contact_icon"
             android:gravity="center"
-            android:text="Contact"
+            android:text="@string/contact"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -228,9 +234,13 @@
             android:layout_toEndOf="@+id/contact_label"
             android:backgroundTint="@color/textColor"
             android:singleLine="true"
-            android:text="Placeholder Contact"
+            android:text="@string/placeholder_contact"
             android:textAlignment="textEnd"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:autofillHints="Contact"
+            android:inputType="phone"
+            android:labelFor="@+id/edit_contact_text"
+            />
 
     </RelativeLayout>
 
@@ -255,7 +265,7 @@
             android:id="@+id/mini_address_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:contentDescription="Address Icon"
+            android:contentDescription="@string/address_icon"
             android:src="@drawable/address_icon"
             app:tint="@color/colorPrimary" />
 
@@ -266,7 +276,7 @@
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/mini_address_icon"
             android:gravity="center"
-            android:text="City or Zip Code"
+            android:text="@string/city_or_zip_code"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -279,9 +289,13 @@
             android:layout_toEndOf="@+id/address_label"
             android:backgroundTint="@color/textColor"
             android:singleLine="true"
-            android:text="Placeholder Address"
+            android:text="@string/placeholder_address"
             android:textAlignment="textEnd"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:autofillHints="Zip Code"
+            android:inputType="text"
+            android:labelFor="@+id/edit_address_text"
+            />
 
     </RelativeLayout>
 
@@ -305,7 +319,7 @@
         android:clickable="true"
         android:gravity="center"
         android:paddingHorizontal="20dp"
-        android:text="Save Changes"
+        android:text="@string/save_changes"
         android:textColor="@color/white" />
 
 

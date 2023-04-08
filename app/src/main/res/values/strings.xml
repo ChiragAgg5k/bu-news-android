@@ -52,7 +52,6 @@
     <string name="profile_icon">profile icon</string>
     <string name="full_name">Full Name</string>
     <string name="email_icon">email icon</string>
-
     <string name="select_date_label">Please select a date</string>
     <string name="date_unavailable_label">Date not available</string>
     <string name="no_sub_news">No subscribed news yet. Subscribe to your desired categories to get news from them.</string>
@@ -65,5 +64,30 @@
     <string name="enter_your_password">Enter your password</string>
     <string name="enter_your_email">Enter your email</string>
     <string name="not_provided">Not provided</string>
+    <string name="back">Back</string>
+    <string name="event_date">Event Date</string>
+    <string name="select_date">Select Date</string>
+    <string name="submit">Submit</string>
+    <string name="add_event">Add Event</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="phone_91_9667658415">Phone: +91 9667658415</string>
+    <string name="email_chiragaggarwal5k_gmail_com">Email: chiragaggarwal5k@gmail.com</string>
+    <string name="contact_us_text">Hi! Seems like you are facing some issues. Please note Team Obsidian is a small group of 3 college students so we are not able to provide 24/7 support. We will try our best to resolve your issue as soon as possible. Thank you for your patience.</string>
+    <string name="news_date">News Date</string>
+    <string name="news_author">News Author</string>
+    <string name="detailed_news">Detailed News</string>
+    <string name="placeholder_address">Placeholder Address</string>
+    <string name="city_or_zip_code">City or Zip Code</string>
+    <string name="address_icon">Address Icon</string>
+    <string name="placeholder_contact">Placeholder Contact</string>
+    <string name="contact">Contact</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="edit_profile_image">Edit Profile Image</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="edit_full_name">Edit Full Name</string>
+    <string name="placeholder_name_to_be_replaced">Placeholder Name to be replaced</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="contact_icon">Contact Icon</string>
+    <string name="you_can_t_change_your_email">You can\'t change your email</string>
 
 </resources>

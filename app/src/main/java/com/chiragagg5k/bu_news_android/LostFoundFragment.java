@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.chiragagg5k.bu_news_android.adaptors.LostFoundAdapter;
+import com.chiragagg5k.bu_news_android.adaptors.LostFoundViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class LostFoundFragment extends Fragment {
@@ -44,7 +44,7 @@ public class LostFoundFragment extends Fragment {
     }
 
     private void prepareViewPager(ViewPager viewPager) {
-        LostFoundAdapter adapter = new LostFoundAdapter(getChildFragmentManager());
+        LostFoundViewPagerAdapter adapter = new LostFoundViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new LostFragment(), "Lost");
         adapter.addFragment(new FoundFragment(), "Found");
         viewPager.setAdapter(adapter);

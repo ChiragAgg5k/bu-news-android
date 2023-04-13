@@ -106,7 +106,6 @@ public class DashboardActivity extends AppCompatActivity {
             sideNavUsername.setText("User");
         }
 
-
         // disabling middle icon
         bottomNavigationView.getMenu().getItem(2).setEnabled(false);
 

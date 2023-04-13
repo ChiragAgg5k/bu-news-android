@@ -1,21 +1,35 @@
 package com.chiragagg5k.bu_news_android.objects;
 
+import com.chiragagg5k.bu_news_android.UtilityClass;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
+
 public class LostFoundObject {
 
     private String itemName;
     private String itemDescription;
     private String itemLocation;
-    private String itemDate;
+    private long itemDate;
+    private String toContactUID;
+    private String itemImageURL;
+    private String contactNo;
+    FirebaseUser user;
 
     public LostFoundObject() {
         // !IMPORTANT: This constructor is required for Firebase to work
     }
 
-    public LostFoundObject(String itemName, String itemDescription, String itemLocation, String itemDate) {
+    public LostFoundObject(String itemName, String itemDescription, String itemLocation, String contactNo, String imageUrl) {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemLocation = itemLocation;
-        this.itemDate = itemDate;
+        this.contactNo = contactNo;
+        this.itemDate = UtilityClass.getCurrentDateInMilliSeconds();
+        this.user = FirebaseAuth.getInstance().getCurrentUser();
+        this.toContactUID = (user != null) ? user.getUid() : null;
+        this.itemImageURL = imageUrl;
     }
 
     public String getItemName() {
@@ -30,7 +44,20 @@ public class LostFoundObject {
         return itemLocation;
     }
 
-    public String getItemDate() {
+    public long getItemDate() {
         return itemDate;
     }
+
+    public String getToContactUID() {
+        return toContactUID;
+    }
+
+    public String getItemImageURL() {
+        return itemImageURL;
+    }
+
+    public String getContactNo() {
+        return contactNo;
+    }
+
 }

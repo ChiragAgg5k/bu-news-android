@@ -64,6 +64,11 @@
             android:windowSoftInputMode="stateVisible|adjustPan">
         </activity>
 
+        <activity
+            android:name=".LostFoundUploadActivity"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+
         <service android:name=".NotificationHandler"
             android:enabled="true"
             android:exported="false">

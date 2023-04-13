@@ -63,7 +63,7 @@
         android:inputType="text"
         android:padding="8dp"
         android:textSize="18sp"
-        android:hint="@string/placeholder_title"
+        android:backgroundTint="@color/backgroundColorDarker"
         />
 
     <TextView
@@ -88,8 +88,8 @@
         android:padding="8dp"
         android:textSize="18sp"
         android:labelFor="@+id/event_description_label"
-        android:hint="@string/placeholder_description"
         android:autofillHints="Description"
+        android:backgroundTint="@color/backgroundColorDarker"
         />
 
 
@@ -132,9 +132,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/select_date_button"
         android:layout_centerInParent="true"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/submit"
-        android:textSize="12sp" />
+        android:textSize="14sp" />
 
 </RelativeLayout>

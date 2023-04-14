@@ -82,9 +82,10 @@ public class RegisterFragment extends Fragment {
                 return;
             }
 
+            register_button.setEnabled(false);
+
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    register_button.setText(getResources().getString(R.string.registering));
                     user = mAuth.getCurrentUser();
 
                     // Add user to database
@@ -100,7 +101,6 @@ public class RegisterFragment extends Fragment {
                         }
                     });
 
-                    register_button.setText(getResources().getString(R.string.register));
 
                     this.full_name.setText("");
                     this.email.setText("");
@@ -116,9 +116,11 @@ public class RegisterFragment extends Fragment {
 
                     Toast.makeText(getContext(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
                 }
+            }).addOnFailureListener(e -> {
+                register_button.setEnabled(true);
+                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             });
 
-            register_button.setText(getResources().getString(R.string.register));
         });
     }
 

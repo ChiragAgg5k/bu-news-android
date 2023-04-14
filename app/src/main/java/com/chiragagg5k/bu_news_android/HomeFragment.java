@@ -3,6 +3,7 @@ package com.chiragagg5k.bu_news_android;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,14 +102,16 @@ public class HomeFragment extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
         if (user != null) {
+            Log.d("HomeFragment", "onViewCreated: " + user.getUid());
             userReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
             userReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String username = snapshot.child("name").getValue(String.class);
-
-                    assert username != null;
-                    String firstName = username.split(" ")[0];
+                    String firstName;
+                    if (username != null)
+                        firstName = username.split(" ")[0];
+                    else firstName = "User";
 
                     greetingUserText.setText(firstName);
                 }

@@ -3,15 +3,24 @@ package com.chiragagg5k.bu_news_android;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +32,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -30,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseUser user;
     ImageView back_button;
     TextView profile_name, full_name_text, email_text, contact_text, address_text;
-    Button edit_profile_button;
+    Button edit_profile_button, delete_profile_button;
     DatabaseReference databaseRef;
     StorageReference storageRef;
 
@@ -59,6 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
         profile_image = findViewById(R.id.profile_image);
 
         back_button = findViewById(R.id.back_button);
+        delete_profile_button = findViewById(R.id.delete_profile_button);
         edit_profile_button = findViewById(R.id.edit_profile_button);
 
         back_button.setOnClickListener(v -> finish());
@@ -71,6 +83,9 @@ public class ProfileActivity extends AppCompatActivity {
         if (user == null) {
             edit_profile_button.setEnabled(false);
             edit_profile_button.setBackgroundColor(getResources().getColor(R.color.backgroundColorDarker));
+
+            delete_profile_button.setEnabled(false);
+            delete_profile_button.setBackgroundColor(getResources().getColor(R.color.backgroundColorDarker));
             return;
         }
 
@@ -92,6 +107,48 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         email_text.setText(user.getEmail());
+
+        delete_profile_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+                builder.setTitle("Delete Profile");
+                builder.setMessage("Confirm your password to delete your profile");
+
+                final EditText input = new EditText(ProfileActivity.this);
+                input.setPadding(50, 50, 50, 0);
+                input.requestFocus();
+                builder.setView(input);
+
+                builder.setPositiveButton("Delete", (dialog, which) -> {
+                    String password = input.getText().toString();
+                    AuthCredential credential = EmailAuthProvider
+                            .getCredential(Objects.requireNonNull(user.getEmail()), password);
+                    user.reauthenticate(credential).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+
+                            databaseRef.child(user.getUid()).removeValue();
+                            storageRef.child(user.getUid()).delete();
+
+                            user.delete().addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    Toast.makeText(ProfileActivity.this, "Profile deleted", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(ProfileActivity.this, AuthenticationActivity.class));
+                                }
+                            });
+
+
+                        }else {
+                            Toast.makeText(ProfileActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                            dialog.cancel();
+                        }
+                    });
+                });
+
+                builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+                builder.show();
+            }
+        });
     }
 
     @Override

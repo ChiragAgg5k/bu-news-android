@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +35,7 @@ public class EventsFragment extends Fragment {
     Button addEventBtn;
     DatabaseReference userRef, eventsRef;
     FirebaseUser user;
+    ProgressBar progressBar;
 
     public EventsFragment() {
         // Required empty public constructor
@@ -52,6 +54,7 @@ public class EventsFragment extends Fragment {
 
         eventsRv = view.findViewById(R.id.events_rv);
         addEventBtn = view.findViewById(R.id.add_event_btn);
+        progressBar = view.findViewById(R.id.events_progress_bar);
         user = FirebaseAuth.getInstance().getCurrentUser();
         eventsRef = FirebaseDatabase.getInstance().getReference("events");
 
@@ -78,6 +81,7 @@ public class EventsFragment extends Fragment {
                     eventsObjects.add(eventsObject);
                 }
                 setEventsRv();
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiragagg5k.bu_news_android.adaptors.LostFoundAdaptor;
 import com.chiragagg5k.bu_news_android.objects.LostFoundObject;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,7 @@ public class LostFragment extends Fragment {
     TextView lostTextView;
     DatabaseReference lostDatabaseReference;
     ArrayList<LostFoundObject> lostFoundObjects;
+    FirebaseUser user;
 
     public LostFragment() {
         // Required empty public constructor
@@ -49,12 +52,17 @@ public class LostFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         lostRecyclerView = view.findViewById(R.id.lostRecyclerView);
         lostTextView = view.findViewById(R.id.lostTextView);
         lostDatabaseReference = FirebaseDatabase.getInstance().getReference("lost_found").child("lost");
 
-        setClickHereListener();
+        if (user != null) {
+            setClickHereListener();
+        } else {
+            lostTextView.setText("Lost Something? Register to upload a post");
+        }
 
         lostFoundObjects = new ArrayList<>();
 

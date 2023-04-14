@@ -94,7 +94,8 @@ public class DashboardActivity extends AppCompatActivity {
             userDatabaseRef.child(user.getUid()).child("name").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    sideNavUsername.setText(Objects.requireNonNull(snapshot.getValue()).toString());
+                    if (snapshot.getValue() != null)
+                        sideNavUsername.setText(snapshot.getValue().toString());
                 }
 
                 @Override

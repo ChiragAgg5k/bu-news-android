@@ -23,8 +23,13 @@ import com.chiragagg5k.bu_news_android.objects.LostFoundObject;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -43,6 +48,9 @@ public class LostFoundUploadActivity extends AppCompatActivity {
     StorageTask uploadTask;
     Boolean isLost;
     Uri imageUri;
+
+    FirebaseUser user;
+    DatabaseReference userDatabase;
 
     ActivityResultLauncher<Intent> getImageActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(
@@ -64,6 +72,8 @@ public class LostFoundUploadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_lostfound);
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
         backBtn = findViewById(R.id.back_button);
         title = findViewById(R.id.lf_upload_item_name);
         description = findViewById(R.id.lf_upload_item_description);
@@ -83,6 +93,21 @@ public class LostFoundUploadActivity extends AppCompatActivity {
 
         lostDatabase = lostFoundDatabase.child("lost");
         foundDatabase = lostFoundDatabase.child("found");
+        userDatabase = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+
+        userDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                contact.setText(snapshot.child("phoneNo").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
         upload.setOnClickListener(v -> {
             String titleText = title.getText().toString();

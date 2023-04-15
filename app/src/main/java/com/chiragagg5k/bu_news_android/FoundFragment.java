@@ -9,6 +9,7 @@ import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class FoundFragment extends Fragment {
     ArrayList<LostFoundObject> lostFoundObjects;
     DatabaseReference foundDatabaseReference;
     FirebaseUser user;
+    ProgressBar progressBar;
 
 
     public FoundFragment() {
@@ -56,6 +58,7 @@ public class FoundFragment extends Fragment {
 
         foundRecyclerView = view.findViewById(R.id.foundRecyclerView);
         foundTextView = view.findViewById(R.id.foundTextView);
+        progressBar = view.findViewById(R.id.foundProgressBar);
         foundDatabaseReference = FirebaseDatabase.getInstance().getReference("lost_found").child("found");
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -80,6 +83,8 @@ public class FoundFragment extends Fragment {
                 LostFoundAdaptor lostFoundAdaptor = new LostFoundAdaptor(lostFoundObjects, false);
                 foundRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 foundRecyclerView.setAdapter(lostFoundAdaptor);
+
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

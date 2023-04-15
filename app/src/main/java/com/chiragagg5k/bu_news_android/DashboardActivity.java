@@ -168,6 +168,7 @@ public class DashboardActivity extends AppCompatActivity {
                     }
 
                     if (user == null) {
+                        startActivity(new Intent(DashboardActivity.this, AuthenticationActivity.class));
                         finish();
                         return;
                     }

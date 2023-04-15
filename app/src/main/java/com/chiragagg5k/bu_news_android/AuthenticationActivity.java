@@ -2,6 +2,7 @@ package com.chiragagg5k.bu_news_android;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -30,6 +31,19 @@ public class AuthenticationActivity extends AppCompatActivity {
         pagerAdapter.addFragment(new LoginFragment());
         pagerAdapter.addFragment(new RegisterFragment());
         viewPager.setAdapter(pagerAdapter);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (viewPager.getCurrentItem() == 0) {
+                    finishAffinity();
+                } else {
+                    viewPager.setCurrentItem(0);
+                }
+            }
+        };
+
+        getOnBackPressedDispatcher().addCallback(this, callback);
     }
 }
 

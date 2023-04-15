@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,7 @@ public class LostFragment extends Fragment {
     DatabaseReference lostDatabaseReference;
     ArrayList<LostFoundObject> lostFoundObjects;
     FirebaseUser user;
+    ProgressBar progressBar;
 
     public LostFragment() {
         // Required empty public constructor
@@ -56,6 +58,7 @@ public class LostFragment extends Fragment {
 
         lostRecyclerView = view.findViewById(R.id.lostRecyclerView);
         lostTextView = view.findViewById(R.id.lostTextView);
+        progressBar = view.findViewById(R.id.lostProgressBar);
         lostDatabaseReference = FirebaseDatabase.getInstance().getReference("lost_found").child("lost");
 
         if (user != null) {
@@ -78,6 +81,8 @@ public class LostFragment extends Fragment {
                 LostFoundAdaptor lostFoundAdaptor = new LostFoundAdaptor(lostFoundObjects, true);
                 lostRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 lostRecyclerView.setAdapter(lostFoundAdaptor);
+
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

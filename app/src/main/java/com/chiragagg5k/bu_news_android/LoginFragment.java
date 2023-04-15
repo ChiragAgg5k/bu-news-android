@@ -93,8 +93,10 @@ public class LoginFragment extends Fragment {
                             user = mAuth.getCurrentUser();
                             startActivity(new Intent(getActivity(), DashboardActivity.class));
                             login_button.setText(getResources().getString(R.string.login));
-                            email.setText("");
-                            password.setText("");
+
+                            if (getActivity() != null) {
+                                getActivity().finish();
+                            }
 
                         } else {
                             YoYo.with(Techniques.Bounce)

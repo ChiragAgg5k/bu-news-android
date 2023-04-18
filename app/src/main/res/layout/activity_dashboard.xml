@@ -127,7 +127,7 @@
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
                 android:textSize="13sp"
-                android:text="Made by Team Obsidian\nver. 1.5.0" />
+                android:text="Made by Team Obsidian\nver. 1.6.0" />
 
         </LinearLayout>
 

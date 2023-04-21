@@ -6,7 +6,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +77,7 @@ public class LostFragment extends Fragment {
                     lostFoundObjects.add(lostFoundObject);
                 }
 
-                LostFoundAdaptor lostFoundAdaptor = new LostFoundAdaptor(lostFoundObjects, true);
+                LostFoundAdaptor lostFoundAdaptor = new LostFoundAdaptor(lostFoundObjects, true, getContext());
                 lostRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 lostRecyclerView.setAdapter(lostFoundAdaptor);
 

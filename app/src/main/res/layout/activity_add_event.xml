@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.BUNewsAndroidDark"
-    tools:context=".EditProfileActivity">
+    tools:context=".EditProfileActivity"
+    tools:ignore="HardcodedText">
 
     <RelativeLayout
         android:id="@+id/addEventHeader"
@@ -60,11 +61,10 @@
         android:layout_below="@id/event_heading_label"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@color/backgroundColorDarker"
         android:inputType="text"
         android:padding="8dp"
-        android:textSize="18sp"
-        android:backgroundTint="@color/backgroundColorDarker"
-        />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/event_description_label"
@@ -84,13 +84,12 @@
         android:layout_below="@id/event_description_label"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
-        android:inputType="text"
-        android:padding="8dp"
-        android:textSize="18sp"
-        android:labelFor="@+id/event_description_label"
         android:autofillHints="Description"
         android:backgroundTint="@color/backgroundColorDarker"
-        />
+        android:inputType="text"
+        android:labelFor="@+id/event_description_label"
+        android:padding="8dp"
+        android:textSize="18sp" />
 
 
     <TextView

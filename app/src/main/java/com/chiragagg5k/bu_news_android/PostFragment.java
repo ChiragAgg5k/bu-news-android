@@ -27,8 +27,13 @@ import androidx.fragment.app.Fragment;
 import com.chiragagg5k.bu_news_android.objects.NewsObject;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -37,16 +42,17 @@ import com.squareup.picasso.Picasso;
 @SuppressWarnings("rawtypes")
 public class PostFragment extends Fragment {
 
-    TextView image_status;
+    TextView image_status, what_to_post_tv;
     EditText heading, description;
     Button choose_image, post_button;
     ImageView preview_image;
     StorageReference storageRef;
-    DatabaseReference databaseRef;
+    DatabaseReference databaseRef, userRef;
     StorageTask uploadTask;
     Uri image_uri;
     Spinner category_spinner;
     ArrayAdapter<CharSequence> category_adapter;
+    FirebaseUser user;
 
     /**
      * This is the callback for the result of the activity started by selectImage()
@@ -91,9 +97,13 @@ public class PostFragment extends Fragment {
         image_status = view.findViewById(R.id.selected_image_tv);
         category_spinner = view.findViewById(R.id.categories_spinner);
         preview_image = view.findViewById(R.id.preview_image);
+        what_to_post_tv = view.findViewById(R.id.what_to_post_tv);
 
         storageRef = FirebaseStorage.getInstance().getReference("uploads");
         databaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
 
         category_adapter = ArrayAdapter.createFromResource(getContext(), R.array.choice_category_names, android.R.layout.simple_spinner_item);
         category_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -110,6 +120,47 @@ public class PostFragment extends Fragment {
                 post();
             }
 
+        });
+
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DataSnapshot lastPostTimeSnapshot = snapshot.child("lastPostTime");
+                DataSnapshot isAdminSnapshot = snapshot.child("admin");
+                Boolean isAdmin = isAdminSnapshot.getValue(Boolean.class);
+
+                if (isAdmin != null && isAdmin) {
+                    what_to_post_tv.setText("You are an admin. You can post anything you want without cooldown.");
+                    return;
+                }
+
+                if (!lastPostTimeSnapshot.exists()) {
+                    return;
+                }
+
+                long lastPostTime = lastPostTimeSnapshot.getValue(Long.class);
+                long currentTime = System.currentTimeMillis();
+                long timeDiff = currentTime - lastPostTime;
+                if (timeDiff < 7200000) {
+                    post_button.setEnabled(false);
+                    choose_image.setEnabled(false);
+
+                    try {
+                        post_button.setBackgroundColor(getResources().getColor(R.color.backgroundColorDarker));
+                        choose_image.setBackgroundColor(getResources().getColor(R.color.backgroundColorDarker));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+                    what_to_post_tv.setText("Sorry for not informing in advance that posting has a cooldown of 2hrs! You can post again in " + (120 - timeDiff / 60000) + " minutes. Please wait.");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
     }
 
@@ -174,6 +225,9 @@ public class PostFragment extends Fragment {
                             String uploadId = databaseRef.push().getKey();
                             if (uploadId != null) databaseRef.child(uploadId).setValue(upload);
                         });
+
+                        // update the last post time
+                        userRef.child("lastPostTime").setValue(System.currentTimeMillis());
 
                         // clear the fields after 1 seconds
                         new Handler().postDelayed(() -> {

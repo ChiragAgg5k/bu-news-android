@@ -69,6 +69,11 @@
             android:windowSoftInputMode="adjustResize">
         </activity>
 
+        <activity
+            android:name=".LostFoundDetailActivity"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+
         <service android:name=".NotificationHandler"
             android:enabled="true"
             android:exported="false">

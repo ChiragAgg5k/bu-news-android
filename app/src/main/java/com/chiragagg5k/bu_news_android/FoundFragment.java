@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -63,9 +62,9 @@ public class FoundFragment extends Fragment {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user !=null) {
+        if (user != null) {
             setClickHereListener();
-        }else{
+        } else {
             foundTextView.setText("Found Something? Register to upload a post");
         }
 
@@ -80,7 +79,7 @@ public class FoundFragment extends Fragment {
                     lostFoundObjects.add(lostFoundObject);
                 }
 
-                LostFoundAdaptor lostFoundAdaptor = new LostFoundAdaptor(lostFoundObjects, false);
+                LostFoundAdaptor lostFoundAdaptor = new LostFoundAdaptor(lostFoundObjects, false, getContext());
                 foundRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 foundRecyclerView.setAdapter(lostFoundAdaptor);
 

@@ -5,7 +5,6 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,9 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chiragagg5k.bu_news_android.objects.LostFoundObject;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,16 +28,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 public class LostFoundUploadActivity extends AppCompatActivity {
 
     ImageView backBtn;
-    EditText title, description,location, contact;
+    EditText title, description, location, contact;
     TextView selectImageLabel;
     Button selectImage, upload;
     DatabaseReference lostFoundDatabase, lostDatabase, foundDatabase;
@@ -106,7 +100,6 @@ public class LostFoundUploadActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         upload.setOnClickListener(v -> {

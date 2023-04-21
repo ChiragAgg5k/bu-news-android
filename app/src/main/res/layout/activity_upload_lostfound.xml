@@ -134,15 +134,14 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/selectedImageLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/lf_upload_item_image_label"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
-            android:id="@+id/selectedImageLabel"
             android:text="No Image Selected"
-            android:textColor="@color/textColor"
-            />
+            android:textColor="@color/textColor" />
 
         <Button
             android:id="@+id/lf_upload_item_image_button"

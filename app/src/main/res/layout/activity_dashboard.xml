@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
+    tools:ignore="HardcodedText"
     android:layout_height="match_parent"
     tools:context=".DashboardActivity">
 
@@ -24,7 +25,7 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:padding="10dp">
 
@@ -92,13 +93,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorPrimary"
+                android:contentDescription="Floating Action Post"
                 android:src="@drawable/post_icon_foreground"
                 app:borderWidth="0dp"
                 app:layout_anchor="@id/app_bar"
                 app:maxImageSize="40dp"
-                app:tint="@color/white"
-                android:contentDescription="Floating Action Post"
-                />
+                app:tint="@color/white" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -126,8 +126,8 @@
                 android:layout_height="48dp"
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
-                android:textSize="13sp"
-                android:text="Made by Team Obsidian\nver. 1.6.0" />
+                android:text="Made by Team Obsidian\nver. 1.6.5"
+                android:textSize="13sp" />
 
         </LinearLayout>
 

@@ -1,6 +1,7 @@
 package com.chiragagg5k.bu_news_android.adaptors;
 
-import android.net.Uri;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +11,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chiragagg5k.bu_news_android.LostFoundDetailActivity;
 import com.chiragagg5k.bu_news_android.R;
 import com.chiragagg5k.bu_news_android.objects.LostFoundObject;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class LostFoundAdaptor extends RecyclerView.Adapter<LostFoundAdaptor.ViewHolder>{
+public class LostFoundAdaptor extends RecyclerView.Adapter<LostFoundAdaptor.ViewHolder> {
 
     ArrayList<LostFoundObject> lostFoundObjects;
     boolean isLost;
+    private final Context context;
 
-    public LostFoundAdaptor(ArrayList<LostFoundObject> lostFoundObjects, boolean isLost) {
+    public LostFoundAdaptor(ArrayList<LostFoundObject> lostFoundObjects, boolean isLost, Context context) {
         this.lostFoundObjects = lostFoundObjects;
         this.isLost = isLost;
+        this.context = context;
     }
 
     @NonNull
@@ -41,6 +45,18 @@ public class LostFoundAdaptor extends RecyclerView.Adapter<LostFoundAdaptor.View
 
         Picasso.get().load(lostFoundObjects.get(position).getItemImageURL()).fit().centerCrop().into(holder.itemImage);
 
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), LostFoundDetailActivity.class);
+            intent.putExtra("item_name", lostFoundObjects.get(position).getItemName());
+            intent.putExtra("item_description", lostFoundObjects.get(position).getItemDescription());
+            intent.putExtra("item_location", lostFoundObjects.get(position).getItemLocation());
+            intent.putExtra("item_image_url", lostFoundObjects.get(position).getItemImageURL());
+            intent.putExtra("item_date", lostFoundObjects.get(position).getItemDate());
+            intent.putExtra("uploader_uid", lostFoundObjects.get(position).getToContactUID());
+            intent.putExtra("uploader_contact", lostFoundObjects.get(position).getContactNo());
+
+            context.startActivity(intent);
+        });
     }
 
     @Override

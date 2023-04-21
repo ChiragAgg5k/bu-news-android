@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="10dp"
     app:cardBackgroundColor="@color/backgroundColorDark"
     app:cardCornerRadius="8dp"
-    app:cardElevation="8dp">
-    
+    app:cardElevation="8dp"
+    tools:ignore="HardcodedText">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:layout_margin="10dp"
-        android:weightSum="2"
-        >
+        android:weightSum="2">
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -25,46 +26,52 @@
                 android:id="@+id/itemLostFoundName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Item Name"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                />
+                android:layout_marginEnd="5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Item Name"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/itemLostFoundDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Item Description"
-                android:textSize="15sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
                 android:layout_below="@id/itemLostFoundName"
-                />
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Item Description"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/itemLostFoundLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Location"
-                android:textSize="15sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
                 android:layout_below="@id/itemLostFoundDescription"
-                />
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Location"
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
-        
+
         <ImageView
             android:id="@+id/itemLostFoundImage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@color/colorPrimaryDark"
-            />
-        
+            android:contentDescription="Lost/Found Image"
+            android:src="@color/colorPrimaryDark" />
+
     </LinearLayout>
-    
+
 </androidx.cardview.widget.CardView>

@@ -3,11 +3,8 @@ package com.chiragagg5k.bu_news_android;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -138,7 +135,7 @@ public class ProfileActivity extends AppCompatActivity {
                             });
 
 
-                        }else {
+                        } else {
                             Toast.makeText(ProfileActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                             dialog.cancel();
                         }

@@ -68,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/colorPrimary"
+                android:contentDescription="@string/edit_profile_image"
                 android:src="@drawable/edit_icon"
                 app:borderWidth="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -75,8 +76,7 @@
                 app:layout_constraintHorizontal_bias="0.676"
                 app:layout_constraintStart_toStartOf="parent"
                 app:maxImageSize="25dp"
-                app:tint="@color/white"
-                android:contentDescription="@string/edit_profile_image" />
+                app:tint="@color/white" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -112,9 +112,9 @@
             android:id="@+id/mini_profile_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:contentDescription="@string/profile_image"
             android:src="@drawable/profile_icon"
-            app:tint="@color/colorPrimary"
-            android:contentDescription="@string/profile_image" />
+            app:tint="@color/colorPrimary" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -133,14 +133,13 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="35dp"
             android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/textColor"
-            android:singleLine="true"
-            android:text="@string/placeholder_name_to_be_replaced"
-            android:textSize="14sp"
             android:autofillHints="Edit Name"
+            android:backgroundTint="@color/textColor"
             android:inputType="text"
             android:labelFor="@+id/edit_name"
-            />
+            android:singleLine="true"
+            android:text="@string/placeholder_name_to_be_replaced"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
@@ -232,15 +231,14 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/contact_label"
+            android:autofillHints="Contact"
             android:backgroundTint="@color/textColor"
+            android:inputType="phone"
+            android:labelFor="@+id/edit_contact_text"
             android:singleLine="true"
             android:text="@string/placeholder_contact"
             android:textAlignment="textEnd"
-            android:textSize="14sp"
-            android:autofillHints="Contact"
-            android:inputType="phone"
-            android:labelFor="@+id/edit_contact_text"
-            />
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
@@ -287,15 +285,14 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/address_label"
+            android:autofillHints="Zip Code"
             android:backgroundTint="@color/textColor"
+            android:inputType="text"
+            android:labelFor="@+id/edit_address_text"
             android:singleLine="true"
             android:text="@string/placeholder_address"
             android:textAlignment="textEnd"
-            android:textSize="14sp"
-            android:autofillHints="Zip Code"
-            android:inputType="text"
-            android:labelFor="@+id/edit_address_text"
-            />
+            android:textSize="14sp" />
 
     </RelativeLayout>
 

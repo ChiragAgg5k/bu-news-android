@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventsFragment">
+    tools:context=".EventsFragment"
+    tools:ignore="HardcodedText">
 
     <TextView
         android:id="@+id/events_heading"
@@ -13,7 +14,7 @@
         android:layout_marginVertical="20dp"
         android:text="Events Timeline"
         android:textAlignment="center"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <View

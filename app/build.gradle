@@ -11,8 +11,8 @@ android {
         applicationId "com.chiragagg5k.bu_news_android"
         minSdk 29
         targetSdk 33
-        versionCode 11
-        versionName "1.6.0"
+        versionCode 13
+        versionName "1.6.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,7 +39,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.8.0' // Material Design
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4' // Constraint Layout
     implementation platform('com.google.firebase:firebase-bom:31.2.2') // Firebase BOM
-    implementation 'com.google.firebase:firebase-auth:21.2.0' // Firebase Auth
+    implementation ('com.google.firebase:firebase-auth:21.3.0'){
+        exclude module: "play-services-safetynet"
+    } // Firebase Auth
     implementation 'com.google.firebase:firebase-database' // Firebase Realtime Database
     implementation 'com.google.firebase:firebase-storage' // Firebase Storage
     implementation 'de.hdodenhof:circleimageview:3.1.0'// Circle Image View

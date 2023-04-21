@@ -59,6 +59,7 @@
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/backgroundColorDark"
             android:hint="Heading"
+            android:importantForAutofill="no"
             android:inputType="text"
             android:singleLine="true" />
 
@@ -73,6 +74,7 @@
             android:backgroundTint="@color/backgroundColorDark"
             android:gravity="bottom"
             android:hint="Description"
+            android:importantForAutofill="no"
             android:inputType="textMultiLine"
             android:minLines="6"
             android:scrollbars="vertical" />
@@ -95,7 +97,6 @@
                 android:id="@+id/categories_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/post_description_et"
                 android:layout_marginHorizontal="20dp"
                 android:backgroundTint="@color/colorPrimaryDark" />
 
@@ -139,6 +140,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
+            android:contentDescription="Preview Image"
             android:maxHeight="100dp"
             android:visibility="gone" />
 

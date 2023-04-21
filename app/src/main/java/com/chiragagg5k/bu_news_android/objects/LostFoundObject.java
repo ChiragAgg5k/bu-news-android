@@ -4,10 +4,9 @@ import com.chiragagg5k.bu_news_android.UtilityClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Objects;
-
 public class LostFoundObject {
 
+    FirebaseUser user;
     private String itemName;
     private String itemDescription;
     private String itemLocation;
@@ -15,7 +14,6 @@ public class LostFoundObject {
     private String toContactUID;
     private String itemImageURL;
     private String contactNo;
-    FirebaseUser user;
 
     public LostFoundObject() {
         // !IMPORTANT: This constructor is required for Firebase to work

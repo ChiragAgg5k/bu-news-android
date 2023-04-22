@@ -4,13 +4,23 @@ This Android programme was created with Bennett University students in mind. It 
 
 ## Install the app
 
-Available on the Google Play Store: https://play.google.com/store/apps/details?id=com.chiragagg5k.bu_news_android
+[![Foo](screenshots/google-play-png-logo-3799.png)](https://play.google.com/store/apps/details?id=com.chiragagg5k.bu_news_android)
 
 ## Screenshots
 
 
 | ![](screenshots/screenshot_1.png) | ![](screenshots/screenshot_2.png) | ![](screenshots/screenshot_3.png) | ![](screenshots/screenshot_4.png) |
-| :---: | :---: | :---: | :---: |
+|:---------------------------------:| :---: | :---: | :---: |
+
+## Features
+
+- User authentication using email and password
+- User profile with profile picture, name, email and phone number 
+- Weather info using OpenWeatherMap API
+- Subscribe to news categories
+- Upload your own news with a 2hr cooldown
+- Upload lost and found posts
+- Timeline view of upcoming events
 
 ## Running from source
 
@@ -33,13 +43,15 @@ git clone https://github.com/ChiragAgg5k/bu-news-android.git
 - CircleImageView - https://github.com/hdodenhof/CircleImageView
 - Image Picker - https://github.com/Dhaval2404/ImagePicker
 - YoYo Animations - https://github.com/daimajia/AndroidViewAnimations
+- Picasso - https://github.com/square/picasso
+- OpenWeatherMap API - https://openweathermap.org/api
 
 ## Info
 
 This application was created as part of our University Project for 1st year (2nd Sem) of B.Tech. in Computer Science and Engineering at Bennett University. Following are the team members who worked on this project:
 
-- Chirag Aggarwal 
-- Divesh Saini
-- Dishita Chaudary
+- Chirag Aggarwal  - E22CSEU0325
+- Divesh Saini - E22CSEU1471
+- Dishita Chaudary - E22CSEU0303
 
 Please feel free to open an issue if you find any bugs or have any suggestions and don't forget to star the repo if you like it. You can also leave a review on the Play Store.

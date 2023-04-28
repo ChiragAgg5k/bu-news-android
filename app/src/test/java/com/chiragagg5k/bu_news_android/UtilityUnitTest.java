@@ -30,7 +30,7 @@ public class UtilityUnitTest {
     }
 
     @Test
-    public void testGetDate(){
+    public void testGetDate() {
         long time = 1577836800000L;
         String expected = "Wednesday, 1 January";
         String actual = UtilityClass.getDate(time);

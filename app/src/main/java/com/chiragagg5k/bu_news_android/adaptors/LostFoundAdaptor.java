@@ -20,9 +20,9 @@ import java.util.ArrayList;
 
 public class LostFoundAdaptor extends RecyclerView.Adapter<LostFoundAdaptor.ViewHolder> {
 
+    private final Context context;
     ArrayList<LostFoundObject> lostFoundObjects;
     boolean isLost;
-    private final Context context;
 
     public LostFoundAdaptor(ArrayList<LostFoundObject> lostFoundObjects, boolean isLost, Context context) {
         this.lostFoundObjects = lostFoundObjects;

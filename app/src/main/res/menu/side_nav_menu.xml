@@ -4,28 +4,28 @@
     tools:ignore="HardcodedText">
 
     <item
-        android:icon="@drawable/profile_icon"
         android:id="@+id/nav_profile"
+        android:icon="@drawable/profile_icon"
         android:title="Profile" />
 
     <item
-        android:icon="@drawable/info_icon_foreground"
         android:id="@+id/about"
+        android:icon="@drawable/info_icon_foreground"
         android:title="Github Repo" />
 
     <item
-        android:icon="@drawable/web_icon"
         android:id="@+id/website"
+        android:icon="@drawable/web_icon"
         android:title="Website" />
 
     <item
-        android:icon="@drawable/phone_icon"
         android:id="@+id/contact_side_nav"
+        android:icon="@drawable/phone_icon"
         android:title="Contact Us" />
 
     <item
-        android:icon="@drawable/close_icon_foreground"
         android:id="@+id/nav_logout"
+        android:icon="@drawable/close_icon_foreground"
         android:title="Logout" />
 
 </menu>

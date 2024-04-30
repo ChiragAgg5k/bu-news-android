@@ -38,11 +38,11 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1' // AppCompat
     implementation 'com.google.android.material:material:1.11.0' // Material Design
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4' // Constraint Layout
-    implementation platform('com.google.firebase:firebase-bom:31.2.2') // Firebase BOM
-    implementation('com.google.firebase:firebase-auth:22.3.0') {
+    implementation platform('com.google.firebase:firebase-bom:32.8.1') // Firebase BOM
+    implementation('com.google.firebase:firebase-auth:22.3.1') {
         exclude module: "play-services-safetynet"
     } // Firebase Auth
-    implementation 'com.google.firebase:firebase-database:20.3.0' // Firebase Realtime Database
+    implementation 'com.google.firebase:firebase-database:20.3.1' // Firebase Realtime Database
     implementation 'com.google.firebase:firebase-storage:20.3.0' // Firebase Storage
     implementation 'de.hdodenhof:circleimageview:3.1.0'// Circle Image View
     implementation 'com.daimajia.androidanimations:library:2.4@aar' // Yo Yo animations
